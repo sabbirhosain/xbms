@@ -54,7 +54,7 @@ const Login = () => {
                     className="eye_icon">{showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
                   </button>
 
-                  <small className="text-danger position-absolute">invalid user and password</small>
+                  {/* <small className="text-danger position-absolute">invalid user and password</small> */}
                 </div>
 
                 <div className="d-flex align-items-center justify-content-between">
