@@ -1,0 +1,135 @@
+.login_section {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.login_left_side {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  background-color: white;
+}
+
+.login_left_logo {
+  max-width: 100%;
+  height: auto;
+  padding: 0px 50px 30px 50px;
+}
+
+.login_left_img {
+  width: 90%;
+  height: auto;
+}
+
+.login_text_title {
+  color: var(--Secondary-Color);
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 50px;
+  letter-spacing: -1px;
+  text-align: left;
+  padding: 0px 50px;
+}
+
+.login_right_side {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #F0F3F9;
+}
+
+.login_form_box {
+  display: flex;
+  width: 489px;
+  padding: 56px 32px;
+  flex-direction: column;
+  gap: 16px;
+  border-radius: 18px;
+  background-color: white;
+}
+
+.login_title {
+  color: var(--Secondary, #223039);
+  text-align: center;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 43px;
+  letter-spacing: -0.5px;
+}
+
+.form-label {
+  color: var(--Colors-Slate-700);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.2px;
+}
+
+.form-control {
+  padding: 11px 14px;
+  border-radius: 6px;
+  border: 1px solid #5E718D;
+  background: #ffffff;
+  color: var(--Colors-Slate-800);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.2px;
+}
+
+.form-check-label {
+  color: #475467;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+
+.lock_icon {
+  font-size: 20px;
+  color: #475467;
+  position: absolute;
+  left: 3%;
+  top: 58%;
+  display: flex;
+  width: 30px;
+  height: 20px;
+  align-items: center;
+  border-right: 1px solid #475467;
+}
+
+.eye_icon {
+  font-size: 20px;
+  color: #475467;
+  position: absolute;
+  right: 3%;
+  top: 58%;
+  display: flex;
+  width: 20px;
+  height: 20px;
+  justify-content: end;
+  align-items: center;
+  cursor: pointer;
+}
+
+.login_btn {
+  color: white;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 30px;
+  letter-spacing: -0.3px;
+  padding: 13px 20px;
+  border-radius: 6px;
+  background: var(--Primary-Color);
+}
