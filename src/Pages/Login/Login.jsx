@@ -2,8 +2,9 @@ import { Link } from "react-router-dom"
 import { FaRegEye, FaRegEyeSlash, RiLockPasswordLine } from "../../Data/Icon"
 import { loginImg, logo } from "../../Data/Images"
 import Layout from "../../Layout/Layout"
-import "./Login.css"
 import { useContextProvider } from "../../ContextApi/ContextApi"
+import "./Login.css"
+import "./Login.responsive.css"
 
 const Login = () => {
   const { showPassword, passwordShowToggle, user, inputValue, formSubmit } = useContextProvider()
@@ -24,8 +25,9 @@ const Login = () => {
           <div className="col-md-6 g-0">
             <div className="login_right_side">
               <form action="" onSubmit={formSubmit} className="login_form_box" method="post">
-                <h2 className="login_title">Login</h2>
-
+                <h2 className="login_title d-none d-sm-block">Login</h2>
+                <div className="text-center d-sm-none pb-3 pb-sm-0">
+                  <img src={logo} className="" alt="site_logo" /></div>
                 <div className="">
                   <label htmlFor="user_name" className="form-label">User Name</label>
 
@@ -36,7 +38,7 @@ const Login = () => {
                     className="form-control" id="user_name" placeholder="Sabbir47" />
                 </div>
 
-                <div className="position-relative mb-3">
+                <div className="position-relative mb-md-3">
                   <label htmlFor="password" className="form-label">Password</label>
 
                   <input
