@@ -68,6 +68,10 @@ ul {
 .main_content {
   margin-left: 250px;
   padding-top: 60px;
-  position: relative;
-  left: 0;
+}
+
+@media screen and (max-width:599px) {
+  .main_content {
+    margin-left: 0px;
+  }
 }
