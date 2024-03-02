@@ -2,7 +2,6 @@
   .login_section {
     width: 100%;
     height: 100vh;
-    overflow: scroll;
   }
 
   .login_left_side {
@@ -12,13 +11,17 @@
     align-items: end;
     justify-content: center;
     background-color: white;
-    display: none;
+  }
+
+  .login_left_text_logo {
+    padding: 0px 5%;
+    text-align: center;
   }
 
   .login_left_logo {
     max-width: 100%;
     height: auto;
-    padding: 0px 10px 20px 10px;
+    padding-bottom: 20px;
   }
 
   .login_left_img {
@@ -27,30 +30,22 @@
   }
 
   .login_text_title {
-    color: var(--Secondary-Color);
-    font-size: 26px;
-    font-style: normal;
+    font-size: 24px;
     font-weight: 600;
-    line-height: 40px;
-    letter-spacing: -1px;
-    text-align: left;
+    line-height: 36px;
+    letter-spacing: -0.5px;
+    text-align: center;
     padding: 0px 10px;
   }
 
   .login_right_side {
-    height: 80vh;
+    height: 70vh;
     width: 100%;
-    background-color: white;
   }
 
   .login_form_box {
-    display: flex;
-    width: 100%;
+    width: 95%;
     padding: 30px 20px;
-    flex-direction: column;
-    gap: 16px;
-    border-radius: 0px;
-    background-color: white;
   }
 
   .form-control {

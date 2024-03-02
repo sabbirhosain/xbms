@@ -1,8 +1,13 @@
-import React from 'react'
-
+import "./SideBar.css"
 const SideBar = () => {
   return (
-    <div></div>
+    <>
+      <div className="sidebar">
+        <div className="scroll_sidebar">
+          <h6>Sidebar</h6>
+        </div>
+      </div>
+    </>
   )
 }
 

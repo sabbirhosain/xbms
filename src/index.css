@@ -64,3 +64,10 @@ ul {
   padding: 0;
   list-style-type: none;
 }
+
+.main_content {
+  margin-left: 250px;
+  padding-top: 60px;
+  position: relative;
+  left: 0;
+}
