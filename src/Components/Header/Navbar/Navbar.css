@@ -42,6 +42,12 @@
   border-radius: 6px;
   border: 1px solid var(--Primary-Color);
   margin: 0px 32px;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    color: white;
+    background-color: var(--Primary-Color);
+  }
 }
 
 .user_dropdown {

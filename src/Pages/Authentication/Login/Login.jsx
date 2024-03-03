@@ -1,12 +1,61 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { FaRegEye, FaRegEyeSlash, RiLockPasswordLine } from "../../../Data/Icon"
 import { loginImg, loginImg3, logo } from "../../../Data/Images"
 import { useContextProvider } from "../../../ContextApi/ContextApi"
 import "./Login.css"
 import "./Login.responsive.css"
+import { useState } from "react"
+import axios from "axios"
+import { toast } from 'react-toastify';
+
 
 const Login = () => {
-  const { showPassword, passwordShowToggle, user, inputValue, formSubmit } = useContextProvider()
+  const { showPassword, passwordShowToggle } = useContextProvider();
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate()
+
+  const formSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('https://xms-esxe.onrender.com/api/auth/login/', {
+        username: username,
+        password: password,
+      });
+
+      if (!response === response.data.user.password) {
+        console.log("wrong password");
+      }
+
+
+      if (response && response.data.user) {
+        toast.success("Login Successfully!")
+
+        setAccessToken({
+          ...accessToken,
+          user_name: response.data.user,
+          accessToken: response.data.access
+        })
+        localStorage.setItem("access_token", JSON.stringify(response.data))
+
+        setRefreshToken({
+          ...refreshToken,
+          user_name: response.data.user,
+          accessToken: response.data.refresh
+        })
+        localStorage.setItem("refresh_token", JSON.stringify(response.data))
+
+        navigate("/")
+      }
+
+    } catch (error) {
+      console.log(error);
+      toast.error("Login Faild !")
+    }
+  };
+
+
 
   return (
     <>
@@ -32,9 +81,11 @@ const Login = () => {
                   <label htmlFor="user_name" className="form-label">User Name</label>
 
                   <input type="text"
-                    name="userName"
-                    value={user.userName}
-                    onChange={inputValue}
+                    // name="username"
+                    // value={user.username}
+                    // onChange={inputValue}
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                     className="form-control" id="user_name" placeholder="Sabbir47" />
                 </div>
 
@@ -43,9 +94,11 @@ const Login = () => {
 
                   <input
                     type={showPassword ? "text" : "password"}
-                    name="userPassword"
-                    value={user.userPassword}
-                    onChange={inputValue}
+                    // name="password"
+                    // value={user.password}
+                    // onChange={inputValue}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     className="form-control px-5" id="password" />
 
                   <span className="lock_icon"><RiLockPasswordLine /></span>
@@ -67,7 +120,7 @@ const Login = () => {
                   <Link to={"/"} className="form-check-label">Forget Password</Link>
                 </div>
 
-                <button className="login_btn">Login Now</button>
+                <button type="submit" className="login_btn">Login Now</button>
               </form>
             </div>
           </div>

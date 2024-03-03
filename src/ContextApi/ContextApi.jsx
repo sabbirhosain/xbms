@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 const ContextProvider = createContext();
 
 const ContextApi = ({ children }) => {
@@ -8,32 +8,52 @@ const ContextApi = ({ children }) => {
     setShowPassword(!showPassword);
   };
 
-  // user input data handel
-  const [user, setUser] = useState({ userName: '', userPassword: '' });
-  console.log(user);
-  const inputValue = (e) => {
-    const { name, value } = e.target;
-    setUser((prevUser) => ({ ...prevUser, [name]: value }));
+  // token store in localhost
+  const [accessToken, setAccessToken] = useState({ user_name: null, accessToken: null });
+  const [refreshToken, setRefreshToken] = useState({ user_name: null, refreshToken: null });
+
+  const access_data = () => {
+    const data = localStorage.getItem("access_token")
+    if (data) {
+      const parse_data = JSON.parse(data)
+      setAccessToken({
+        ...accessToken,
+        user_name: parse_data.user,
+        accessToken: parse_data.access
+      })
+    }
+  }
+
+  const refresh_data = () => {
+    const data = localStorage.getItem("refresh_token")
+    if (data) {
+      const parse_data = JSON.parse(data)
+      setRefreshToken({
+        ...refreshToken,
+        user_name: parse_data.user,
+        accessToken: parse_data.access
+      })
+    }
+  }
+
+
+  useEffect(() => {
+    access_data();
+    refresh_data();
+  });
+
+
+  const logout = () => {
+    setAccessToken(null);
+    setRefreshToken(null);
   };
-
-  const formSubmit = (e) => {
-    e.preventDefault();
-    // write condition
-  };
-
-
-
-
-
-
-
 
 
 
 
 
   return (
-    <ContextProvider.Provider value={{ showPassword, passwordShowToggle, user, inputValue, formSubmit }}>
+    <ContextProvider.Provider value={{ showPassword, passwordShowToggle, setAccessToken, setRefreshToken,}}>
       {children}
     </ContextProvider.Provider>
   )
