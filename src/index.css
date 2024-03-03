@@ -6,6 +6,7 @@
   --Colors-Slate-200: #D7DFE9;
   --Colors-Slate-700: #3D4A5C;
   --Colors-Slate-800: #2D3643;
+  --Color-Slate-50: #F0F3F9;
   --Primary-Fonts: 'Inter', sans-serif;
 }
 
@@ -65,10 +66,16 @@ ul {
   list-style-type: none;
 }
 
+
+.dropdown-toggle::after {
+  display: none;
+}
+
 .main_content {
   margin-left: 250px;
-  padding-top: 60px;
+  /* padding-top: 90px; */
 }
+
 
 @media screen and (max-width:599px) {
   .main_content {

@@ -1,19 +1,65 @@
 .navbar_top {
   width: 100%;
-  height: 60px;
-  position: fixed;
+  height: 90px;
+  /* position: fixed; */
   top: 0;
   right: 0;
   left: 0;
-  background-color: green;
-  border-bottom: 1px solid orangered;
+  background-color: var(--Color-Slate-50);
 }
 
 .navbar_row {
-  height: 60px;
+  height: 90px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.new_company_btn {
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: center;
+  display: inline-block;
+  padding: 16px 24px;
+  background-color: transparent;
+  border-radius: 6px;
+  background-color: var(--Primary-Color);
+
+}
+
+.create_invoice_btn {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: center;
+  display: inline-block;
+  padding: 16px 24px;
+  background-color: transparent;
+  border-radius: 6px;
+  border: 1px solid var(--Primary-Color);
+  margin: 0px 32px;
+}
+
+.user_dropdown {
+  padding: 10px 20px;
+  display: inline-flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.03);
+}
+
+.user_dropdown_icon {
+  font-size: 30px;
+  margin-right: 10px;
+}
+
+.user_dropdown_arrow_icon {
+  font-size: 12px;
 }
 
 @media (min-width: 600px) {
