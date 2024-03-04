@@ -40,7 +40,7 @@ const ContextApi = ({ children }) => {
   useEffect(() => {
     access_data();
     refresh_data();
-  });
+  }, [""]);
 
 
   const logout = () => {
@@ -51,13 +51,13 @@ const ContextApi = ({ children }) => {
 
 
 
-
   return (
-    <ContextProvider.Provider value={{ showPassword, passwordShowToggle, setAccessToken, setRefreshToken,}}>
+    <ContextProvider.Provider value={{ showPassword, passwordShowToggle, accessToken, setAccessToken, refreshToken, setRefreshToken, }}>
       {children}
     </ContextProvider.Provider>
   )
 }
+
 export default ContextApi
 
 // coustom hooks

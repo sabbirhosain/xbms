@@ -10,24 +10,25 @@ import { toast } from 'react-toastify';
 
 
 const Login = () => {
-  const { showPassword, passwordShowToggle } = useContextProvider();
+  const { showPassword, passwordShowToggle, accessToken, setAccessToken, refreshToken, setRefreshToken, } = useContextProvider();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState("")
   const navigate = useNavigate()
 
   const formSubmit = async (e) => {
     e.preventDefault();
     try {
+
+      if (!username || !password) {
+        return setError("username and password is required...!!")
+      }
+
       const response = await axios.post('https://xms-esxe.onrender.com/api/auth/login/', {
         username: username,
         password: password,
       });
-
-      if (!response === response.data.user.password) {
-        console.log("wrong password");
-      }
-
 
       if (response && response.data.user) {
         toast.success("Login Successfully!")
@@ -50,8 +51,8 @@ const Login = () => {
       }
 
     } catch (error) {
-      console.log(error);
-      toast.error("Login Faild !")
+      setError("user and password invalid...!!")
+      // toast.error("Login Faild !")
     }
   };
 
@@ -109,7 +110,7 @@ const Login = () => {
                     className="eye_icon">{showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
                   </button>
 
-                  {/* <small className="text-danger position-absolute">invalid user and password</small> */}
+                  <small className="text-danger position-absolute">{error}</small>
                 </div>
 
                 <div className="d-flex align-items-center justify-content-between pt-2 pt-md-0">
