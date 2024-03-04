@@ -7,6 +7,12 @@
   border-radius: 8px;
   background: #FFF;
   box-shadow: 0px 1px 2px 0px rgba(45, 54, 67, 0.04), 0px 2px 4px 0px rgba(45, 54, 67, 0.08);
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #f8fdfa;
+  }
 }
 
 .account_balance_count {
@@ -17,7 +23,8 @@
   line-height: 43px;
   letter-spacing: -0.5px;
 }
-.account_balance_icon{
+
+.account_balance_icon {
   width: 20px;
   margin-right: 5px;
 }
@@ -29,4 +36,74 @@
   font-weight: 500;
   line-height: 24px;
   letter-spacing: -0.2px;
+}
+
+
+/* =========== Dashboard Progress ========== */
+.dashboard_progress {
+  margin-top: 40px;
+}
+
+.dashboard_progress_box {
+  display: flex;
+  padding: 24px;
+  flex-direction: column;
+  gap: 16px;
+  border-radius: 18px;
+  background: #FFF;
+}
+
+.dashboard_progress_title {
+  color: var(--Secondary-Color);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
+  letter-spacing: -0.3px;
+}
+
+.dashboard_coustomer_sales {
+  color: #000;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.2px;
+}
+
+.dashboard_dropdown {
+  color: var(--Primary-Color);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.2px;
+  display: flex;
+  padding: 6px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 6px;
+  border: 1px solid var(--Primary-Color);
+  background: white;
+}
+
+.dashboard_dropdown_arrow_icon {
+  font-size: 10px;
+}
+
+.progress {
+  border-radius: 0px;
+  height: 22px;
+  background-color: transparent;
+}
+
+.progress-bar {
+  color: white;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 14px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
 }

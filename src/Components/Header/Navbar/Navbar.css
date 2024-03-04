@@ -64,6 +64,12 @@
   background-color: white;
   border-radius: 6px;
   box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #f8fdfa;
+  }
 }
 
 .user_dropdown_icon {
