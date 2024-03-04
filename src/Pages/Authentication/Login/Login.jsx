@@ -53,6 +53,7 @@ const Login = () => {
     } catch (error) {
       setError("user and password invalid...!!")
       // toast.error("Login Faild !")
+      console.error("Error", error);
     }
   };
 

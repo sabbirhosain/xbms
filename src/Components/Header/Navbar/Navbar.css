@@ -26,8 +26,15 @@
   padding: 16px 24px;
   background-color: transparent;
   border-radius: 6px;
+  display: flex;
+  align-items: center;
   background-color: var(--Primary-Color);
 
+}
+
+.company_btn_icon {
+  font-size: 20px;
+  margin-right: 5px;
 }
 
 .create_invoice_btn {
@@ -75,5 +82,38 @@
 
   .navbar_row {
     justify-content: end;
+  }
+}
+
+/* =========== [ MOBILE RESPOSIVE ] ============= */
+
+@media screen and (max-width:480px) {
+  .navbar_top {
+    height: 60px;
+  }
+
+  .navbar_row {
+    height: 60px;
+    margin: 0px 10px;
+  }
+
+  .offcanvas_bar_icon {
+    font-size: 25px;
+  }
+
+  .company_btn_icon {
+    font-size: 22px;
+  }
+
+  .user_dropdown {
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0;
+    padding-left: 10px;
+  }
+
+  .user_dropdown_icon {
+    font-size: 30px;
+    margin-right: 0px;
   }
 }
