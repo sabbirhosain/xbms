@@ -1,0 +1,21 @@
+@media screen and (max-width:480px) {
+  .account_balance_count {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 32px;
+    letter-spacing: -0.3px;
+  }
+
+  .account_balance_icon {
+    width: 15px;
+  }
+
+  .account_balance_title {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -0.2px;
+  }
+}

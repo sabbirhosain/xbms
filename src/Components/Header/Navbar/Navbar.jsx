@@ -8,7 +8,7 @@ const Navbar = () => {
   return (
     <>
       <div className="navbar_top">
-        <div className="container">
+        <div className="container-fluid">
           <div className="navbar_row">
             <button className="offcanvas_close_btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><FaBars className="offcanvas_bar_icon" /></button>
 
