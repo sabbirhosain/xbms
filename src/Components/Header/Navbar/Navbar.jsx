@@ -14,9 +14,9 @@ const Navbar = () => {
               <button className="new_company_btn d-none d-md-block">
                 <FaRegSquarePlus className="company_btn_icon" /> New Company</button>
 
-              <button className="d-md-none">
+              <Link to={"/"} className="d-md-none">
                 <BsPlusSquare className="company_btn_icon" />
-              </button>
+              </Link>
 
               <button className="create_invoice_btn d-none d-md-block">Create Invoice</button>
 
@@ -26,7 +26,7 @@ const Navbar = () => {
                   <SlArrowDown className="user_dropdown_arrow_icon d-none d-md-block" />
                 </button>
                 <ul className="dropdown-menu dropdown-menu-end mt-2">
-                  <li><Link to={""} className="dropdown-item" type="button">Action</Link></li>
+                  <li><Link to={"/login"} className="dropdown-item" type="button">Login</Link></li>
                   <li><Link to={""} className="dropdown-item" type="button">Another</Link></li>
                   <li><Link to={""} className="dropdown-item" type="button">Something</Link></li>
                 </ul>
