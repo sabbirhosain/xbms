@@ -35,14 +35,14 @@ const Login = () => {
 
         setAccessToken({
           ...accessToken,
-          user_name: response.data.user,
+          user_data: response.data.user,
           accessToken: response.data.access
         })
         localStorage.setItem("access_token", JSON.stringify(response.data))
 
         setRefreshToken({
           ...refreshToken,
-          user_name: response.data.user,
+          user_data: response.data.user,
           accessToken: response.data.refresh
         })
         localStorage.setItem("refresh_token", JSON.stringify(response.data))

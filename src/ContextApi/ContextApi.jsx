@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 const ContextProvider = createContext();
 
 const ContextApi = ({ children }) => {
@@ -9,8 +10,8 @@ const ContextApi = ({ children }) => {
   };
 
   // token store in localhost
-  const [accessToken, setAccessToken] = useState({ user_name: null, accessToken: null });
-  const [refreshToken, setRefreshToken] = useState({ user_name: null, refreshToken: null });
+  const [accessToken, setAccessToken] = useState({ user_data: null, accessToken: null });
+  const [refreshToken, setRefreshToken] = useState({ user_data: null, refreshToken: null });
 
   const access_data = () => {
     const data = localStorage.getItem("access_token")
@@ -18,7 +19,7 @@ const ContextApi = ({ children }) => {
       const parse_data = JSON.parse(data)
       setAccessToken({
         ...accessToken,
-        user_name: parse_data.user,
+        user_data: parse_data.user,
         accessToken: parse_data.access
       })
     }
@@ -30,7 +31,7 @@ const ContextApi = ({ children }) => {
       const parse_data = JSON.parse(data)
       setRefreshToken({
         ...refreshToken,
-        user_name: parse_data.user,
+        user_data: parse_data.user,
         accessToken: parse_data.access
       })
     }
@@ -44,15 +45,25 @@ const ContextApi = ({ children }) => {
 
 
   const logout = () => {
-    setAccessToken(null);
-    setRefreshToken(null);
+    setAccessToken({
+      ...accessToken,
+      user_data: null,
+      accessToken: null
+    })
+    setRefreshToken({
+      ...refreshToken,
+      user_data: null,
+      accessToken: null
+    })
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
+    toast.success("Logout Success..!!")
   };
 
 
 
-
   return (
-    <ContextProvider.Provider value={{ showPassword, passwordShowToggle, accessToken, setAccessToken, refreshToken, setRefreshToken, }}>
+    <ContextProvider.Provider value={{ showPassword, passwordShowToggle, accessToken, setAccessToken, refreshToken, setRefreshToken, logout }}>
       {children}
     </ContextProvider.Provider>
   )

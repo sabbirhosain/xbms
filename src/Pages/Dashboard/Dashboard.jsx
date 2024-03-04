@@ -4,7 +4,7 @@ import Layout from '../../Layout/Layout'
 import "./Dashboard.css"
 
 const Dashboard = () => {
-  const { accessToken, setAccessToken, refreshToken, setRefreshToken } = useContextProvider()
+  const { accessToken, refreshToken } = useContextProvider()
   return (
     <Layout title={"Dashboard"}>
       <h3>DashBoard</h3>

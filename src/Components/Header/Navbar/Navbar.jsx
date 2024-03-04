@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom"
 import { FaRegSquarePlus, FaBars, PiUserCircleLight, SlArrowDown, BsPlusSquare, } from "../../../Data/Icon"
 import "./Navbar.css"
+import { useContextProvider } from "../../../ContextApi/ContextApi"
 
 const Navbar = () => {
+  const { accessToken, refreshToken, logout } = useContextProvider()
   return (
     <>
       <div className="navbar_top">
@@ -26,7 +28,13 @@ const Navbar = () => {
                   <SlArrowDown className="user_dropdown_arrow_icon d-none d-md-block" />
                 </button>
                 <ul className="dropdown-menu dropdown-menu-end mt-2">
-                  <li><Link to={"/login"} className="dropdown-item" type="button">Login</Link></li>
+                  <li>
+                    {
+                      (!accessToken.user_data || !refreshToken.user_data) ?
+                        <Link to={"/login"} className="dropdown-item">Login</Link> :
+                        <Link to={"/login"} onClick={logout} className="dropdown-item">Logout</Link>
+                    }
+                  </li>
                   <li><Link to={""} className="dropdown-item" type="button">Another</Link></li>
                   <li><Link to={""} className="dropdown-item" type="button">Something</Link></li>
                 </ul>
