@@ -25,6 +25,7 @@ import balance4 from "../assets/balance-icon/balance4.svg"
 import balance5 from "../assets/balance-icon/balance5.svg"
 import balance6 from "../assets/balance-icon/balance6.svg"
 
+import edit from "../assets/table/edit.svg"
+import trash from "../assets/table/trash.svg"
 
-
-export { logo, loginImg, loginImg3, dashIcon1, dashIcon2, dashIcon3, dashIcon4, dashIcon5, dashIcon6, dashIcon7, dashIcon8, dashIcon9, dashIcon10, dashIcon11, dashIcon12, dashIcon13, balance1, balance2, balance3, balance4, balance5, balance6 }
+export { logo, loginImg, loginImg3, dashIcon1, dashIcon2, dashIcon3, dashIcon4, dashIcon5, dashIcon6, dashIcon7, dashIcon8, dashIcon9, dashIcon10, dashIcon11, dashIcon12, dashIcon13, balance1, balance2, balance3, balance4, balance5, balance6, edit, trash }

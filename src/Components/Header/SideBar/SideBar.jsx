@@ -29,9 +29,9 @@ const SideBar = () => {
                 </a>
 
                 <div className="collapse" id="collapseExample">
-                  <Link to={""} className="dropdown_link">Dropdown 1</Link>
-                  <Link to={""} className="dropdown_link">Dropdown 2</Link>
-                  <Link to={""} className="dropdown_link">Dropdown 3</Link>
+                  <Link to={"/account-chart"} className="dropdown_link">Account Chart</Link>
+                  <Link to={""} className="dropdown_link">Account Statement</Link>
+                  <Link to={""} className="dropdown_link">Payment Method</Link>
                   <Link to={""} className="dropdown_link">Dropdown 4</Link>
                 </div>
               </li>
