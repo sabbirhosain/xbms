@@ -7,9 +7,10 @@ import { IoIosArrowDown } from "react-icons/io";
 import { PiUserCircleLight } from "react-icons/pi";
 import { SlArrowDown } from "react-icons/sl";
 import { BsPlusSquare } from "react-icons/bs";
+import { CiSearch } from "react-icons/ci";
 
 
 
 
 
-export { RiLockPasswordLine, FaRegEye, FaRegEyeSlash, FaBars, GrHomeRounded, IoIosArrowDown, FaRegSquarePlus, PiUserCircleLight, FaRegCircleUser, SlArrowDown,BsPlusSquare }
+export { RiLockPasswordLine, FaRegEye, FaRegEyeSlash, FaBars, GrHomeRounded, IoIosArrowDown, FaRegSquarePlus, PiUserCircleLight, FaRegCircleUser, SlArrowDown, BsPlusSquare, CiSearch }

@@ -40,7 +40,18 @@
 }
 
 .account_search_box {
-  background-color: red;
+  display: flex;
+  align-items: center;
+  background-color: #F9F9F9;
+  padding: 0px 10px;
+  border-radius: 8px;
+}
+
+.account_search_icon {
+  font-size: 25px;
+}
+.account_search_input{
+  padding: 10px;
 }
 
 .add_new_account_row {
@@ -101,4 +112,8 @@
 
 .table>thead>tr>td {
   color: white;
+}
+
+.account_action_icon {
+  width: 22px;
 }

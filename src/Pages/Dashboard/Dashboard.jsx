@@ -78,30 +78,30 @@ const Dashboard = () => {
                 <h5 className='dashboard_progress_title'>Top 5 Customers</h5>
                 <div className="d-flex align-items-center justify-content-between">
                   <span className='dashboard_coustomer_sales'>Customers Sales </span>
-                  <div class="btn-group">
-                    <button type="button" class="dashboard_dropdown dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">Monthly <SlArrowDown className='dashboard_dropdown_arrow_icon' /></button>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                      <li><a class="dropdown-item" href="#">Menu item</a></li>
-                      <li><a class="dropdown-item" href="#">Menu item</a></li>
-                      <li><a class="dropdown-item" href="#">Menu item</a></li>
+                  <div className="btn-group">
+                    <button type="button" className="dashboard_dropdown dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">Monthly <SlArrowDown className='dashboard_dropdown_arrow_icon' /></button>
+                    <ul className="dropdown-menu dropdown-menu-end">
+                      <li><a className="dropdown-item" href="#">Menu item</a></li>
+                      <li><a className="dropdown-item" href="#">Menu item</a></li>
+                      <li><a className="dropdown-item" href="#">Menu item</a></li>
                     </ul>
                   </div>
                 </div>
                 <div>
-                  <div class="progress mb-3">
-                    <div class="progress-bar bg-success ps-4" role="progressbar" aria-label="Success example" style={{ width: "100%" }} aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">12,478</div>
+                  <div className="progress mb-3">
+                    <div className="progress-bar bg-success ps-4" role="progressbar" aria-label="Success example" style={{ width: "100%" }} aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">12,478</div>
                   </div>
-                  <div class="progress mb-3">
-                    <div class="progress-bar bg-info ps-4" role="progressbar" aria-label="Info example" style={{ width: "80%" }} aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">7,546</div>
+                  <div className="progress mb-3">
+                    <div className="progress-bar bg-info ps-4" role="progressbar" aria-label="Info example" style={{ width: "80%" }} aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">7,546</div>
                   </div>
-                  <div class="progress mb-3">
-                    <div class="progress-bar bg-warning ps-4" role="progressbar" aria-label="Warning example" style={{ width: "60%" }} aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">6,083</div>
+                  <div className="progress mb-3">
+                    <div className="progress-bar bg-warning ps-4" role="progressbar" aria-label="Warning example" style={{ width: "60%" }} aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">6,083</div>
                   </div>
-                  <div class="progress mb-3">
-                    <div class="progress-bar bg-danger ps-4" role="progressbar" aria-label="Danger example" style={{ width: "40%" }} aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">3,963</div>
+                  <div className="progress mb-3">
+                    <div className="progress-bar bg-danger ps-4" role="progressbar" aria-label="Danger example" style={{ width: "40%" }} aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">3,963</div>
                   </div>
-                  <div class="progress">
-                    <div class="progress-bar bg-success ps-4" role="progressbar" aria-label="Danger example" style={{ width: "30%" }} aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">3,560</div>
+                  <div className="progress">
+                    <div className="progress-bar bg-success ps-4" role="progressbar" aria-label="Danger example" style={{ width: "30%" }} aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">3,560</div>
                   </div>
                 </div>
               </div>
@@ -111,30 +111,30 @@ const Dashboard = () => {
                 <h5 className='dashboard_progress_title'>Top 5 Sale Items</h5>
                 <div className="d-flex align-items-center justify-content-between">
                   <span className='dashboard_coustomer_sales'>Item Sales </span>
-                  <div class="btn-group">
-                    <button type="button" class="dashboard_dropdown dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">Monthly <SlArrowDown className='dashboard_dropdown_arrow_icon' /></button>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                      <li><a class="dropdown-item" href="#">Menu item</a></li>
-                      <li><a class="dropdown-item" href="#">Menu item</a></li>
-                      <li><a class="dropdown-item" href="#">Menu item</a></li>
+                  <div className="btn-group">
+                    <button type="button" className="dashboard_dropdown dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">Monthly <SlArrowDown className='dashboard_dropdown_arrow_icon' /></button>
+                    <ul className="dropdown-menu dropdown-menu-end">
+                      <li><a className="dropdown-item" href="#">Menu item</a></li>
+                      <li><a className="dropdown-item" href="#">Menu item</a></li>
+                      <li><a className="dropdown-item" href="#">Menu item</a></li>
                     </ul>
                   </div>
                 </div>
                 <div>
-                  <div class="progress mb-3">
-                    <div class="progress-bar bg-success ps-4" role="progressbar" aria-label="Success example" style={{ width: "100%" }} aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">12,478</div>
+                  <div className="progress mb-3">
+                    <div className="progress-bar bg-success ps-4" role="progressbar" aria-label="Success example" style={{ width: "100%" }} aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">12,478</div>
                   </div>
-                  <div class="progress mb-3">
-                    <div class="progress-bar bg-info ps-4" role="progressbar" aria-label="Info example" style={{ width: "80%" }} aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">7,546</div>
+                  <div className="progress mb-3">
+                    <div className="progress-bar bg-info ps-4" role="progressbar" aria-label="Info example" style={{ width: "80%" }} aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">7,546</div>
                   </div>
-                  <div class="progress mb-3">
-                    <div class="progress-bar bg-warning ps-4" role="progressbar" aria-label="Warning example" style={{ width: "60%" }} aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">6,083</div>
+                  <div className="progress mb-3">
+                    <div className="progress-bar bg-warning ps-4" role="progressbar" aria-label="Warning example" style={{ width: "60%" }} aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">6,083</div>
                   </div>
-                  <div class="progress mb-3">
-                    <div class="progress-bar bg-danger ps-4" role="progressbar" aria-label="Danger example" style={{ width: "40%" }} aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">3,963</div>
+                  <div className="progress mb-3">
+                    <div className="progress-bar bg-danger ps-4" role="progressbar" aria-label="Danger example" style={{ width: "40%" }} aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">3,963</div>
                   </div>
-                  <div class="progress">
-                    <div class="progress-bar bg-success ps-4" role="progressbar" aria-label="Danger example" style={{ width: "30%" }} aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">3,560</div>
+                  <div className="progress">
+                    <div className="progress-bar bg-success ps-4" role="progressbar" aria-label="Danger example" style={{ width: "30%" }} aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">3,560</div>
                   </div>
                 </div>
               </div>
@@ -144,30 +144,30 @@ const Dashboard = () => {
                 <h5 className='dashboard_progress_title'>Top 5 Customers</h5>
                 <div className="d-flex align-items-center justify-content-between">
                   <span className='dashboard_coustomer_sales'>Customers Sales </span>
-                  <div class="btn-group">
-                    <button type="button" class="dashboard_dropdown dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">Monthly <SlArrowDown className='dashboard_dropdown_arrow_icon' /></button>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                      <li><a class="dropdown-item" href="#">Menu item</a></li>
-                      <li><a class="dropdown-item" href="#">Menu item</a></li>
-                      <li><a class="dropdown-item" href="#">Menu item</a></li>
+                  <div className="btn-group">
+                    <button type="button" className="dashboard_dropdown dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">Monthly <SlArrowDown className='dashboard_dropdown_arrow_icon' /></button>
+                    <ul className="dropdown-menu dropdown-menu-end">
+                      <li><a className="dropdown-item" href="#">Menu item</a></li>
+                      <li><a className="dropdown-item" href="#">Menu item</a></li>
+                      <li><a className="dropdown-item" href="#">Menu item</a></li>
                     </ul>
                   </div>
                 </div>
                 <div>
-                  <div class="progress mb-3">
-                    <div class="progress-bar bg-success ps-4" role="progressbar" aria-label="Success example" style={{ width: "100%" }} aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">12,478</div>
+                  <div className="progress mb-3">
+                    <div className="progress-bar bg-success ps-4" role="progressbar" aria-label="Success example" style={{ width: "100%" }} aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">12,478</div>
                   </div>
-                  <div class="progress mb-3">
-                    <div class="progress-bar bg-info ps-4" role="progressbar" aria-label="Info example" style={{ width: "80%" }} aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">7,546</div>
+                  <div className="progress mb-3">
+                    <div className="progress-bar bg-info ps-4" role="progressbar" aria-label="Info example" style={{ width: "80%" }} aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">7,546</div>
                   </div>
-                  <div class="progress mb-3">
-                    <div class="progress-bar bg-warning ps-4" role="progressbar" aria-label="Warning example" style={{ width: "60%" }} aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">6,083</div>
+                  <div className="progress mb-3">
+                    <div className="progress-bar bg-warning ps-4" role="progressbar" aria-label="Warning example" style={{ width: "60%" }} aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">6,083</div>
                   </div>
-                  <div class="progress mb-3">
-                    <div class="progress-bar bg-danger ps-4" role="progressbar" aria-label="Danger example" style={{ width: "40%" }} aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">3,963</div>
+                  <div className="progress mb-3">
+                    <div className="progress-bar bg-danger ps-4" role="progressbar" aria-label="Danger example" style={{ width: "40%" }} aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">3,963</div>
                   </div>
-                  <div class="progress">
-                    <div class="progress-bar bg-success ps-4" role="progressbar" aria-label="Danger example" style={{ width: "30%" }} aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">3,560</div>
+                  <div className="progress">
+                    <div className="progress-bar bg-success ps-4" role="progressbar" aria-label="Danger example" style={{ width: "30%" }} aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">3,560</div>
                   </div>
                 </div>
               </div>

@@ -15,5 +15,7 @@ import ProductSection from "./Products/ProductSection/ProductSection";
 import ProductType from "./Products/ProductType/ProductType";
 import ServiceList from "./Products/ServiceList/ServiceList";
 
+// users
+import User from "./Users/User/User";
 
-export { Login, Register, Dashboard, NotFound, AccountChart, AccountStatement, PaymentMethod, ProductList, ProductSection, ProductType, ServiceList, }
+export { Login, Register, Dashboard, NotFound, AccountChart, AccountStatement, PaymentMethod, ProductList, ProductSection, ProductType, ServiceList,User }

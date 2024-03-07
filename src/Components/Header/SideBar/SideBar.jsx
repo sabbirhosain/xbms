@@ -37,6 +37,21 @@ const SideBar = () => {
               </li>
 
               <li className="dropdown_list">
+                <a className="dropdown_btn" role="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleuser" aria-expanded="false" aria-controls="collapseExampleuser">
+                  <span className="dropdown_list_name">
+                    <img src={dashIcon2} className="dropdown_list_icon" alt="" /> User</span>
+                  <IoIosArrowDown className="dropdown_icon" />
+                </a>
+
+                <div className="collapse" id="collapseExampleuser">
+                  <Link to={"/user"} className="dropdown_link">User List</Link>
+                  <Link to={""} className="dropdown_link">Account Statement</Link>
+                  <Link to={""} className="dropdown_link">Payment Method</Link>
+                  <Link to={""} className="dropdown_link">Dropdown 4</Link>
+                </div>
+              </li>
+
+              <li className="dropdown_list">
                 <a className="dropdown_btn" role="button" data-bs-toggle="collapse" data-bs-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
                   <span className="dropdown_list_name">
                     <img src={dashIcon3} className="dropdown_list_icon" alt="" /> Product</span>

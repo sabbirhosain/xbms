@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 const ContextProvider = createContext();
@@ -12,6 +13,7 @@ const ContextApi = ({ children }) => {
   // token store in localhost
   const [accessToken, setAccessToken] = useState({ user_data: null, accessToken: null });
   const [refreshToken, setRefreshToken] = useState({ user_data: null, refreshToken: null });
+
 
   const access_data = () => {
     const data = localStorage.getItem("access_token")
@@ -62,6 +64,8 @@ const ContextApi = ({ children }) => {
 
 
 
+
+
   return (
     <ContextProvider.Provider value={{ showPassword, passwordShowToggle, accessToken, setAccessToken, refreshToken, setRefreshToken, logout }}>
       {children}
@@ -75,3 +79,4 @@ export default ContextApi
 export const useContextProvider = () => {
   return useContext(ContextProvider)
 };
+
