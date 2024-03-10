@@ -16,6 +16,7 @@ import dashIcon10 from "../assets/dashboard-icon/icon10.svg"
 import dashIcon11 from "../assets/dashboard-icon/icon11.svg"
 import dashIcon12 from "../assets/dashboard-icon/icon12.svg"
 import dashIcon13 from "../assets/dashboard-icon/icon13.svg"
+import dashIcon14 from "../assets/dashboard-icon/icon14.svg"
 
 // balance icons
 import balance1 from "../assets/balance-icon/balance1.svg"
@@ -24,8 +25,10 @@ import balance3 from "../assets/balance-icon/balance3.svg"
 import balance4 from "../assets/balance-icon/balance4.svg"
 import balance5 from "../assets/balance-icon/balance5.svg"
 import balance6 from "../assets/balance-icon/balance6.svg"
+import balance7 from "../assets/balance-icon/balance7.svg"
 
 import edit from "../assets/table/edit.svg"
 import trash from "../assets/table/trash.svg"
+import user from "../assets/table/user.png"
 
-export { logo, loginImg, loginImg3, dashIcon1, dashIcon2, dashIcon3, dashIcon4, dashIcon5, dashIcon6, dashIcon7, dashIcon8, dashIcon9, dashIcon10, dashIcon11, dashIcon12, dashIcon13, balance1, balance2, balance3, balance4, balance5, balance6, edit, trash }
+export { logo, loginImg, loginImg3, dashIcon1, dashIcon2, dashIcon3, dashIcon4, dashIcon5, dashIcon6, dashIcon7, dashIcon8, dashIcon9, dashIcon10, dashIcon11, dashIcon12, dashIcon13, dashIcon14, balance1, balance2, balance3, balance4, balance5, balance6, balance7, edit, trash, user }

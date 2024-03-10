@@ -6,7 +6,7 @@ import swal from 'sweetalert';
 import { ToastContainer } from 'react-toastify';
 import { Route, Routes } from "react-router-dom"
 
-import { Login, Register, Dashboard, NotFound, AccountChart, AccountStatement, PaymentMethod, ProductList, ProductSection, ProductType, ServiceList, User } from "./Pages/Pages.jsx";
+import { Login, Register, Dashboard, NotFound, ProductList, ProductSection, ProductType, ServiceList, User, Accounts, Designation, ProductCategory, Territory, UnitType } from "./Pages/Pages.jsx";
 import PrivateRoute from "./Routes/PrivateRoute.jsx";
 
 const App = () => {
@@ -21,11 +21,11 @@ const App = () => {
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<Dashboard />} />
           <Route path="dashboard" element={<Dashboard />} />
-
-          {/* accounts */}
-          <Route path="/account-chart" element={<AccountChart />} />
-          <Route path="/account-statement" element={<AccountStatement />} />
-          <Route path="/payment-method" element={<PaymentMethod />} />
+          <Route path="/accounts" element={<Accounts />} />
+          <Route path="/designation" element={<Designation />} />
+          <Route path="/product-category" element={<ProductCategory />} />
+          <Route path="/territory" element={<Territory />} />
+          <Route path="/unit-type" element={<UnitType />} />
 
           {/* products */}
           <Route path="/product-list" element={<ProductList />} />

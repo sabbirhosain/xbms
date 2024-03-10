@@ -2,6 +2,7 @@ import { dashIcon12, edit, trash } from '../../../Data/Images'
 import { CiSearch } from '../../../Data/Icon'
 import Layout from '../../../Layout/Layout'
 import "./AccountChart.css"
+import AddUser from '../../../Components/Modal/User/AddUser/AddUser'
 
 const AccountChart = () => {
   return (
@@ -28,8 +29,9 @@ const AccountChart = () => {
               <section>
                 <div className='add_new_account_row'>
                   <h5 className='add_new_account_title'>My Cash</h5>
-                  <button className='account_add_new_btn'>
-                    <img src={dashIcon12} className='account_add_new_icon' alt="" />Add New Cash</button>
+                  <button className='account_add_new_btn' data-bs-toggle="modal" data-bs-target="#addUserModal">
+                    <img src={dashIcon12} className='account_add_new_icon' alt="" />Add New User</button>
+                  <AddUser />
                 </div>
                 <div>
                   <table className='table table-responsive table-hover'>

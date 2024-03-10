@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
-import { GrHomeRounded, IoIosArrowDown } from "../../../Data/Icon"
+import { IoIosArrowDown } from "../../../Data/Icon"
 import "./SideBar.css"
-import { dashIcon1, dashIcon10, dashIcon11, dashIcon12, dashIcon13, dashIcon2, dashIcon3, dashIcon4, dashIcon5, dashIcon6, dashIcon7, dashIcon8, dashIcon9, logo } from "../../../Data/Images"
+import { dashIcon1, dashIcon10, dashIcon11, dashIcon12, dashIcon13, dashIcon14, dashIcon2, dashIcon3, dashIcon4, dashIcon5, dashIcon6, dashIcon7, dashIcon8, dashIcon9, logo } from "../../../Data/Images"
 const SideBar = () => {
   return (
     <>
@@ -14,26 +14,26 @@ const SideBar = () => {
           <div className="offcanvas-body">
 
             <ul className="dropdown_item">
+
               <li className="dropdown_list">
-                <Link to={""} className="dropdown_btn">
+                <Link to={"/"} className="dropdown_btn">
                   <span className="dropdown_list_name">
                     <img src={dashIcon1} className="dropdown_list_icon" alt="" /> Dashboard</span>
                 </Link>
               </li>
 
               <li className="dropdown_list">
-                <a className="dropdown_btn" role="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                <Link to={"/accounts"} className="dropdown_btn">
                   <span className="dropdown_list_name">
                     <img src={dashIcon2} className="dropdown_list_icon" alt="" /> Account</span>
-                  <IoIosArrowDown className="dropdown_icon" />
-                </a>
+                </Link>
+              </li>
 
-                <div className="collapse" id="collapseExample">
-                  <Link to={"/account-chart"} className="dropdown_link">Account Chart</Link>
-                  <Link to={""} className="dropdown_link">Account Statement</Link>
-                  <Link to={""} className="dropdown_link">Payment Method</Link>
-                  <Link to={""} className="dropdown_link">Dropdown 4</Link>
-                </div>
+              <li className="dropdown_list">
+                <Link to={"/territory"} className="dropdown_btn">
+                  <span className="dropdown_list_name">
+                    <img src={dashIcon14} className="dropdown_list_icon" alt="" />Setup</span>
+                </Link>
               </li>
 
               <li className="dropdown_list">
@@ -44,6 +44,21 @@ const SideBar = () => {
                 </a>
 
                 <div className="collapse" id="collapseExampleuser">
+                  <Link to={"/user"} className="dropdown_link">User List</Link>
+                  <Link to={""} className="dropdown_link">Account Statement</Link>
+                  <Link to={""} className="dropdown_link">Payment Method</Link>
+                  <Link to={""} className="dropdown_link">Dropdown 4</Link>
+                </div>
+              </li>
+
+              <li className="dropdown_list">
+                <a className="dropdown_btn" role="button" data-bs-toggle="collapse" data-bs-target="#collapseExamplesetup" aria-expanded="false" aria-controls="collapseExamplesetup">
+                  <span className="dropdown_list_name">
+                    <img src={dashIcon14} className="dropdown_list_icon" alt="" />Setup</span>
+                  <IoIosArrowDown className="dropdown_icon" />
+                </a>
+
+                <div className="collapse" id="collapseExamplesetup">
                   <Link to={"/user"} className="dropdown_link">User List</Link>
                   <Link to={""} className="dropdown_link">Account Statement</Link>
                   <Link to={""} className="dropdown_link">Payment Method</Link>
