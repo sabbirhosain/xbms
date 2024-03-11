@@ -1,28 +1,61 @@
 import { createContext, useContext, useEffect, useState } from "react"
-import { terrritori_list, terrritori_delete } from "../ApiURL";
+import { terrritori_list, terrritori_delete, terrritori_update } from "../ApiURL";
 import axios from "axios";
 import Swal from 'sweetalert2';
+import { toast } from "react-toastify";
 const ContextDataProvider = createContext()
 
 const ContextDataApi = ({ children }) => {
-  const [territoryData, setTerritoryData] = useState("");
-
 
   // All Territory Data
+  const [territoryData, setTerritoryData] = useState("");
+
   const territory = async () => {
     try {
       const response = await axios.get(terrritori_list);
-      setTerritoryData(response.data.results);
+      setTerritoryData(response.data.results.reverse());
     } catch (error) {
       console.log(error);
     }
   };
 
-// Update 
-const update_terrritori = (id) => {
-  console.log(id);
-}
+  // Update Territory
+  const [updateTerritory, setUpdateTerritory] = useState({ id: "", name: "" });
+  const [errorTerritory, setErrorTerritory] = useState();
+  const [hideModal, setHideModal] = useState(false);
 
+  const inputChangeHandler = (e) => {
+    const { name, value } = e.target
+    setUpdateTerritory({ ...updateTerritory, name: value });
+  }
+
+  const update_terrritori = async (id) => {
+    try {
+      const response = await axios.get(`${terrritori_list}${id}/`);
+      setUpdateTerritory(response.data)
+    } catch (error) {
+      console.error('Error updating user:', error);
+    }
+  }
+
+  const submitForm = async (e) => {
+    e.preventDefault();
+    const { name } = updateTerritory
+
+    try {
+      if (!name) {
+        return setErrorTerritory("Territory Name is required...!!")
+      }
+      const response = await axios.put(`${terrritori_update}${updateTerritory.id}/`, updateTerritory);
+      if (response && response.data) {
+        toast.success("Territory Updated Successfully!")
+        setHideModal(!hideModal);
+      }
+    } catch (error) {
+      console.error('Error adding post:', error);
+    }
+
+  }
 
 
 
@@ -66,7 +99,7 @@ const update_terrritori = (id) => {
   }, [territoryData])
 
   return (
-    <ContextDataProvider.Provider value={{ territoryData, delete_terrritori,update_terrritori }}>
+    <ContextDataProvider.Provider value={{ territoryData, delete_terrritori, updateTerritory, inputChangeHandler, update_terrritori, submitForm, errorTerritory, hideModal }}>
       {children}
     </ContextDataProvider.Provider>
   )

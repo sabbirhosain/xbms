@@ -3,7 +3,7 @@ import { edit, trash } from '../../../../Data/Images';
 import DataTable from 'react-data-table-component';
 import UpdateTerritoryModal from '../Modal/UpdateTerritoryModal copy';
 const TerritoryTable = () => {
-  const { territoryData, delete_terrritori, update_terrritori } = useContextDataProvider();
+  const { territoryData, submitForm, delete_terrritori, update_terrritori } = useContextDataProvider();
 
 
 
