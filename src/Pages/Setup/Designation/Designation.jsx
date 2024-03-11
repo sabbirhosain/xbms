@@ -20,7 +20,7 @@ const Designation = () => {
               <NavLink className="setup_page_link" to={"/product-category"}>Product Category</NavLink>
             </div>
             <div>
-              <input type="search" placeholder="search" name="" id="" />
+              <input type="search" placeholder="" name="" id="" />
             </div>
           </nav>
         </div>
