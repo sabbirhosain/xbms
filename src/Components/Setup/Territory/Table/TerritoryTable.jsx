@@ -1,9 +1,11 @@
 import { useContextDataProvider } from '../../../../ContextApi/ContextDataApi';
 import { edit, trash } from '../../../../Data/Images';
 import DataTable from 'react-data-table-component';
-
+import UpdateTerritoryModal from '../Modal/UpdateTerritoryModal copy';
 const TerritoryTable = () => {
-  const { territoryData } = useContextDataProvider();
+  const { territoryData, delete_terrritori, update_terrritori } = useContextDataProvider();
+
+
 
   const columns = [
     {
@@ -33,8 +35,8 @@ const TerritoryTable = () => {
     {
       name: "Action",
       cell: row => <>
-        <button className="me-2" onClick={() => alert(row.id)}> <img src={edit} /></button>
-        <button className="" onClick={() => alert(row.id)}><img src={trash} /></button>
+        <button className="me-2" data-bs-toggle="modal" data-bs-target="#update_territory" onClick={() => update_terrritori(row.id)}> <img src={edit} /></button>
+        <button className="" onClick={() => delete_terrritori(row.id)}><img src={trash} /></button>
       </>
 
     }
@@ -44,6 +46,7 @@ const TerritoryTable = () => {
   return (
     <div>
       <DataTable columns={columns} data={territoryData}></DataTable>
+      <UpdateTerritoryModal />
     </div>
   )
 }

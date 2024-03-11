@@ -1,11 +1,12 @@
 import "./TerritoryModal.css"
-const TerritoryModal = () => {
+const UpdateTerritoryModal = () => {
+
+
+
+
+
   return (
     <div>
-      {/* <!-- Button trigger modal --> */}
-      {/* <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Launch demo modal
-      </button> */}
 
       {/* <!-- Modal --> */}
       <div className="modal fade" id="update_territory" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -32,4 +33,11 @@ const TerritoryModal = () => {
   )
 }
 
-export default TerritoryModal
+export default UpdateTerritoryModal
+
+
+
+{/* <!-- Button trigger modal --> */ }
+{/* <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Launch demo modal
+      </button> */}

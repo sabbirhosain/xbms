@@ -2,7 +2,6 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 import "../node_modules/bootstrap/dist/js/bootstrap.bundle.js"
 // react-toastify
 import 'react-toastify/dist/ReactToastify.css';
-import swal from 'sweetalert';
 import { ToastContainer } from 'react-toastify';
 import { Route, Routes } from "react-router-dom"
 
@@ -10,6 +9,7 @@ import { Login, Register, Dashboard, NotFound, ProductList, ProductSection, Prod
 import PrivateRoute from "./Routes/PrivateRoute.jsx";
 
 const App = () => {
+
   return (
     <>
       <ToastContainer />
