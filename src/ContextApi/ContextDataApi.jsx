@@ -50,7 +50,7 @@ const ContextDataApi = ({ children }) => {
 
   useEffect(() => {
     territory();
-  }, [territoryData])
+  }, [])
 
 
 
@@ -147,7 +147,7 @@ const ContextDataApi = ({ children }) => {
         errorTerritory,
         hideModal
 
-        
+
       }
     }>
       {children}

@@ -15,22 +15,7 @@ const TerritoryTable = () => {
     {
       name: "Territory Name",
       selector: row => row.name,
-    },
-    {
-      name: "",
-      selector: row => row.x,
-    },
-    {
-      name: "",
-      selector: row => row.x,
-    },
-    {
-      name: "",
-      selector: row => row.x,
-    },
-    {
-      name: "",
-      selector: row => row.x,
+      width:"800px"
     },
     {
       name: "Action",
@@ -45,7 +30,7 @@ const TerritoryTable = () => {
 
   return (
     <>
-      <DataTable columns={columns} data={searchFilter}></DataTable>
+      <DataTable columns={columns} data={searchFilter} pagination></DataTable>
 
       <nav>
         <ul className="pagination">

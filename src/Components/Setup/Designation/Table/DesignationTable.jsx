@@ -12,22 +12,7 @@ const DesignationTable = () => {
     {
       name: "Designation Name",
       selector: row => row.name,
-    },
-    {
-      name: "",
-      selector: row => row.x,
-    },
-    {
-      name: "",
-      selector: row => row.x,
-    },
-    {
-      name: "",
-      selector: row => row.x,
-    },
-    {
-      name: "",
-      selector: row => row.x,
+      width:"800px"
     },
     {
       name: "Action",
@@ -57,7 +42,7 @@ const DesignationTable = () => {
 
   return (
     <>
-      <DataTable columns={columns} data={data}></DataTable>
+      <DataTable columns={columns} data={data} pagination></DataTable>
     </>
   )
 }

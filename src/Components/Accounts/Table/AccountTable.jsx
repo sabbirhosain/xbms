@@ -59,7 +59,7 @@ const AccountTable = () => {
 
   return (
     <>
-      <DataTable columns={columns} data={data}></DataTable>
+      <DataTable columns={columns} data={data} pagination></DataTable>
     </>
   )
 }
