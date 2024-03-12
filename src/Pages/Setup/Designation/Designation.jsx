@@ -2,6 +2,7 @@ import React from 'react'
 import Layout from '../../../Layout/Layout'
 import { balance7 } from '../../../Data/Images'
 import { NavLink } from 'react-router-dom'
+import DesignationTable from '../../../Components/Setup/Designation/Table/DesignationTable'
 
 const Designation = () => {
   return (
@@ -10,7 +11,7 @@ const Designation = () => {
         <div className="container">
           <div className="page_title">
             <h2 className="page_title_name">Designation</h2>
-            <button className="setup_page_btn"><img src={balance7} alt="" />Create</button>
+            <button className="add_action_btn"><img src={balance7} alt="" />Create</button>
           </div>
           <nav className="setup_navbar">
             <div>
@@ -25,7 +26,12 @@ const Designation = () => {
           </nav>
         </div>
       </section>
-      Designation
+
+      <section>
+        <div className="container">
+          <DesignationTable />
+        </div>
+      </section>
     </Layout>
   )
 }

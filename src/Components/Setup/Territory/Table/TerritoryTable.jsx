@@ -3,7 +3,7 @@ import { edit, trash } from '../../../../Data/Images';
 import DataTable from 'react-data-table-component';
 import UpdateTerritoryModal from '../Modal/UpdateTerritoryModal copy';
 const TerritoryTable = () => {
-  const { territoryData, submitForm, delete_terrritori, update_terrritori } = useContextDataProvider();
+  const { territoryData, searchFilter, delete_terrritori, update_terrritori, nextPage, prevPage, currentPage, handleNextPage, handlePrevPage, } = useContextDataProvider();
 
 
 
@@ -44,10 +44,29 @@ const TerritoryTable = () => {
 
 
   return (
-    <div>
-      <DataTable columns={columns} data={territoryData}></DataTable>
+    <>
+      <DataTable columns={columns} data={searchFilter}></DataTable>
+
+      <nav>
+        <ul className="pagination">
+          <li className={`page-item ${prevPage ? '' : 'disabled'}`}>
+            <button className="page-link" onClick={handlePrevPage} disabled={!prevPage}>
+              Previous
+            </button>
+          </li>
+          <li className="page-item">
+            <span className="page-link">{currentPage}</span>
+          </li>
+          <li className={`page-item ${nextPage ? '' : 'disabled'}`}>
+            <button className="page-link" onClick={handleNextPage} disabled={!nextPage}>
+              Next
+            </button>
+          </li>
+        </ul>
+      </nav>
+
       <UpdateTerritoryModal />
-    </div>
+    </>
   )
 }
 

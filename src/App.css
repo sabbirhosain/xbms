@@ -1,0 +1,58 @@
+.page_title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 30px 0px;
+}
+
+.add_action_btn {
+  color: var(--Secondary-Color);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: -0.3px;
+  display: flex;
+  padding: 12px 20px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px solid #475467;
+}
+
+.page_title_name {
+  color: var(--Secondary-Color);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 36px;
+  letter-spacing: -0.5px;
+  text-align: left;
+  margin: 0px;
+}
+
+
+/* Data Table */
+
+.jyGcZb {
+  &::-webkit-scrollbar {
+    width: 6px !important;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #d8f8e1;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+  }
+}
+
+.mHisf {
+  color: #223039 !important;
+  font-size: 16px !important;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: -0.30000001192092896px;
+  text-align: left;
+  background-color: #D7DFE9 !important;
+}

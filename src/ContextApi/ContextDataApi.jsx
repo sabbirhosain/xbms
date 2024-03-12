@@ -7,17 +7,53 @@ const ContextDataProvider = createContext()
 
 const ContextDataApi = ({ children }) => {
 
-  // All Territory Data
-  const [territoryData, setTerritoryData] = useState("");
+  // =================================================================
+  //                      Territory Context API Start
+  // =================================================================
+
+  // All Territory Data pagination and search filter
+  const [territoryData, setTerritoryData] = useState([]);
+  const [nextPage, setNextPage] = useState(null);
+  const [prevPage, setPrevPage] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [search, setSearch] = useState("");
+  const [searchFilter, setSearchFilter] = useState([]);
 
   const territory = async () => {
     try {
-      const response = await axios.get(terrritori_list);
-      setTerritoryData(response.data.results.reverse());
+      const response = await axios.get(`${terrritori_list}?page=${currentPage}`);
+      setTerritoryData(response.data.results);
+      setNextPage(response.data.next);
+      setPrevPage(response.data.previous);
+      setSearchFilter(response.data.results);
     } catch (error) {
       console.log(error);
     }
   };
+
+  const handleNextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
+  const handlePrevPage = () => {
+    setCurrentPage(currentPage - 1);
+  };
+
+
+
+  useEffect(() => {
+    const searchResult = searchFilter.filter(item =>
+      item.name.toLowerCase().match(search.toLowerCase())
+    );
+    setSearchFilter(searchResult);
+  }, [search])
+
+  useEffect(() => {
+    territory();
+  }, [territoryData])
+
+
+
 
   // Update Territory
   const [updateTerritory, setUpdateTerritory] = useState({ id: "", name: "" });
@@ -88,18 +124,32 @@ const ContextDataApi = ({ children }) => {
   };
 
 
+  // =================================================================
+  //                      Territory Context API End
+  // =================================================================
 
 
 
 
 
 
-  useEffect(() => {
-    territory();
-  }, [territoryData])
+
 
   return (
-    <ContextDataProvider.Provider value={{ territoryData, delete_terrritori, updateTerritory, inputChangeHandler, update_terrritori, submitForm, errorTerritory, hideModal }}>
+    <ContextDataProvider.Provider value={
+      {
+        // territory
+        territoryData,
+        nextPage, prevPage, currentPage, handleNextPage, handlePrevPage,
+        searchFilter, search, setSearch,
+        delete_terrritori,
+        updateTerritory, inputChangeHandler, update_terrritori, submitForm,
+        errorTerritory,
+        hideModal
+
+        
+      }
+    }>
       {children}
     </ContextDataProvider.Provider>
   )

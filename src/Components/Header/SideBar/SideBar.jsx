@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { IoIosArrowDown } from "../../../Data/Icon"
 import "./SideBar.css"
-import { dashIcon1, dashIcon10, dashIcon11, dashIcon12, dashIcon13, dashIcon14, dashIcon2, dashIcon3, dashIcon4, dashIcon5, dashIcon6, dashIcon7, dashIcon8, dashIcon9, logo } from "../../../Data/Images"
+import { dashIcon1, dashIcon10, dashIcon11, dashIcon12, dashIcon13, dashIcon14, dashIcon15, dashIcon16, dashIcon2, dashIcon3, dashIcon4, dashIcon5, dashIcon6, dashIcon7, dashIcon8, dashIcon9, logo } from "../../../Data/Images"
 const SideBar = () => {
   return (
     <>
@@ -39,7 +39,7 @@ const SideBar = () => {
               <li className="dropdown_list">
                 <a className="dropdown_btn" role="button" data-bs-toggle="collapse" data-bs-target="#collapseExampleuser" aria-expanded="false" aria-controls="collapseExampleuser">
                   <span className="dropdown_list_name">
-                    <img src={dashIcon2} className="dropdown_list_icon" alt="" /> User</span>
+                    <img src={dashIcon15} className="dropdown_list_icon" alt="" /> User</span>
                   <IoIosArrowDown className="dropdown_icon" />
                 </a>
 
@@ -54,7 +54,7 @@ const SideBar = () => {
               <li className="dropdown_list">
                 <a className="dropdown_btn" role="button" data-bs-toggle="collapse" data-bs-target="#collapseExamplesetup" aria-expanded="false" aria-controls="collapseExamplesetup">
                   <span className="dropdown_list_name">
-                    <img src={dashIcon14} className="dropdown_list_icon" alt="" />Setup</span>
+                    <img src={dashIcon16} className="dropdown_list_icon" alt="" />Inventory</span>
                   <IoIosArrowDown className="dropdown_icon" />
                 </a>
 

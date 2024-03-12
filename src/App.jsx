@@ -7,6 +7,7 @@ import { Route, Routes } from "react-router-dom"
 
 import { Login, Register, Dashboard, NotFound, ProductList, ProductSection, ProductType, ServiceList, User, Accounts, Designation, ProductCategory, Territory, UnitType } from "./Pages/Pages.jsx";
 import PrivateRoute from "./Routes/PrivateRoute.jsx";
+import "./App.css"
 
 const App = () => {
 

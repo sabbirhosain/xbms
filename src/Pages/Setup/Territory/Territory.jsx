@@ -4,15 +4,19 @@ import { NavLink } from 'react-router-dom'
 import TerritoryTable from '../../../Components/Setup/Territory/Table/TerritoryTable'
 import "./Territory.css"
 import AddTerritoryModal from '../../../Components/Setup/Territory/Modal/AddTerritoryModal'
+import { useContextDataProvider } from '../../../ContextApi/ContextDataApi'
 
 const Territory = () => {
+  const { search, setSearch } = useContextDataProvider()
+
+
   return (
     <Layout title={"Territory"}>
       <section>
         <div className="container">
           <div className="page_title">
             <h2 className="page_title_name">Territory List</h2>
-            <button className="setup_page_btn" data-bs-toggle="modal" data-bs-target="#add_territory">
+            <button className="add_action_btn" data-bs-toggle="modal" data-bs-target="#add_territory">
               <img src={balance7} alt="" />Create</button>
           </div>
           <AddTerritoryModal />
@@ -24,7 +28,7 @@ const Territory = () => {
               <NavLink className="setup_page_link" to={"/product-category"}>Product Category</NavLink>
             </div>
             <div>
-              <input type="search" placeholder="" name="" id="" />
+              <input type="search" value={search} onChange={(e) => setSearch(e.target.value)} placeholder=""/>
             </div>
           </nav>
         </div>
