@@ -27,9 +27,6 @@ const Territory = () => {
               <NavLink className="setup_page_link" to={"/unit-type"}>Unit Type</NavLink>
               <NavLink className="setup_page_link" to={"/product-category"}>Product Category</NavLink>
             </div>
-            <div>
-              <input type="search" value={search} onChange={(e) => setSearch(e.target.value)} placeholder=""/>
-            </div>
           </nav>
         </div>
       </section>

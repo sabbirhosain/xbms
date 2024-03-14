@@ -7,6 +7,7 @@ import "./Login.responsive.css"
 import { useState } from "react"
 import axios from "axios"
 import { toast } from 'react-toastify';
+import { admin_login } from "../../../ApiURL"
 
 
 const Login = () => {
@@ -25,7 +26,7 @@ const Login = () => {
         return setError("username and password is required...!!")
       }
 
-      const response = await axios.post('https://xms-esxe.onrender.com/api/auth/login/', {
+      const response = await axios.post(`${admin_login}`, {
         username: username,
         password: password,
       });
@@ -52,7 +53,6 @@ const Login = () => {
 
     } catch (error) {
       setError("user and password invalid...!!")
-      // toast.error("Login Faild !")
       console.error("Error", error);
     }
   };

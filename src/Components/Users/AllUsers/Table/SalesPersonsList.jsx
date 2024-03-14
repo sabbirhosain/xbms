@@ -1,10 +1,11 @@
 import DataTable from "react-data-table-component"
 import { edit, trash } from "../../../../Data/Images";
-import "./AllUser.css"
+// import "./AllUser.css"
 import { UserData } from "../../../../Data/Data";
 import { useCallback, useMemo, useState } from "react";
 
-const AllUser = () => {
+
+const SalesPersonsList = () => {
   const [selectedRows, setSelectedRows] = useState([]);
   const [toggleCleared, setToggleCleared] = useState(false);
   const [data, setData] = useState(UserData);
@@ -101,4 +102,4 @@ const AllUser = () => {
   )
 }
 
-export default AllUser
+export default SalesPersonsList

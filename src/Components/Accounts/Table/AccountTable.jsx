@@ -1,6 +1,7 @@
 import React from 'react'
 import { edit, trash } from '../../../Data/Images';
 import DataTable from 'react-data-table-component';
+import UpdateAccountModal from '../Modal/UpdateAccountModal';
 
 const AccountTable = () => {
 
@@ -28,7 +29,7 @@ const AccountTable = () => {
     {
       name: "Action",
       cell: row => <>
-        <button className="me-2" onClick={() => alert(row.id)}> <img src={edit} /></button>
+        <button className="me-2" data-bs-toggle="modal" data-bs-target="#update_account" onClick={() => alert(row.id)}> <img src={edit} /></button>
         <button className="" onClick={() => alert(row.id)}><img src={trash} /></button>
       </>
 
@@ -60,6 +61,7 @@ const AccountTable = () => {
   return (
     <>
       <DataTable columns={columns} data={data} pagination></DataTable>
+      <UpdateAccountModal />
     </>
   )
 }

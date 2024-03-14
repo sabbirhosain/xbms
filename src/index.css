@@ -43,7 +43,8 @@ span {
 }
 
 button,
-input {
+input,
+select {
   border: none;
   border-radius: 0px;
   outline: none;

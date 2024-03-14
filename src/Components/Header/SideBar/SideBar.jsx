@@ -37,19 +37,18 @@ const SideBar = () => {
               </li>
 
 
-              <div class="accordion accordion-flush" id="accordionFlushExample">
+              <div className="accordion accordion-flush" id="accordionFlushExample">
                 <li className="dropdown_list">
                   <button className="dropdown_btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseuser" aria-expanded="false" aria-controls="flush-collapseuser">
                     <span className="dropdown_list_name">
-                      <img src={dashIcon15} className="dropdown_list_icon" alt="" /> User</span>
+                      <img src={dashIcon15} className="dropdown_list_icon" alt="" /> Users</span>
                     <IoIosArrowDown className="dropdown_icon" />
                   </button>
 
-                  <div id="flush-collapseuser" class="accordion-collapse collapse" aria-labelledby="flush-headinguser" data-bs-parent="#accordionFlushExample">
-                    <Link to={"/user"} className="dropdown_link">User List</Link>
-                    <Link to={""} className="dropdown_link">Account Statement</Link>
-                    <Link to={""} className="dropdown_link">Payment Method</Link>
-                    <Link to={""} className="dropdown_link">Dropdown 4</Link>
+                  <div id="flush-collapseuser" className="accordion-collapse collapse" aria-labelledby="flush-headinguser" data-bs-parent="#accordionFlushExample">
+                    <NavLink to={"/sales-person-list"} className="dropdown_link">All User</NavLink>
+                    <NavLink to={"/add-sales-person"} className="dropdown_link">Sales Person</NavLink>
+                    <NavLink to={"/suppliers-list"} className="dropdown_link">Suppliers</NavLink>
                   </div>
                 </li>
 
@@ -60,11 +59,10 @@ const SideBar = () => {
                     <IoIosArrowDown className="dropdown_icon" />
                   </button>
 
-                  <div id="flush-collapseInventory" class="accordion-collapse collapse" aria-labelledby="flush-headingInventory" data-bs-parent="#accordionFlushExample">
-                    <Link to={"/user"} className="dropdown_link">User List</Link>
-                    <Link to={""} className="dropdown_link">Account Statement</Link>
-                    <Link to={""} className="dropdown_link">Payment Method</Link>
-                    <Link to={""} className="dropdown_link">Dropdown 4</Link>
+                  <div id="flush-collapseInventory" className="accordion-collapse collapse" aria-labelledby="flush-headingInventory" data-bs-parent="#accordionFlushExample">
+                    <Link to={"/inventory-raw-item"} className="dropdown_link">Raw item</Link>
+                    <Link to={"/inventory-product"} className="dropdown_link">Product</Link>
+                    <Link to={"/inventory-pack-size"} className="dropdown_link">Pack size</Link>
                   </div>
                 </li>
 
@@ -75,7 +73,7 @@ const SideBar = () => {
                     <IoIosArrowDown className="dropdown_icon" />
                   </button>
 
-                  <div id="flush-collapseProduct" class="accordion-collapse collapse" aria-labelledby="flush-headingProduct" data-bs-parent="#accordionFlushExample">
+                  <div id="flush-collapseProduct" className="accordion-collapse collapse" aria-labelledby="flush-headingProduct" data-bs-parent="#accordionFlushExample">
                     <Link to={""} className="dropdown_link">Dropdown 1</Link>
                     <Link to={""} className="dropdown_link">Dropdown 2</Link>
                     <Link to={""} className="dropdown_link">Dropdown 3</Link>
@@ -90,7 +88,7 @@ const SideBar = () => {
                     <IoIosArrowDown className="dropdown_icon" />
                   </button>
 
-                  <div id="flush-collapsePayment" class="accordion-collapse collapse" aria-labelledby="flush-headingPayment" data-bs-parent="#accordionFlushExample">
+                  <div id="flush-collapsePayment" className="accordion-collapse collapse" aria-labelledby="flush-headingPayment" data-bs-parent="#accordionFlushExample">
                     <Link to={""} className="dropdown_link">Dropdown 1</Link>
                     <Link to={""} className="dropdown_link">Dropdown 2</Link>
                     <Link to={""} className="dropdown_link">Dropdown 3</Link>
@@ -105,7 +103,7 @@ const SideBar = () => {
                     <IoIosArrowDown className="dropdown_icon" />
                   </button>
 
-                  <div id="flush-collapsesale" class="accordion-collapse collapse" aria-labelledby="flush-headingsale" data-bs-parent="#accordionFlushExample">
+                  <div id="flush-collapsesale" className="accordion-collapse collapse" aria-labelledby="flush-headingsale" data-bs-parent="#accordionFlushExample">
                     <Link to={""} className="dropdown_link">Dropdown 1</Link>
                     <Link to={""} className="dropdown_link">Dropdown 2</Link>
                     <Link to={""} className="dropdown_link">Dropdown 3</Link>
@@ -120,7 +118,7 @@ const SideBar = () => {
                     <IoIosArrowDown className="dropdown_icon" />
                   </button>
 
-                  <div id="flush-collapsePayment1" class="accordion-collapse collapse" aria-labelledby="flush-headingPayment1" data-bs-parent="#accordionFlushExample">
+                  <div id="flush-collapsePayment1" className="accordion-collapse collapse" aria-labelledby="flush-headingPayment1" data-bs-parent="#accordionFlushExample">
                     <Link to={""} className="dropdown_link">Dropdown 1</Link>
                     <Link to={""} className="dropdown_link">Dropdown 2</Link>
                     <Link to={""} className="dropdown_link">Dropdown 3</Link>
@@ -135,7 +133,7 @@ const SideBar = () => {
                     <IoIosArrowDown className="dropdown_icon" />
                   </button>
 
-                  <div id="flush-collapsePayment2" class="accordion-collapse collapse" aria-labelledby="flush-headingPayment2" data-bs-parent="#accordionFlushExample">
+                  <div id="flush-collapsePayment2" className="accordion-collapse collapse" aria-labelledby="flush-headingPayment2" data-bs-parent="#accordionFlushExample">
                     <Link to={""} className="dropdown_link">Dropdown 1</Link>
                     <Link to={""} className="dropdown_link">Dropdown 2</Link>
                     <Link to={""} className="dropdown_link">Dropdown 3</Link>
@@ -150,7 +148,7 @@ const SideBar = () => {
                     <IoIosArrowDown className="dropdown_icon" />
                   </button>
 
-                  <div id="flush-collapsePayment3" class="accordion-collapse collapse" aria-labelledby="flush-headingPayment3" data-bs-parent="#accordionFlushExample">
+                  <div id="flush-collapsePayment3" className="accordion-collapse collapse" aria-labelledby="flush-headingPayment3" data-bs-parent="#accordionFlushExample">
                     <Link to={""} className="dropdown_link">Dropdown 1</Link>
                     <Link to={""} className="dropdown_link">Dropdown 2</Link>
                     <Link to={""} className="dropdown_link">Dropdown 3</Link>
@@ -165,7 +163,7 @@ const SideBar = () => {
                     <IoIosArrowDown className="dropdown_icon" />
                   </button>
 
-                  <div id="flush-collapsePayment4" class="accordion-collapse collapse" aria-labelledby="flush-headingPayment4" data-bs-parent="#accordionFlushExample">
+                  <div id="flush-collapsePayment4" className="accordion-collapse collapse" aria-labelledby="flush-headingPayment4" data-bs-parent="#accordionFlushExample">
                     <Link to={""} className="dropdown_link">Dropdown 1</Link>
                     <Link to={""} className="dropdown_link">Dropdown 2</Link>
                     <Link to={""} className="dropdown_link">Dropdown 3</Link>
@@ -180,7 +178,7 @@ const SideBar = () => {
                     <IoIosArrowDown className="dropdown_icon" />
                   </button>
 
-                  <div id="flush-collapsePayment5" class="accordion-collapse collapse" aria-labelledby="flush-headingPayment5" data-bs-parent="#accordionFlushExample">
+                  <div id="flush-collapsePayment5" className="accordion-collapse collapse" aria-labelledby="flush-headingPayment5" data-bs-parent="#accordionFlushExample">
                     <Link to={""} className="dropdown_link">Dropdown 1</Link>
                     <Link to={""} className="dropdown_link">Dropdown 2</Link>
                     <Link to={""} className="dropdown_link">Dropdown 3</Link>
@@ -195,7 +193,7 @@ const SideBar = () => {
                     <IoIosArrowDown className="dropdown_icon" />
                   </button>
 
-                  <div id="flush-collapsePayment6" class="accordion-collapse collapse" aria-labelledby="flush-headingPayment6" data-bs-parent="#accordionFlushExample">
+                  <div id="flush-collapsePayment6" className="accordion-collapse collapse" aria-labelledby="flush-headingPayment6" data-bs-parent="#accordionFlushExample">
                     <Link to={""} className="dropdown_link">Dropdown 1</Link>
                     <Link to={""} className="dropdown_link">Dropdown 2</Link>
                     <Link to={""} className="dropdown_link">Dropdown 3</Link>
@@ -210,7 +208,7 @@ const SideBar = () => {
                     <IoIosArrowDown className="dropdown_icon" />
                   </button>
 
-                  <div id="flush-collapsePayment7" class="accordion-collapse collapse" aria-labelledby="flush-headingPayment7" data-bs-parent="#accordionFlushExample">
+                  <div id="flush-collapsePayment7" className="accordion-collapse collapse" aria-labelledby="flush-headingPayment7" data-bs-parent="#accordionFlushExample">
                     <Link to={""} className="dropdown_link">Dropdown 1</Link>
                     <Link to={""} className="dropdown_link">Dropdown 2</Link>
                     <Link to={""} className="dropdown_link">Dropdown 3</Link>
@@ -225,7 +223,7 @@ const SideBar = () => {
                     <IoIosArrowDown className="dropdown_icon" />
                   </button>
 
-                  <div id="flush-collapsePayment8" class="accordion-collapse collapse" aria-labelledby="flush-headingPayment8" data-bs-parent="#accordionFlushExample">
+                  <div id="flush-collapsePayment8" className="accordion-collapse collapse" aria-labelledby="flush-headingPayment8" data-bs-parent="#accordionFlushExample">
                     <Link to={""} className="dropdown_link">Dropdown 1</Link>
                     <Link to={""} className="dropdown_link">Dropdown 2</Link>
                     <Link to={""} className="dropdown_link">Dropdown 3</Link>

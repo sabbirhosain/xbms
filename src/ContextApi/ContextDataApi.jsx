@@ -3,6 +3,7 @@ import { terrritori_list, terrritori_delete, terrritori_update } from "../ApiURL
 import axios from "axios";
 import Swal from 'sweetalert2';
 import { toast } from "react-toastify";
+import { useContextProvider } from "./ContextApi";
 const ContextDataProvider = createContext()
 
 const ContextDataApi = ({ children }) => {
@@ -12,48 +13,27 @@ const ContextDataApi = ({ children }) => {
   // =================================================================
 
   // All Territory Data pagination and search filter
+  const { accessToken } = useContextProvider();
   const [territoryData, setTerritoryData] = useState([]);
-  const [nextPage, setNextPage] = useState(null);
-  const [prevPage, setPrevPage] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [search, setSearch] = useState("");
-  const [searchFilter, setSearchFilter] = useState([]);
+  console.log(accessToken.accessToken);
 
   const territory = async () => {
     try {
-      const response = await axios.get(`${terrritori_list}?page=${currentPage}`);
+      const response = await axios.get(`${terrritori_list}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken.accessToken}`,
+          // Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyMDcwNDA1NjgxLCJpYXQiOjE3MTA0MDU2ODEsImp0aSI6IjBhNDlmZTU1ZGFiMzQ1ZTQ4ZjUwZDAzMTc1YjhmZDk4IiwidXNlcl9pZCI6MX0.yIlhSaIzbitlJGYSHY917MhX-nHZdY_GsOuxlCnMRn8`
+        }
+      });
       setTerritoryData(response.data.results);
-      setNextPage(response.data.next);
-      setPrevPage(response.data.previous);
-      setSearchFilter(response.data.results);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleNextPage = () => {
-    setCurrentPage(currentPage + 1);
-  };
-
-  const handlePrevPage = () => {
-    setCurrentPage(currentPage - 1);
-  };
-
-
-
-  useEffect(() => {
-    const searchResult = searchFilter.filter(item =>
-      item.name.toLowerCase().match(search.toLowerCase())
-    );
-    setSearchFilter(searchResult);
-  }, [search])
-
   useEffect(() => {
     territory();
   }, [])
-
-
-
 
   // Update Territory
   const [updateTerritory, setUpdateTerritory] = useState({ id: "", name: "" });
@@ -67,7 +47,9 @@ const ContextDataApi = ({ children }) => {
 
   const update_terrritori = async (id) => {
     try {
-      const response = await axios.get(`${terrritori_list}${id}/`);
+      const response = await axios.get(`${terrritori_list}${id}/`, {
+        headers: { Authorization: `Bearer ${accessToken.accessToken}` }
+      });
       setUpdateTerritory(response.data)
     } catch (error) {
       console.error('Error updating user:', error);
@@ -82,10 +64,13 @@ const ContextDataApi = ({ children }) => {
       if (!name) {
         return setErrorTerritory("Territory Name is required...!!")
       }
-      const response = await axios.put(`${terrritori_update}${updateTerritory.id}/`, updateTerritory);
+      const response = await axios.put(`${terrritori_update}${updateTerritory.id}/`, updateTerritory, {
+        headers: { Authorization: `Bearer ${accessToken.accessToken}` }
+      });
       if (response && response.data) {
         toast.success("Territory Updated Successfully!")
         setHideModal(!hideModal);
+        territory();
       }
     } catch (error) {
       console.error('Error adding post:', error);
@@ -110,8 +95,11 @@ const ContextDataApi = ({ children }) => {
       if (result.isConfirmed) {
 
         try {
-          await axios.delete(`${terrritori_delete}${id}/`);
+          await axios.delete(`${terrritori_delete}${id}/`, {
+            headers: { Authorization: `Bearer ${accessToken.accessToken}` }
+          });
           Swal.fire('Deleted!', 'Territory will be deleted permanently!', 'success');
+          territory();
         } catch (error) {
           Swal.fire('Error!', 'An error occurred while deleting.', 'error');
         }
@@ -138,16 +126,11 @@ const ContextDataApi = ({ children }) => {
   return (
     <ContextDataProvider.Provider value={
       {
-        // territory
-        territoryData,
-        nextPage, prevPage, currentPage, handleNextPage, handlePrevPage,
-        searchFilter, search, setSearch,
+        territory, territoryData,
         delete_terrritori,
         updateTerritory, inputChangeHandler, update_terrritori, submitForm,
         errorTerritory,
         hideModal
-
-
       }
     }>
       {children}
