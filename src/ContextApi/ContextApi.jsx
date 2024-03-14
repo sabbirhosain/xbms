@@ -1,7 +1,5 @@
-import axios from 'axios';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { terrritori_list } from '../ApiURL';
 const ContextProvider = createContext();
 
 const ContextApi = ({ children }) => {

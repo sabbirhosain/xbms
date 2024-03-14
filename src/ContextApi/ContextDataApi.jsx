@@ -13,17 +13,18 @@ const ContextDataApi = ({ children }) => {
 
   // All Territory Data pagination and search filter
   const [territoryData, setTerritoryData] = useState([]);
-
+  const [filteredData, setFilteredData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const territory = async () => {
     const token = JSON.parse(localStorage.getItem('access_token'));
     try {
       const response = await axios.get(`${terrritori_list}`, {
-        headers: {
-          Authorization: `Bearer ${token.access}`,
-        }
+        headers: { Authorization: `Bearer ${token.access}` }
       });
       setTerritoryData(response.data.results);
+      setFilteredData(response.data.results);
+
     } catch (error) {
       console.log(error);
     }
@@ -32,6 +33,19 @@ const ContextDataApi = ({ children }) => {
   useEffect(() => {
     territory();
   }, [])
+
+
+  const handleSearch = (event) => {
+    const term = event.target.value;
+    setSearchTerm(term);
+    const filtered = territoryData.filter(item =>
+      item.name.toLowerCase().includes(term.toLowerCase())
+    );
+    setFilteredData(filtered);
+  };
+
+
+
 
   // Update Territory
   const [updateTerritory, setUpdateTerritory] = useState({ id: "", name: "" });
@@ -124,7 +138,7 @@ const ContextDataApi = ({ children }) => {
   return (
     <ContextDataProvider.Provider value={
       {
-        territory, territoryData,
+        territory, territoryData, searchTerm, filteredData, handleSearch,
         delete_terrritori,
         updateTerritory, inputChangeHandler, update_terrritori, submitForm,
         errorTerritory,

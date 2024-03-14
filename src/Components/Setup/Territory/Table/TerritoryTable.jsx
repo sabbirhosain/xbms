@@ -2,16 +2,51 @@ import { useContextDataProvider } from '../../../../ContextApi/ContextDataApi';
 import { edit, trash } from '../../../../Data/Images';
 import DataTable from 'react-data-table-component';
 import UpdateTerritoryModal from '../Modal/UpdateTerritoryModal copy';
-import { useContextProvider } from '../../../../ContextApi/ContextApi';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { terrritori_list } from '../../../../ApiURL';
 
 
 
 
 const TerritoryTable = () => {
-  const { territoryData, delete_terrritori, update_terrritori, } = useContextDataProvider();
+  const { delete_terrritori, update_terrritori, } = useContextDataProvider();
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [items, setItems] = useState([]);
+  const [totalRows, setTotalRows] = useState(0);
+  const [perPage, setPerPage] = useState(2);
+
+  useEffect(() => {
+    fetchData(1, perPage);
+  }, [perPage])
+
+
+
+  const fetchData = async (page, per_page) => {
+    try {
+      setIsLoaded(false);
+
+      const token = JSON.parse(localStorage.getItem('access_token'));
+      const response = await axios.get(`https://xms.pythonanywhere.com/api/territories/?page=${page}&per_page=${per_page}`, { headers: { Authorization: `Bearer ${token.access}` } });
+
+      setItems(response.data.results);
+      setTotalRows(response.data.count);
+      setIsLoaded(true);
+    } catch (error) {
+      setIsLoaded(true);
+      setError(error);
+    }
+  }
+
+
+  const handlePageChange = page => {
+    fetchData(page, perPage);
+  };
+
+
+  const handlePerRowsChange = async (newPerPage, page) => {
+    setPerPage(newPerPage);
+  }
 
 
   const columns = [
@@ -34,37 +69,30 @@ const TerritoryTable = () => {
     }
   ];
 
-  return (
-    <>
-      <DataTable
-        columns={columns}
-        data={territoryData}
-        pagination
-      >
 
-      </DataTable>
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  } else if (!isLoaded) {
+    return <div>Loading...</div>;
+  } else {
+    return (
 
-      {/* <nav>
-        <ul className="pagination">
-          <li className={`page-item ${prevPage ? '' : 'disabled'}`}>
-            <button className="page-link" onClick={handlePrevPage} disabled={!prevPage}>
-              Previous
-            </button>
-          </li>
-          <li className="page-item">
-            <span className="page-link">{currentPage}</span>
-          </li>
-          <li className={`page-item ${nextPage ? '' : 'disabled'}`}>
-            <button className="page-link" onClick={handleNextPage} disabled={!nextPage}>
-              Next
-            </button>
-          </li>
-        </ul>
-      </nav> */}
+      <>
+        <DataTable
+          columns={columns}
+          data={items}
+          pagination
+          paginationServer
+          paginationTotalRows={totalRows}
+          onChangePage={handlePageChange}
+          onChangeRowsPerPage={handlePerRowsChange}
+        >
+        </DataTable >
 
-      <UpdateTerritoryModal />
-    </>
-  )
+        <UpdateTerritoryModal />
+      </>
+    )
+  }
 }
 
 export default TerritoryTable

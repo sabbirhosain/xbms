@@ -14,7 +14,7 @@ const App = () => {
 
   return (
     <>
-      <ToastContainer />
+      <ToastContainer position="top-right" autoClose={1000} />
 
       <Routes>
         <Route path="/login" element={<Login />} />
