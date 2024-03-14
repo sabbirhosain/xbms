@@ -3,12 +3,10 @@ import "./TerritoryModal.css"
 import { terrritori_create } from "../../../../ApiURL";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { useContextProvider } from "../../../../ContextApi/ContextApi";
 import { useContextDataProvider } from "../../../../ContextApi/ContextDataApi";
 
 
 const AddTerritoryModal = () => {
-  const { accessToken } = useContextProvider();
   const { territory } = useContextDataProvider()
   const [name, setName] = useState("");
   const [error, setError] = useState("");
@@ -16,12 +14,13 @@ const AddTerritoryModal = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const token = JSON.parse(localStorage.getItem('access_token'));
     try {
       if (!name) {
         return setError("Territory Name is required...!!")
       }
       const response = await axios.post(terrritori_create, { name: name }, {
-        headers: { Authorization: `Bearer ${accessToken.accessToken}` }
+        headers: { Authorization: `Bearer ${token.access}` }
       });
 
       if (response && response.data) {

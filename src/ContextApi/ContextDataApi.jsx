@@ -3,7 +3,6 @@ import { terrritori_list, terrritori_delete, terrritori_update } from "../ApiURL
 import axios from "axios";
 import Swal from 'sweetalert2';
 import { toast } from "react-toastify";
-import { useContextProvider } from "./ContextApi";
 const ContextDataProvider = createContext()
 
 const ContextDataApi = ({ children }) => {
@@ -13,16 +12,15 @@ const ContextDataApi = ({ children }) => {
   // =================================================================
 
   // All Territory Data pagination and search filter
-  const { accessToken } = useContextProvider();
   const [territoryData, setTerritoryData] = useState([]);
-  console.log(accessToken.accessToken);
+
 
   const territory = async () => {
+    const token = JSON.parse(localStorage.getItem('access_token'));
     try {
       const response = await axios.get(`${terrritori_list}`, {
         headers: {
-          Authorization: `Bearer ${accessToken.accessToken}`,
-          // Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyMDcwNDA1NjgxLCJpYXQiOjE3MTA0MDU2ODEsImp0aSI6IjBhNDlmZTU1ZGFiMzQ1ZTQ4ZjUwZDAzMTc1YjhmZDk4IiwidXNlcl9pZCI6MX0.yIlhSaIzbitlJGYSHY917MhX-nHZdY_GsOuxlCnMRn8`
+          Authorization: `Bearer ${token.access}`,
         }
       });
       setTerritoryData(response.data.results);
@@ -46,9 +44,10 @@ const ContextDataApi = ({ children }) => {
   }
 
   const update_terrritori = async (id) => {
+    const token = JSON.parse(localStorage.getItem('access_token'));
     try {
       const response = await axios.get(`${terrritori_list}${id}/`, {
-        headers: { Authorization: `Bearer ${accessToken.accessToken}` }
+        headers: { Authorization: `Bearer ${token.access}` }
       });
       setUpdateTerritory(response.data)
     } catch (error) {
@@ -59,13 +58,13 @@ const ContextDataApi = ({ children }) => {
   const submitForm = async (e) => {
     e.preventDefault();
     const { name } = updateTerritory
-
+    const token = JSON.parse(localStorage.getItem('access_token'));
     try {
       if (!name) {
         return setErrorTerritory("Territory Name is required...!!")
       }
       const response = await axios.put(`${terrritori_update}${updateTerritory.id}/`, updateTerritory, {
-        headers: { Authorization: `Bearer ${accessToken.accessToken}` }
+        headers: { Authorization: `Bearer ${token.access}` }
       });
       if (response && response.data) {
         toast.success("Territory Updated Successfully!")
@@ -82,7 +81,7 @@ const ContextDataApi = ({ children }) => {
 
   // Delete Territory
   const delete_terrritori = (id) => {
-
+    const token = JSON.parse(localStorage.getItem('access_token'));
     Swal.fire({
       title: 'Are you sure?',
       text: 'By Clicking Delete Territory Your Territory will be deleted permanently!',
@@ -93,10 +92,9 @@ const ContextDataApi = ({ children }) => {
       reverseButtons: true,
     }).then(async (result) => {
       if (result.isConfirmed) {
-
         try {
           await axios.delete(`${terrritori_delete}${id}/`, {
-            headers: { Authorization: `Bearer ${accessToken.accessToken}` }
+            headers: { Authorization: `Bearer ${token.access}` }
           });
           Swal.fire('Deleted!', 'Territory will be deleted permanently!', 'success');
           territory();

@@ -4,12 +4,8 @@ import { NavLink } from 'react-router-dom'
 import TerritoryTable from '../../../Components/Setup/Territory/Table/TerritoryTable'
 import "./Territory.css"
 import AddTerritoryModal from '../../../Components/Setup/Territory/Modal/AddTerritoryModal'
-import { useContextDataProvider } from '../../../ContextApi/ContextDataApi'
 
 const Territory = () => {
-  const { search, setSearch } = useContextDataProvider()
-
-
   return (
     <Layout title={"Territory"}>
       <section>
