@@ -1,38 +1,9 @@
-import React, { useEffect, useState } from 'react'
 import DataTable from 'react-data-table-component';
 import { edit, trash } from '../../../../Data/Images';
 import { useContextDataProvider } from '../../../../ContextApi/ContextDataApi';
-import axios from 'axios';
-import { unittypes_list } from '../../../../ApiURL';
 
 const UnitTypeTable = () => {
-  const { getUnitType, deleteUnitType,s } = useContextDataProvider();
-  const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [unitTypesList, setUnitTypesList] = useState([]);
-  const [totalRows, setTotalRows] = useState(0);
-  const paginationComponentOptions = { noRowsPerPage: true };
-  useEffect(() => { unitTypesListFetch(1) }, [])
-
-
-  const unitTypesListFetch = async (page) => {
-    try {
-      setIsLoaded(true);
-      const token = JSON.parse(localStorage.getItem('access_token'));
-      const response = await axios.get(`${unittypes_list}?page=${page}`, { headers: { Authorization: `Bearer ${token.access}` } });
-      setUnitTypesList(response.data.results);
-      setTotalRows(response.data.count);
-      setIsLoaded(false);
-    } catch (error) {
-      setIsLoaded(true);
-      setError(error);
-    }
-  }
-
-
-  const handlePageChange = page => {
-    unitTypesListFetch(page);
-  };
+  const { getUnitType, deleteUnitType, isLoadedUnitType, unitTypeError, unitTypesList, totalRowsUnitType, paginationComponentOptionsUnitType, unitTypeHandlePageChange, } = useContextDataProvider();
 
 
   const columns = [
@@ -56,9 +27,8 @@ const UnitTypeTable = () => {
   ];
 
 
-  if (error) {
-    console.log(error);
-    return <div>Error: {error}</div>;
+  if (unitTypeError) {
+    return <div>Error: {unitTypeError.message}</div>;
   } else {
     return (
       <>
@@ -67,10 +37,10 @@ const UnitTypeTable = () => {
           data={unitTypesList}
           pagination
           paginationServer
-          paginationComponentOptions={paginationComponentOptions}
-          progressPending={isLoaded}
-          paginationTotalRows={totalRows}
-          onChangePage={handlePageChange}
+          paginationComponentOptions={paginationComponentOptionsUnitType}
+          progressPending={isLoadedUnitType}
+          paginationTotalRows={totalRowsUnitType}
+          onChangePage={unitTypeHandlePageChange}
         >
         </DataTable >
       </>

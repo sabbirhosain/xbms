@@ -13,6 +13,7 @@ const ContextDataApi = ({ children }) => {
   const [hideModal, setHideModal] = useState(false);
   const [error, setError] = useState([]);
 
+
   // Create Territory
   const [terrritoriName, setTerritoryName] = useState("");
   const terrritoriHandleSubmit = async (e) => {
@@ -29,11 +30,45 @@ const ContextDataApi = ({ children }) => {
       if (response && response.data) {
         toast.success("Territory Added Successfully!")
         setHideModal(!hideModal);
+        territoriFetch(1);
       }
     } catch (error) {
       console.error('Error adding post:', error);
     }
   };
+
+
+  // All Territori List
+  const [territoriError, setTerritoriError] = useState(null);
+  const [isLoadedTerritori, setIsLoadedTerritori] = useState(false);
+  const [territoriList, setTerritoriList] = useState([]);
+  const [totalRowsTerritori, setTotalRowsTerritori] = useState(0);
+  const paginationComponentOptionsTerritori = { noRowsPerPage: true };
+
+  useEffect(() => {
+    territoriFetch(1);
+  }, [])
+
+
+  const territoriFetch = async (page) => {
+    try {
+      setIsLoadedTerritori(true);
+      const token = JSON.parse(localStorage.getItem('access_token'));
+      const response = await axios.get(`${terrritori_list}?page=${page}`, { headers: { Authorization: `Bearer ${token.access}` } });
+      setTerritoriList(response.data.results);
+      setTotalRowsTerritori(response.data.count);
+      setIsLoadedTerritori(false);
+    } catch (error) {
+      setIsLoadedTerritori(true);
+      setTerritoriError(error);
+    }
+  }
+
+
+  const territoriHandlePageChange = page => {
+    territoriFetch(page);
+  };
+
 
 
 
@@ -44,6 +79,7 @@ const ContextDataApi = ({ children }) => {
     const { name, value } = e.target
     setUpdateTerritory({ ...updateTerritory, name: value });
   }
+  const a = null;
 
   const update_terrritori = async (id) => {
     const token = JSON.parse(localStorage.getItem('access_token'));
@@ -71,7 +107,7 @@ const ContextDataApi = ({ children }) => {
       if (response && response.data) {
         toast.success("Territory Updated Successfully!")
         setHideModal(!hideModal);
-        // territory();
+        territoriFetch(1);
       }
     } catch (error) {
       console.error('Error adding post:', error);
@@ -99,7 +135,7 @@ const ContextDataApi = ({ children }) => {
             headers: { Authorization: `Bearer ${token.access}` }
           });
           Swal.fire('Deleted!', 'Territory will be deleted permanently!', 'success');
-          // territory();
+          territoriFetch(1);
         } catch (error) {
           Swal.fire('Error!', 'An error occurred while deleting.', 'error');
         }
@@ -118,7 +154,6 @@ const ContextDataApi = ({ children }) => {
 
   // Create Designation
   const [designationsName, setDesignationsName] = useState("");
-
   const designationsHandleSubmit = async (e) => {
     e.preventDefault();
     const token = JSON.parse(localStorage.getItem('access_token'));
@@ -133,12 +168,41 @@ const ContextDataApi = ({ children }) => {
       if (response && response.data) {
         toast.success("Territory Added Successfully!")
         setHideModal(!hideModal);
-        // designationsFetch();
+        designationsFetch(1);
       }
     } catch (error) {
       console.error(error);
     }
   };
+
+  const [designationsError, setDesignationsError] = useState(null);
+  const [isLoadedDesignations, setIsLoadedDesignations] = useState(false);
+  const [designationsList, setDesignationsList] = useState([]);
+  const [totalRowsDesignations, setTotalRowsDesignations] = useState(0);
+  const paginationComponentOptionsDesignations = { noRowsPerPage: true };
+  useEffect(() => { designationsFetch(1) }, [])
+
+
+  const designationsFetch = async (page) => {
+    try {
+      setIsLoadedDesignations(true);
+      const token = JSON.parse(localStorage.getItem('access_token'));
+      const response = await axios.get(`${designations_list}?page=${page}`, { headers: { Authorization: `Bearer ${token.access}` } });
+      setDesignationsList(response.data.results);
+      setTotalRowsDesignations(response.data.count);
+      setIsLoadedDesignations(false);
+    } catch (error) {
+      setIsLoadedDesignations(true);
+      setDesignationsError(error);
+    }
+  }
+
+
+  const designationsHandlePageChange = page => {
+    designationsFetch(page);
+  };
+
+
 
   // Update Designations
   const [updateDesignations, setUpdateDesignations] = useState({ id: "", name: "" });
@@ -174,6 +238,7 @@ const ContextDataApi = ({ children }) => {
       if (response && response.data) {
         toast.success("Designations Updated Successfully!")
         setHideModal(!hideModal);
+        designationsFetch(1);
       }
     } catch (error) {
       console.error(error);
@@ -182,7 +247,7 @@ const ContextDataApi = ({ children }) => {
   }
 
 
-  // Delete Territory
+  // Delete Designations
   const deleteDesignations = (id) => {
     const token = JSON.parse(localStorage.getItem('access_token'));
     Swal.fire({
@@ -200,7 +265,7 @@ const ContextDataApi = ({ children }) => {
             headers: { Authorization: `Bearer ${token.access}` }
           });
           Swal.fire('Deleted!', 'Territory will be deleted permanently!', 'success');
-          // designationsFetch();
+          designationsFetch(1);
         } catch (error) {
           Swal.fire('Error!', 'An error occurred while deleting.', 'error');
         }
@@ -214,10 +279,10 @@ const ContextDataApi = ({ children }) => {
 
 
   // =================================================================
-  //                      Designation Context API Start
+  //                      UnitType Context API Start
   // =================================================================
 
-  // Create Designation
+  // Create UnitType
   const [unitTypeName, setUnitTypeName] = useState("");
 
   const unitTypeHandleSubmit = async (e) => {
@@ -234,14 +299,43 @@ const ContextDataApi = ({ children }) => {
       if (response && response.data) {
         toast.success("UnitType Added Successfully!")
         setHideModal(!hideModal);
-        // designationsFetch();
+        unitTypesListFetch(1)
       }
     } catch (error) {
       console.error(error);
     }
   };
 
-  // Update Designations
+  // All UnitType List
+  const [unitTypeError, setUnitTypeError] = useState(null);
+  const [isLoadedUnitType, setIsLoadedUnitType] = useState(false);
+  const [unitTypesList, setUnitTypesList] = useState([]);
+  const [totalRowsUnitType, setTotalRowsUnitType] = useState(0);
+  const paginationComponentOptionsUnitType = { noRowsPerPage: true };
+  useEffect(() => { unitTypesListFetch(1) }, [])
+
+
+  const unitTypesListFetch = async (page) => {
+    try {
+      setIsLoadedUnitType(true);
+      const token = JSON.parse(localStorage.getItem('access_token'));
+      const response = await axios.get(`${unittypes_list}?page=${page}`, { headers: { Authorization: `Bearer ${token.access}` } });
+      setUnitTypesList(response.data.results);
+      setTotalRowsUnitType(response.data.count);
+      setIsLoadedUnitType(false);
+    } catch (error) {
+      setIsLoadedUnitType(true);
+      setUnitTypeError(error);
+    }
+  }
+
+
+  const unitTypeHandlePageChange = page => {
+    unitTypesListFetch(page);
+  };
+
+
+  // Update UnitType
   const [updateUnitType, setUpdateUnitType] = useState({ id: "", name: "" });
 
   const unittypeInputChange = (e) => {
@@ -275,6 +369,7 @@ const ContextDataApi = ({ children }) => {
       if (response && response.data) {
         toast.success("Designations Updated Successfully!")
         setHideModal(!hideModal);
+        unitTypesListFetch(1)
       }
     } catch (error) {
       console.error(error);
@@ -283,7 +378,7 @@ const ContextDataApi = ({ children }) => {
   }
 
 
-  // Delete Territory
+  // Delete UnitType
   const deleteUnitType = (id) => {
     const token = JSON.parse(localStorage.getItem('access_token'));
     Swal.fire({
@@ -301,7 +396,7 @@ const ContextDataApi = ({ children }) => {
             headers: { Authorization: `Bearer ${token.access}` }
           });
           Swal.fire('Deleted!', 'Territory will be deleted permanently!', 'success');
-          // designationsFetch();
+          unitTypesListFetch(1)
         } catch (error) {
           Swal.fire('Error!', 'An error occurred while deleting.', 'error');
         }
@@ -317,7 +412,7 @@ const ContextDataApi = ({ children }) => {
   //                      Product Category Context API Start
   // =================================================================
 
-  // Create Designation
+  // Create Product Category
   const [productCategoryName, setProductCategoryName] = useState("");
 
   const productCategoryHandleSubmit = async (e) => {
@@ -334,14 +429,44 @@ const ContextDataApi = ({ children }) => {
       if (response && response.data) {
         toast.success("Product Category Added Successfully!")
         setHideModal(!hideModal);
-        // designationsFetch();
+        productCategoryListFetch(1)
       }
     } catch (error) {
       console.error(error);
     }
   };
 
-  // Update Designations
+  // All Product Category List
+  const [productCategoryError, setProductCategoryError] = useState(null);
+  const [isLoadedProductCategory, setIsLoadedProductCategory] = useState(false);
+  const [productCategoryList, setProductCategoryList] = useState([]);
+  const [totalRowsProductCategory, setTotalRowsProductCategory] = useState(0);
+  const paginationComponentOptionsProductCategory = { noRowsPerPage: true };
+  useEffect(() => { productCategoryListFetch(1) }, [])
+
+
+  const productCategoryListFetch = async (page) => {
+    try {
+      setIsLoadedProductCategory(true);
+      const token = JSON.parse(localStorage.getItem('access_token'));
+      const response = await axios.get(`${productcategories_list}?page=${page}`, { headers: { Authorization: `Bearer ${token.access}` } });
+      setProductCategoryList(response.data.results);
+      setTotalRowsProductCategory(response.data.count);
+      setIsLoadedProductCategory(false);
+    } catch (error) {
+      setIsLoadedProductCategory(true);
+      setProductCategoryError(error);
+    }
+  }
+
+
+  const productCategoryHandlePageChange = page => {
+    productCategoryListFetch(page);
+  };
+
+
+
+  // Update Product Category
   const [updateProductCategory, setUpdateProductCategory] = useState({ id: "", name: "" });
 
   const productCategoryInputChange = (e) => {
@@ -375,6 +500,7 @@ const ContextDataApi = ({ children }) => {
       if (response && response.data) {
         toast.success("Product Category Updated Successfully!")
         setHideModal(!hideModal);
+        productCategoryListFetch(1)
       }
     } catch (error) {
       console.error(error);
@@ -383,7 +509,7 @@ const ContextDataApi = ({ children }) => {
   }
 
 
-  // Delete Territory
+  // Delete Product Category
   const deleteProductCategory = (id) => {
     const token = JSON.parse(localStorage.getItem('access_token'));
     Swal.fire({
@@ -401,7 +527,7 @@ const ContextDataApi = ({ children }) => {
             headers: { Authorization: `Bearer ${token.access}` }
           });
           Swal.fire('Deleted!', 'Product category will be deleted permanently!', 'success');
-          // designationsFetch();
+          productCategoryListFetch(1)
         } catch (error) {
           Swal.fire('Error!', 'An error occurred while deleting.', 'error');
         }
@@ -423,14 +549,14 @@ const ContextDataApi = ({ children }) => {
   return (
     <ContextDataProvider.Provider value={
       {
-        terrritoriHandleSubmit, terrritoriName, setTerritoryName, delete_terrritori, updateTerritory, inputChangeHandler, update_terrritori, submitForm, hideModal, error,
+        terrritoriHandleSubmit, terrritoriName, setTerritoryName, delete_terrritori, updateTerritory, inputChangeHandler, update_terrritori, submitForm, hideModal, error, isLoadedTerritori, territoriError, territoriList, totalRowsTerritori, paginationComponentOptionsTerritori, territoriHandlePageChange,
 
-        designationsName, setDesignationsName, designationsHandleSubmit, updateDesignations, designationsInputChange, getDesignations, UpdateDesignationsFrom, deleteDesignations,
+        designationsName, setDesignationsName, designationsHandleSubmit, updateDesignations, designationsInputChange, getDesignations, UpdateDesignationsFrom, deleteDesignations, isLoadedDesignations, designationsError, designationsList, totalRowsDesignations, paginationComponentOptionsDesignations, designationsHandlePageChange,
 
-        unitTypeName, setUnitTypeName, unitTypeHandleSubmit, updateUnitType, unittypeInputChange, getUnitType, UpdateUnitTypeFrom, deleteUnitType,
+        unitTypeName, setUnitTypeName, unitTypeHandleSubmit, updateUnitType, unittypeInputChange, getUnitType, UpdateUnitTypeFrom, deleteUnitType, isLoadedUnitType, unitTypeError, unitTypesList, totalRowsUnitType, paginationComponentOptionsUnitType, unitTypeHandlePageChange,
 
         productCategoryName, setProductCategoryName, productCategoryHandleSubmit,
-        updateProductCategory, productCategoryInputChange, getProductCategory, UpdateProductCategoryFrom, deleteProductCategory
+        updateProductCategory, productCategoryInputChange, getProductCategory, UpdateProductCategoryFrom, deleteProductCategory, isLoadedProductCategory, productCategoryError, productCategoryList, totalRowsProductCategory, paginationComponentOptionsProductCategory, productCategoryHandlePageChange,
       }
     }>
       {children}
