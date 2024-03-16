@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react"
-import { terrritori_list, terrritori_delete, terrritori_update } from "../ApiURL";
+import { terrritori_list, terrritori_delete, terrritori_update, designations_list, designations_create, designations_update, designations_delete, terrritori_create, unittypes_create, unittypes_list, unittypes_update, unittypes_delete, productcategories_create, productcategories_update, productcategories_list, productcategories_delete } from "../ApiURL";
 import axios from "axios";
 import Swal from 'sweetalert2';
 import { toast } from "react-toastify";
@@ -10,47 +10,35 @@ const ContextDataApi = ({ children }) => {
   // =================================================================
   //                      Territory Context API Start
   // =================================================================
+  const [hideModal, setHideModal] = useState(false);
+  const [error, setError] = useState([]);
 
-  // All Territory Data pagination and search filter
-  const [territoryData, setTerritoryData] = useState([]);
-  const [filteredData, setFilteredData] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
-
-  const territory = async () => {
+  // Create Territory
+  const [terrritoriName, setTerritoryName] = useState("");
+  const terrritoriHandleSubmit = async (e) => {
+    e.preventDefault();
     const token = JSON.parse(localStorage.getItem('access_token'));
     try {
-      const response = await axios.get(`${terrritori_list}`, {
+      if (!terrritoriName) {
+        return setError("Territory Name is required...!!")
+      }
+      const response = await axios.post(terrritori_create, { name: terrritoriName }, {
         headers: { Authorization: `Bearer ${token.access}` }
       });
-      setTerritoryData(response.data.results);
-      setFilteredData(response.data.results);
 
+      if (response && response.data) {
+        toast.success("Territory Added Successfully!")
+        setHideModal(!hideModal);
+      }
     } catch (error) {
-      console.log(error);
+      console.error('Error adding post:', error);
     }
   };
-
-  useEffect(() => {
-    territory();
-  }, [])
-
-
-  const handleSearch = (event) => {
-    const term = event.target.value;
-    setSearchTerm(term);
-    const filtered = territoryData.filter(item =>
-      item.name.toLowerCase().includes(term.toLowerCase())
-    );
-    setFilteredData(filtered);
-  };
-
 
 
 
   // Update Territory
   const [updateTerritory, setUpdateTerritory] = useState({ id: "", name: "" });
-  const [errorTerritory, setErrorTerritory] = useState();
-  const [hideModal, setHideModal] = useState(false);
 
   const inputChangeHandler = (e) => {
     const { name, value } = e.target
@@ -65,7 +53,7 @@ const ContextDataApi = ({ children }) => {
       });
       setUpdateTerritory(response.data)
     } catch (error) {
-      console.error('Error updating user:', error);
+      console.error(error);
     }
   }
 
@@ -75,7 +63,7 @@ const ContextDataApi = ({ children }) => {
     const token = JSON.parse(localStorage.getItem('access_token'));
     try {
       if (!name) {
-        return setErrorTerritory("Territory Name is required...!!")
+        return setError("Territory Name is required...!!")
       }
       const response = await axios.put(`${terrritori_update}${updateTerritory.id}/`, updateTerritory, {
         headers: { Authorization: `Bearer ${token.access}` }
@@ -83,7 +71,7 @@ const ContextDataApi = ({ children }) => {
       if (response && response.data) {
         toast.success("Territory Updated Successfully!")
         setHideModal(!hideModal);
-        territory();
+        // territory();
       }
     } catch (error) {
       console.error('Error adding post:', error);
@@ -111,7 +99,7 @@ const ContextDataApi = ({ children }) => {
             headers: { Authorization: `Bearer ${token.access}` }
           });
           Swal.fire('Deleted!', 'Territory will be deleted permanently!', 'success');
-          territory();
+          // territory();
         } catch (error) {
           Swal.fire('Error!', 'An error occurred while deleting.', 'error');
         }
@@ -125,8 +113,305 @@ const ContextDataApi = ({ children }) => {
 
 
   // =================================================================
-  //                      Territory Context API End
+  //                      Designation Context API Start
   // =================================================================
+
+  // Create Designation
+  const [designationsName, setDesignationsName] = useState("");
+
+  const designationsHandleSubmit = async (e) => {
+    e.preventDefault();
+    const token = JSON.parse(localStorage.getItem('access_token'));
+    try {
+      if (!designationsName) {
+        return setError("Designations Name is required...!!")
+      }
+      const response = await axios.post(designations_create, { name: designationsName }, {
+        headers: { Authorization: `Bearer ${token.access}` }
+      });
+
+      if (response && response.data) {
+        toast.success("Territory Added Successfully!")
+        setHideModal(!hideModal);
+        // designationsFetch();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // Update Designations
+  const [updateDesignations, setUpdateDesignations] = useState({ id: "", name: "" });
+
+  const designationsInputChange = (e) => {
+    const { name, value } = e.target
+    setUpdateDesignations({ ...updateDesignations, name: value });
+  }
+
+  const getDesignations = async (id) => {
+    const token = JSON.parse(localStorage.getItem('access_token'));
+    try {
+      const response = await axios.get(`${designations_list}${id}/`, {
+        headers: { Authorization: `Bearer ${token.access}` }
+      });
+      setUpdateDesignations(response.data)
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const UpdateDesignationsFrom = async (e) => {
+    e.preventDefault();
+    const { name } = updateDesignations
+    const token = JSON.parse(localStorage.getItem('access_token'));
+    try {
+      if (!name) {
+        return setError("Designations Name is required...!!")
+      }
+      const response = await axios.put(`${designations_update}${updateDesignations.id}/`, updateDesignations, {
+        headers: { Authorization: `Bearer ${token.access}` }
+      });
+      if (response && response.data) {
+        toast.success("Designations Updated Successfully!")
+        setHideModal(!hideModal);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+
+  }
+
+
+  // Delete Territory
+  const deleteDesignations = (id) => {
+    const token = JSON.parse(localStorage.getItem('access_token'));
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'By Clicking Delete Designations Your Designations will be deleted permanently!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Delete Designations!',
+      cancelButtonText: 'Keep Designations!',
+      reverseButtons: true,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axios.delete(`${designations_delete}${id}/`, {
+            headers: { Authorization: `Bearer ${token.access}` }
+          });
+          Swal.fire('Deleted!', 'Territory will be deleted permanently!', 'success');
+          // designationsFetch();
+        } catch (error) {
+          Swal.fire('Error!', 'An error occurred while deleting.', 'error');
+        }
+
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire('Cancelled', 'Your item is safe :)', 'info');
+      }
+    });
+
+  };
+
+
+  // =================================================================
+  //                      Designation Context API Start
+  // =================================================================
+
+  // Create Designation
+  const [unitTypeName, setUnitTypeName] = useState("");
+
+  const unitTypeHandleSubmit = async (e) => {
+    e.preventDefault();
+    const token = JSON.parse(localStorage.getItem('access_token'));
+    try {
+      if (!unitTypeName) {
+        return setError("UnitType Name is required...!!")
+      }
+      const response = await axios.post(unittypes_create, { name: unitTypeName }, {
+        headers: { Authorization: `Bearer ${token.access}` }
+      });
+
+      if (response && response.data) {
+        toast.success("UnitType Added Successfully!")
+        setHideModal(!hideModal);
+        // designationsFetch();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // Update Designations
+  const [updateUnitType, setUpdateUnitType] = useState({ id: "", name: "" });
+
+  const unittypeInputChange = (e) => {
+    const { name, value } = e.target
+    setUpdateUnitType({ ...updateUnitType, name: value });
+  }
+
+  const getUnitType = async (id) => {
+    const token = JSON.parse(localStorage.getItem('access_token'));
+    try {
+      const response = await axios.get(`${unittypes_list}${id}/`, {
+        headers: { Authorization: `Bearer ${token.access}` }
+      });
+      setUpdateUnitType(response.data)
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const UpdateUnitTypeFrom = async (e) => {
+    e.preventDefault();
+    const { name } = updateUnitType
+    const token = JSON.parse(localStorage.getItem('access_token'));
+    try {
+      if (!name) {
+        return setError("UnitType Name is required...!!")
+      }
+      const response = await axios.put(`${unittypes_update}${updateUnitType.id}/`, updateUnitType, {
+        headers: { Authorization: `Bearer ${token.access}` }
+      });
+      if (response && response.data) {
+        toast.success("Designations Updated Successfully!")
+        setHideModal(!hideModal);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+
+  }
+
+
+  // Delete Territory
+  const deleteUnitType = (id) => {
+    const token = JSON.parse(localStorage.getItem('access_token'));
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'By Clicking Delete UnitType Your UnitType will be deleted permanently!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Delete UnitType!',
+      cancelButtonText: 'Keep UnitType!',
+      reverseButtons: true,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axios.delete(`${unittypes_delete}${id}/`, {
+            headers: { Authorization: `Bearer ${token.access}` }
+          });
+          Swal.fire('Deleted!', 'Territory will be deleted permanently!', 'success');
+          // designationsFetch();
+        } catch (error) {
+          Swal.fire('Error!', 'An error occurred while deleting.', 'error');
+        }
+
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire('Cancelled', 'Your item is safe :)', 'info');
+      }
+    });
+
+  };
+
+  // =================================================================
+  //                      Product Category Context API Start
+  // =================================================================
+
+  // Create Designation
+  const [productCategoryName, setProductCategoryName] = useState("");
+
+  const productCategoryHandleSubmit = async (e) => {
+    e.preventDefault();
+    const token = JSON.parse(localStorage.getItem('access_token'));
+    try {
+      if (!productCategoryName) {
+        return setError("Product Category Name is required...!!")
+      }
+      const response = await axios.post(productcategories_create, { name: productCategoryName }, {
+        headers: { Authorization: `Bearer ${token.access}` }
+      });
+
+      if (response && response.data) {
+        toast.success("Product Category Added Successfully!")
+        setHideModal(!hideModal);
+        // designationsFetch();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // Update Designations
+  const [updateProductCategory, setUpdateProductCategory] = useState({ id: "", name: "" });
+
+  const productCategoryInputChange = (e) => {
+    const { name, value } = e.target
+    setUpdateProductCategory({ ...updateProductCategory, name: value });
+  }
+
+  const getProductCategory = async (id) => {
+    const token = JSON.parse(localStorage.getItem('access_token'));
+    try {
+      const response = await axios.get(`${productcategories_list}${id}/`, {
+        headers: { Authorization: `Bearer ${token.access}` }
+      });
+      setUpdateProductCategory(response.data)
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const UpdateProductCategoryFrom = async (e) => {
+    e.preventDefault();
+    const { name } = updateProductCategory
+    const token = JSON.parse(localStorage.getItem('access_token'));
+    try {
+      if (!name) {
+        return setError("Product Category Name is required...!!")
+      }
+      const response = await axios.put(`${productcategories_update}${updateProductCategory.id}/`, updateProductCategory, {
+        headers: { Authorization: `Bearer ${token.access}` }
+      });
+      if (response && response.data) {
+        toast.success("Product Category Updated Successfully!")
+        setHideModal(!hideModal);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+
+  }
+
+
+  // Delete Territory
+  const deleteProductCategory = (id) => {
+    const token = JSON.parse(localStorage.getItem('access_token'));
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'By Clicking Delete Product Category Your Product Category will be deleted permanently!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Delete Category!',
+      cancelButtonText: 'Keep Category!',
+      reverseButtons: true,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axios.delete(`${productcategories_delete}${id}/`, {
+            headers: { Authorization: `Bearer ${token.access}` }
+          });
+          Swal.fire('Deleted!', 'Product category will be deleted permanently!', 'success');
+          // designationsFetch();
+        } catch (error) {
+          Swal.fire('Error!', 'An error occurred while deleting.', 'error');
+        }
+
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire('Cancelled', 'Your item is safe :)', 'info');
+      }
+    });
+
+  };
 
 
 
@@ -138,11 +423,14 @@ const ContextDataApi = ({ children }) => {
   return (
     <ContextDataProvider.Provider value={
       {
-        territory, territoryData, searchTerm, filteredData, handleSearch,
-        delete_terrritori,
-        updateTerritory, inputChangeHandler, update_terrritori, submitForm,
-        errorTerritory,
-        hideModal
+        terrritoriHandleSubmit, terrritoriName, setTerritoryName, delete_terrritori, updateTerritory, inputChangeHandler, update_terrritori, submitForm, hideModal, error,
+
+        designationsName, setDesignationsName, designationsHandleSubmit, updateDesignations, designationsInputChange, getDesignations, UpdateDesignationsFrom, deleteDesignations,
+
+        unitTypeName, setUnitTypeName, unitTypeHandleSubmit, updateUnitType, unittypeInputChange, getUnitType, UpdateUnitTypeFrom, deleteUnitType,
+
+        productCategoryName, setProductCategoryName, productCategoryHandleSubmit,
+        updateProductCategory, productCategoryInputChange, getProductCategory, UpdateProductCategoryFrom, deleteProductCategory
       }
     }>
       {children}

@@ -1,7 +1,7 @@
 import { useContextDataProvider } from "../../../../ContextApi/ContextDataApi";
 import "./TerritoryModal.css"
 const UpdateTerritoryModal = () => {
-  const { updateTerritory, inputChangeHandler, submitForm, errorTerritory,hideModal } = useContextDataProvider();
+  const { updateTerritory, inputChangeHandler, submitForm, error,hideModal } = useContextDataProvider();
 
   return (
     <div>
@@ -20,7 +20,7 @@ const UpdateTerritoryModal = () => {
                     className="form-control"
                     id="add_territory"
                     placeholder="Name" />
-                  <small className="text-danger">{errorTerritory}</small>
+                  <small className="text-danger">{error}</small>
                 </div>
                 <div className="d-flex align-items-center mt-4">
                   <button type="button" className="modal_close_btn" data-bs-dismiss="modal">Close</button>

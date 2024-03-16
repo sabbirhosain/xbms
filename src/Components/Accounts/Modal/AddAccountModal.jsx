@@ -1,6 +1,7 @@
 import "./AccountModal.css"
 
 const AddAccountModal = () => {
+  
   return (
     <div>
       <div className={`modal fade`} data-bs- id="add_new_account" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -21,7 +22,7 @@ const AddAccountModal = () => {
                 </div>
                 <div className="d-flex align-items-center mt-4">
                   <button type="button" className="modal_close_btn" data-bs-dismiss="modal">Close</button>
-                  <button type="submit" className="modal_add_btn">Add Territory</button>
+                  <button type="button" className="modal_add_btn">Add Territory</button>
                 </div>
               </form>
             </div>

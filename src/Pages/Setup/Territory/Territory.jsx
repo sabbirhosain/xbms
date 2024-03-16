@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom'
 import TerritoryTable from '../../../Components/Setup/Territory/Table/TerritoryTable'
 import "./Territory.css"
 import AddTerritoryModal from '../../../Components/Setup/Territory/Modal/AddTerritoryModal'
+import UpdateTerritoryModal from '../../../Components/Setup/Territory/Modal/UpdateTerritoryModal copy'
 
 const Territory = () => {
   return (
@@ -16,6 +17,7 @@ const Territory = () => {
               <img src={balance7} alt="" />Create</button>
           </div>
           <AddTerritoryModal />
+          <UpdateTerritoryModal />
           <nav className="setup_navbar">
             <div>
               <NavLink className="setup_page_link" to={"/territory"}>Territory</NavLink>
