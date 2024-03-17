@@ -4,12 +4,12 @@ import { useContextDataProvider } from '../../../../ContextApi/ContextDataApi';
 
 const DesignationTable = () => {
   const { getDesignations, deleteDesignations, isLoadedDesignations, designationsError, designationsList, totalRowsDesignations, paginationComponentOptionsDesignations, designationsHandlePageChange, } = useContextDataProvider();
-
+  const generateSerialNumber = (index) => index + 1;
 
   const columns = [
     {
-      name: "ID",
-      selector: row => row.id,
+      name: "Serial No.",
+      selector: (row, index) => generateSerialNumber(index),
     },
     {
       name: "Designation Name",

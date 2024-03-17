@@ -1,3 +1,4 @@
+import { useParams } from "react-router-dom"
 import AddAccountModal from "../../Components/Accounts/Modal/AddAccountModal"
 import AccountTable from "../../Components/Accounts/Table/AccountTable"
 import { balance7 } from "../../Data/Images"
@@ -5,7 +6,8 @@ import Layout from "../../Layout/Layout"
 import "./Accounts.css"
 
 const Accounts = () => {
-  
+  const URL = useParams()
+  console.log(URL);
   return (
     <Layout title={"Accounts"}>
       <section>

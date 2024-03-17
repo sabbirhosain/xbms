@@ -1,8 +1,18 @@
-import { Link, NavLink } from "react-router-dom"
+import { Link, NavLink, useLocation } from "react-router-dom"
 import { IoIosArrowDown } from "../../../Data/Icon"
 import "./SideBar.css"
 import { dashIcon1, dashIcon10, dashIcon11, dashIcon12, dashIcon13, dashIcon14, dashIcon15, dashIcon16, dashIcon2, dashIcon3, dashIcon4, dashIcon5, dashIcon6, dashIcon7, dashIcon8, dashIcon9, logo } from "../../../Data/Images"
+import { useState } from "react"
+
 const SideBar = () => {
+  const [activeMenu, setActiveMenu] = useState(false);
+  const location = useLocation();
+  const active_menu = () => {
+    setActiveMenu(true)
+  }
+  console.log(activeMenu);
+  console.log(location.pathname);
+
   return (
     <>
       <div className="sidebar">
@@ -14,7 +24,6 @@ const SideBar = () => {
           <div className="offcanvas-body">
 
             <ul className="dropdown_item">
-
               <li className="dropdown_list">
                 <NavLink to={"/"} className="dropdown_btn">
                   <span className="dropdown_list_name">
@@ -38,6 +47,7 @@ const SideBar = () => {
 
 
               <div className="accordion accordion-flush" id="accordionFlushExample">
+
                 <li className="dropdown_list">
                   <button className="dropdown_btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseuser" aria-expanded="false" aria-controls="flush-collapseuser">
                     <span className="dropdown_list_name">
@@ -45,10 +55,10 @@ const SideBar = () => {
                     <IoIosArrowDown className="dropdown_icon" />
                   </button>
 
-                  <div id="flush-collapseuser" className="accordion-collapse collapse" aria-labelledby="flush-headinguser" data-bs-parent="#accordionFlushExample">
-                    <NavLink to={"/sales-person-list"} className="dropdown_link">All User</NavLink>
-                    <NavLink to={"/add-sales-person"} className="dropdown_link">Sales Person</NavLink>
-                    <NavLink to={"/suppliers-list"} className="dropdown_link">Suppliers</NavLink>
+                  <div id="flush-collapseuser" className={`accordion-collapse collapse ${activeMenu ? "show" : ""}`} aria-labelledby="flush-headinguser" data-bs-parent="#accordionFlushExample">
+                    <NavLink onClick={() => active_menu()} to={"/sales-person-list"} className="dropdown_link">All User</NavLink>
+                    <NavLink onClick={() => active_menu()} to={"/add-sales-person"} className="dropdown_link">Sales Person</NavLink>
+                    <NavLink onClick={() => active_menu()} to={"/suppliers-list"} className="dropdown_link">Suppliers</NavLink>
                   </div>
                 </li>
 

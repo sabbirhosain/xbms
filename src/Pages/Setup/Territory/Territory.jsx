@@ -5,16 +5,17 @@ import TerritoryTable from '../../../Components/Setup/Territory/Table/TerritoryT
 import "./Territory.css"
 import AddTerritoryModal from '../../../Components/Setup/Territory/Modal/AddTerritoryModal'
 import UpdateTerritoryModal from '../../../Components/Setup/Territory/Modal/UpdateTerritoryModal copy'
+import { useContextDataProvider } from '../../../ContextApi/ContextDataApi'
 
 const Territory = () => {
+  const { handleOpenModal } = useContextDataProvider()
   return (
     <Layout title={"Territory"}>
       <section>
         <div className="container">
           <div className="page_title">
             <h2 className="page_title_name">Territory List</h2>
-            <button className="add_action_btn" data-bs-toggle="modal" data-bs-target="#add_territory">
-              <img src={balance7} alt="" />Create</button>
+            <button className="add_action_btn" onClick={handleOpenModal}> <img src={balance7}/>Create</button>
           </div>
           <AddTerritoryModal />
           <UpdateTerritoryModal />
@@ -29,7 +30,7 @@ const Territory = () => {
         </div>
       </section>
 
-      <section>
+      <section className='mt-4'>
         <div className="container">
           <TerritoryTable />
         </div>

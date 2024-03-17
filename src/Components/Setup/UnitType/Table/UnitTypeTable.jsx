@@ -5,11 +5,12 @@ import { useContextDataProvider } from '../../../../ContextApi/ContextDataApi';
 const UnitTypeTable = () => {
   const { getUnitType, deleteUnitType, isLoadedUnitType, unitTypeError, unitTypesList, totalRowsUnitType, paginationComponentOptionsUnitType, unitTypeHandlePageChange, } = useContextDataProvider();
 
+  const generateSerialNumber = (index) => index + 1;
 
   const columns = [
     {
-      name: "ID",
-      selector: row => row.id,
+      name: "Serial No.",
+      selector: (row, index) => generateSerialNumber(index),
     },
     {
       name: "UnitType Name",

@@ -1,7 +1,7 @@
 import { useContextDataProvider } from "../../../../ContextApi/ContextDataApi";
 import "./TerritoryModal.css"
 const UpdateTerritoryModal = () => {
-  const { updateTerritory, inputChangeHandler, submitForm, error,hideModal } = useContextDataProvider();
+  const { updateTerritory, inputChangeHandler, submitForm, error, hideModal } = useContextDataProvider();
 
   return (
     <div>

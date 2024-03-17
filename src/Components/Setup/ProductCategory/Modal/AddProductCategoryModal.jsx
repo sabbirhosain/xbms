@@ -2,10 +2,10 @@ import React from 'react'
 import { useContextDataProvider } from '../../../../ContextApi/ContextDataApi'
 
 const AddProductCategoryModal = () => {
-  const { productCategoryName, setProductCategoryName, productCategoryHandleSubmit, error, hideModal } = useContextDataProvider()
+  const { productCategoryName, setProductCategoryName, productCategoryHandleSubmit, error, showModal, handleCloseModal } = useContextDataProvider()
   return (
     <div>
-      <div className={`modal fade ${hideModal ? "show d-none" : " "}`} data-bs- id="add_productCategory" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div className={`modal fade ${showModal ? "show d-block" : ""}`} data-bs- id="add_productCategory" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-body">
@@ -17,7 +17,7 @@ const AddProductCategoryModal = () => {
                   <small className="text-danger">{error}</small>
                 </div>
                 <div className="d-flex align-items-center mt-4">
-                  <button type="button" className="modal_close_btn" data-bs-dismiss="modal">Close</button>
+                  <button type="button" className="modal_close_btn" onClick={handleCloseModal}>Close</button>
                   <button type="submit" className="modal_add_btn">Add Category</button>
                 </div>
               </form>

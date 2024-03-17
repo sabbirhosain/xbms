@@ -5,19 +5,20 @@ import { NavLink } from 'react-router-dom'
 import DesignationTable from '../../../Components/Setup/Designation/Table/DesignationTable'
 import AddDesignationModal from '../../../Components/Setup/Designation/Modal/AddDesignationModal'
 import UpdateDesignationModal from '../../../Components/Setup/Designation/Modal/UpdateDesignationModal'
+import { useContextDataProvider } from '../../../ContextApi/ContextDataApi'
 
 const Designation = () => {
+  const { handleOpenModal } = useContextDataProvider()
   return (
     <Layout title={"Designation"}>
       <section>
         <div className="container">
           <div className="page_title">
             <h2 className="page_title_name">Designation</h2>
-            <button className="add_action_btn" data-bs-toggle="modal" data-bs-target="#add_designation">
-              <img src={balance7} alt="" />Create</button>
+            <button className="add_action_btn" onClick={handleOpenModal}><img src={balance7} />Create</button>
           </div>
           <AddDesignationModal />
-          <UpdateDesignationModal/>
+          <UpdateDesignationModal />
           <nav className="setup_navbar">
             <div>
               <NavLink className="setup_page_link" to={"/territory"}>Territory</NavLink>
@@ -29,7 +30,7 @@ const Designation = () => {
         </div>
       </section>
 
-      <section>
+      <section className='mt-4'>
         <div className="container">
           <DesignationTable />
         </div>

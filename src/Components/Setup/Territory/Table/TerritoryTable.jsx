@@ -5,16 +5,16 @@ import DataTable from 'react-data-table-component';
 const TerritoryTable = () => {
   const { delete_terrritori, update_terrritori, isLoadedTerritori, territoriError, territoriList, totalRowsTerritori, paginationComponentOptionsTerritori, territoriHandlePageChange } = useContextDataProvider();
 
-
+  const generateSerialNumber = (index) => index + 1;
   const columns = [
     {
-      name: "ID",
-      selector: row => row.id,
+      name: "Serial No.",
+      selector: (row, index) => generateSerialNumber(index),
     },
     {
       name: "Territory Name",
       selector: row => row.name,
-      width: "800px"
+      width: "800px",
     },
     {
       name: "Action",

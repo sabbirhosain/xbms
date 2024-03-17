@@ -10,8 +10,12 @@ const ContextDataApi = ({ children }) => {
   // =================================================================
   //                      Territory Context API Start
   // =================================================================
-  const [hideModal, setHideModal] = useState(false);
   const [error, setError] = useState([]);
+  const [hideModal, setHideModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const resetFields = () => { setTerritoryName(""), setDesignationsName(""), setUnitTypeName(""), setProductCategoryName(""), setError(null) };
+  const handleCloseModal = () => { setShowModal(false), setError(null) };
+  const handleOpenModal = () => { setShowModal(true) };
 
 
   // Create Territory
@@ -29,7 +33,8 @@ const ContextDataApi = ({ children }) => {
 
       if (response && response.data) {
         toast.success("Territory Added Successfully!")
-        setHideModal(!hideModal);
+        handleCloseModal();
+        resetFields();
         territoriFetch(1);
       }
     } catch (error) {
@@ -68,7 +73,6 @@ const ContextDataApi = ({ children }) => {
   const territoriHandlePageChange = page => {
     territoriFetch(page);
   };
-
 
 
 
@@ -167,7 +171,8 @@ const ContextDataApi = ({ children }) => {
 
       if (response && response.data) {
         toast.success("Territory Added Successfully!")
-        setHideModal(!hideModal);
+        handleCloseModal();
+        resetFields();
         designationsFetch(1);
       }
     } catch (error) {
@@ -175,6 +180,7 @@ const ContextDataApi = ({ children }) => {
     }
   };
 
+  // All Designations
   const [designationsError, setDesignationsError] = useState(null);
   const [isLoadedDesignations, setIsLoadedDesignations] = useState(false);
   const [designationsList, setDesignationsList] = useState([]);
@@ -298,7 +304,8 @@ const ContextDataApi = ({ children }) => {
 
       if (response && response.data) {
         toast.success("UnitType Added Successfully!")
-        setHideModal(!hideModal);
+        handleCloseModal();
+        resetFields();
         unitTypesListFetch(1)
       }
     } catch (error) {
@@ -428,7 +435,8 @@ const ContextDataApi = ({ children }) => {
 
       if (response && response.data) {
         toast.success("Product Category Added Successfully!")
-        setHideModal(!hideModal);
+        handleCloseModal();
+        resetFields();
         productCategoryListFetch(1)
       }
     } catch (error) {
@@ -549,7 +557,7 @@ const ContextDataApi = ({ children }) => {
   return (
     <ContextDataProvider.Provider value={
       {
-        terrritoriHandleSubmit, terrritoriName, setTerritoryName, delete_terrritori, updateTerritory, inputChangeHandler, update_terrritori, submitForm, hideModal, error, isLoadedTerritori, territoriError, territoriList, totalRowsTerritori, paginationComponentOptionsTerritori, territoriHandlePageChange,
+        terrritoriHandleSubmit, terrritoriName, setTerritoryName, delete_terrritori, updateTerritory, inputChangeHandler, update_terrritori, submitForm, error, isLoadedTerritori, territoriError, territoriList, totalRowsTerritori, paginationComponentOptionsTerritori, territoriHandlePageChange,
 
         designationsName, setDesignationsName, designationsHandleSubmit, updateDesignations, designationsInputChange, getDesignations, UpdateDesignationsFrom, deleteDesignations, isLoadedDesignations, designationsError, designationsList, totalRowsDesignations, paginationComponentOptionsDesignations, designationsHandlePageChange,
 
@@ -557,6 +565,8 @@ const ContextDataApi = ({ children }) => {
 
         productCategoryName, setProductCategoryName, productCategoryHandleSubmit,
         updateProductCategory, productCategoryInputChange, getProductCategory, UpdateProductCategoryFrom, deleteProductCategory, isLoadedProductCategory, productCategoryError, productCategoryList, totalRowsProductCategory, paginationComponentOptionsProductCategory, productCategoryHandlePageChange,
+
+        hideModal, showModal, handleCloseModal, handleOpenModal,
       }
     }>
       {children}
