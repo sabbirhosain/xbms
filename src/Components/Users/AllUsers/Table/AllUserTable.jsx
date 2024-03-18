@@ -3,7 +3,7 @@ import { edit, trash } from "../../../../Data/Images";
 import { useUserDataProvider } from "../../../../ContextApi/UsersContextApi";
 
 const AllUserTable = () => {
-  const { userList, userError, isLoadedUser, totalRowsUser, paginationComponentOptionsUser, userHandlePageChange } = useUserDataProvider();
+  const { userList, userError, isLoadedUser, totalRowsUser, paginationComponentOptionsUser, userHandlePageChange, delete_user } = useUserDataProvider();
   const generateSerialNumber = (index) => index + 1;
 
   // table column name
@@ -41,7 +41,7 @@ const AllUserTable = () => {
       name: "Action",
       cell: row => <>
         <button className="me-2" onClick={() => alert(row.id)}> <img src={edit} /></button>
-        <button className="" onClick={() => alert(row.id)}><img src={trash} /></button>
+        <button className="" onClick={() => delete_user(row.id)}><img src={trash} /></button>
       </>
 
     }

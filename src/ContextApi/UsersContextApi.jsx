@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react"
-import { user_list } from "../ApiURL";
+import { user_delete, user_list } from "../ApiURL";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const UserContextDataProvider = createContext()
 const UsersContextApi = ({ children }) => {
@@ -40,11 +41,35 @@ const UsersContextApi = ({ children }) => {
   };
 
 
+  // Delete User
 
+  const delete_user = (id) => {
+    const token = JSON.parse(localStorage.getItem('access_token'));
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'By Clicking Delete User Your User will be deleted permanently!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Delete User!',
+      cancelButtonText: 'Keep User!',
+      reverseButtons: true,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axios.delete(`${user_delete}${id}/delete/`, {
+            headers: { Authorization: `Bearer ${token.access}` }
+          });
+          Swal.fire('Deleted!', 'User will be deleted permanently!', 'success');
+          territoriFetch(1);
+        } catch (error) {
+          Swal.fire('Error!', 'An error occurred while deleting.', 'error');
+        }
 
-  // Create User
-
-
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire('Cancelled', 'Your item is safe :)', 'info');
+      }
+    });
+  };
 
 
 
@@ -66,8 +91,8 @@ const UsersContextApi = ({ children }) => {
   return (
     <UserContextDataProvider.Provider value={
       {
-        allUserFetch,
-        showUserModal,handleUserCloseModal, handleUserOpenModal,
+        allUserFetch, delete_user,
+        showUserModal, handleUserCloseModal, handleUserOpenModal,
         userList, userError, isLoadedUser, totalRowsUser, paginationComponentOptionsUser, userHandlePageChange
       }}>
       {children}
