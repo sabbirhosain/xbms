@@ -1,10 +1,14 @@
-import { Link, NavLink } from "react-router-dom"
+import { Link, NavLink, useLocation } from "react-router-dom"
 import { IoIosArrowDown } from "../../../Data/Icon"
 import "./SideBar.css"
 import { dashIcon1, dashIcon10, dashIcon11, dashIcon12, dashIcon13, dashIcon14, dashIcon15, dashIcon16, dashIcon2, dashIcon3, dashIcon4, dashIcon5, dashIcon6, dashIcon7, dashIcon8, dashIcon9, logo } from "../../../Data/Images"
+import { useState } from "react"
 
 const SideBar = () => {
-
+  const [activeAccordion, setActiveAccordion] = useState(false);
+  const isAccordionActive = () => {
+    return setActiveAccordion(true)
+  };
   return (
     <>
       <div className="sidebar">
@@ -38,6 +42,7 @@ const SideBar = () => {
               </li>
 
 
+              {/* <div className="accordion accordion-flush" id="accordionFlushExample"> */}
               <div className="accordion accordion-flush" id="accordionFlushExample">
 
                 <li className="dropdown_list">
@@ -48,7 +53,7 @@ const SideBar = () => {
                   </button>
 
                   <div id="flush-collapseuser" className={`accordion-collapse collapse`} aria-labelledby="flush-headinguser" data-bs-parent="#accordionFlushExample">
-                    <NavLink to={"/sales-person-list"} className="dropdown_link">All User</NavLink>
+                    <NavLink to={"/all-user-list"} className="dropdown_link">All User</NavLink>
                     <NavLink to={"/add-sales-person"} className="dropdown_link">Sales Person</NavLink>
                     <NavLink to={"/suppliers-list"} className="dropdown_link">Suppliers</NavLink>
                   </div>

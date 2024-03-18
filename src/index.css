@@ -29,6 +29,9 @@ body {
   font-family: var(--Primary-Fonts);
   background-color: var(--Color-Slate-50);
 }
+.modal-open{
+  padding: 0 !important;
+}
 
 h1,
 h2,

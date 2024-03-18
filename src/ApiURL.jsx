@@ -18,3 +18,7 @@ export const productcategories_list = import.meta.env.VITE_API_URL + "/api/produ
 export const productcategories_create = import.meta.env.VITE_API_URL + "/api/productcategories/";
 export const productcategories_update = import.meta.env.VITE_API_URL + "/api/productcategories/";
 export const productcategories_delete = import.meta.env.VITE_API_URL + "/api/productcategories/";
+
+export const user_list = import.meta.env.VITE_API_URL + "/api/auth/users/";
+export const user_create = import.meta.env.VITE_API_URL + "/api/auth/users/create/";
+export const user_update = import.meta.env.VITE_API_URL + "/api/auth/users/:id/edit/";

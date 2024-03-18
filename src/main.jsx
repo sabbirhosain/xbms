@@ -4,11 +4,14 @@ import './index.css'
 import { BrowserRouter } from 'react-router-dom'
 import ContextApi from './ContextApi/ContextApi.jsx'
 import ContextDataApi from './ContextApi/ContextDataApi.jsx'
+import UsersContextApi from './ContextApi/UsersContextApi.jsx'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <ContextApi>
       <ContextDataApi>
-        <App />
+        <UsersContextApi>
+          <App />
+        </UsersContextApi>
       </ContextDataApi>
     </ContextApi>
   </BrowserRouter>

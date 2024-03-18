@@ -16,7 +16,7 @@ import ProductType from "./Products/ProductType/ProductType";
 import ServiceList from "./Products/ServiceList/ServiceList";
 
 // users
-import SalesPersonList from "./Users/AllUsers/SalesPersonList";
+import AllUserList from "./Users/AllUsers/AllUserList";
 import AddSalesPerson from "./Users/SalesPerson/AddSalesPerson";
 import UpdateSalesPerson from "./Users/SalesPerson/UpdateSalesPerson";
 import SuppliersList from "./Users/Suppliers/SuppliersList";
@@ -30,4 +30,4 @@ import InventoryProduct from "./Inventory/Product/InventoryProduct";
 import ProductStockIn from "./Inventory/Product/ProductStockIn/ProductStockIn";
 import ProductStockOut from "./Inventory/Product/ProductStockout/ProductStockOut";
 
-export { Login, Register, Dashboard, Designation, ProductCategory, Territory, UnitType, NotFound, Accounts, ProductList, ProductSection, ProductType, ServiceList, SalesPersonList, AddSalesPerson, UpdateSalesPerson, SuppliersList, InventoryRawItem, InventoryProduct, AddInventoryPackSize, UpdateInventoryPackSize, InventoryPackSize, ProductStockIn, ProductStockOut }
+export { Login, Register, Dashboard, Designation, ProductCategory, Territory, UnitType, NotFound, Accounts, ProductList, ProductSection, ProductType, ServiceList, AllUserList, AddSalesPerson, UpdateSalesPerson, SuppliersList, InventoryRawItem, InventoryProduct, AddInventoryPackSize, UpdateInventoryPackSize, InventoryPackSize, ProductStockIn, ProductStockOut }

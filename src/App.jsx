@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { Route, Routes } from "react-router-dom"
 
-import { Login, Register, Dashboard, NotFound, ProductList, ProductSection, ProductType, ServiceList, Accounts, Designation, ProductCategory, Territory, UnitType, SalesPersonList, AddSalesPerson, UpdateSalesPerson, SuppliersList, InventoryPackSize, InventoryProduct, InventoryRawItem, AddInventoryPackSize, UpdateInventoryPackSize, ProductStockIn, ProductStockOut } from "./Pages/Pages.jsx";
+import { Login, Register, Dashboard, NotFound, ProductList, ProductSection, ProductType, ServiceList, Accounts, Designation, ProductCategory, Territory, UnitType, AllUserList, AddSalesPerson, UpdateSalesPerson, SuppliersList, InventoryPackSize, InventoryProduct, InventoryRawItem, AddInventoryPackSize, UpdateInventoryPackSize, ProductStockIn, ProductStockOut } from "./Pages/Pages.jsx";
 
 import PrivateRoute from "./Routes/PrivateRoute.jsx";
 import "./App.css"
@@ -38,7 +38,7 @@ const App = () => {
           <Route path="/service-list" element={<ServiceList />} />
 
           {/* users */}
-          <Route path="/sales-person-list" element={<SalesPersonList />} />
+          <Route path="/all-user-list" element={<AllUserList />} />
           <Route path="/add-sales-person" element={<AddSalesPerson />} />
           <Route path="/update-sales-person/:id" element={<UpdateSalesPerson />} />
           <Route path="/suppliers-list" element={<SuppliersList />} />
