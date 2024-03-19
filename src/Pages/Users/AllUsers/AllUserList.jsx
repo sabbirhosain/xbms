@@ -4,6 +4,7 @@ import SalesPersonsList from '../../../Components/Users/AllUsers/Table/AllUserTa
 import { balance7 } from '../../../Data/Images'
 import { useUserDataProvider } from '../../../ContextApi/UsersContextApi'
 import AddUserModal from '../../../Components/Users/AllUsers/Modal/AddUserModal'
+import UpdateUserModal from '../../../Components/Users/AllUsers/Modal/UpdateUserModal'
 
 const AllUserList = () => {
   const { handleUserOpenModal } = useUserDataProvider()
@@ -19,6 +20,7 @@ const AllUserList = () => {
         </div>
       </section>
       <AddUserModal />
+      <UpdateUserModal />
       <section>
         <div className="container">
           <SalesPersonsList />

@@ -64,7 +64,7 @@ const AddUserModal = () => {
 
   return (
     <div>
-      <div className={`modal p-0 ${showUserModal ? "show d-block" : ""}`} data-bs- id="add_territory" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div className={`modal p-0 ${showUserModal ? "show d-block" : ""}`} data-bs- id="add_user" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
           <div className="modal-content">
             <div className="modal-body">
@@ -113,6 +113,7 @@ const AddUserModal = () => {
                       <select className="form-select" value={userType} onChange={(event) => setUserType(event.target.value)} aria-label="Default select example" required>
                         <option>Select User Type</option>
                         <option value="user">User</option>
+                        <option value="salesperson">Salesperson</option>
                         <option value="accountant">Accountant</option>
                       </select>
                       <small className="text-danger">{error}</small>
@@ -136,7 +137,7 @@ const AddUserModal = () => {
                     <div><button type="button" className="modal_close_btn" onClick={handleUserCloseModal}>Close</button></div>
                   </div>
                   <div className="col-md-6">
-                    <div> <button type="submit" className='add_person_submit_btn'>Create Pack Size</button></div>
+                    <div> <button type="submit" className='add_person_submit_btn'>Add User</button></div>
                   </div>
                 </div>
               </form>

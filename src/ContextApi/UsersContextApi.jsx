@@ -1,7 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react"
-import { user_delete, user_list } from "../ApiURL";
+import { user_delete, user_list, user_update } from "../ApiURL";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 const UserContextDataProvider = createContext()
 const UsersContextApi = ({ children }) => {
@@ -40,6 +41,58 @@ const UsersContextApi = ({ children }) => {
     allUserFetch(page);
   };
 
+  // Update User
+  const [updateUser, setUpdateUser] = useState({ username: "", first_name: "", last_name: "", email: "", phone: "", user_type: "", picture: null });
+
+  const userInputChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setUpdateUser({ ...updateUser, [name]: value }); 
+  };
+
+  const userHandleImageChange = (e) => {
+    setUpdateUser({ ...updateUser, picture: e.target.files[0] });
+  };
+
+  const update_user = async (id) => {
+    const token = JSON.parse(localStorage.getItem('access_token'));
+    try {
+      const response = await axios.get(`${user_list}${id}/`, {
+        headers: { Authorization: `Bearer ${token.access}` }
+      });
+      setUpdateUser(response.data)
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const userSubmitForm = async (e) => {
+    e.preventDefault();
+    const { username, first_name, last_name, email, phone, user_type, picture } = updateUser
+    const token = JSON.parse(localStorage.getItem('access_token'));
+    try {
+      const formData = new FormData();
+      formData.append('username', username);
+      formData.append('first_name', first_name);
+      formData.append('last_name', last_name);
+      formData.append('email', email);
+      formData.append('phone', phone);
+      formData.append('user_type', user_type);
+      if (picture) {
+        formData.append('picture', picture);
+      }
+      const response = await axios.put(`${user_update}${updateUser.id}/edit/`, formData, {
+        headers: { Authorization: `Bearer ${token.access}` }
+      });
+      if (response && response.data) {
+        toast.success("User Update Updated Successfully!")
+        setHideModal(!hideModal);
+        allUserFetch(1);
+      }
+    } catch (error) {
+      console.error('Error adding post:', error);
+    }
+
+  }
 
   // Delete User
 
@@ -92,8 +145,8 @@ const UsersContextApi = ({ children }) => {
   return (
     <UserContextDataProvider.Provider value={
       {
-        allUserFetch, delete_user,
-        showUserModal, handleUserCloseModal, handleUserOpenModal,
+        allUserFetch, delete_user, update_user, hideModal,
+        showUserModal, handleUserCloseModal, updateUser, handleUserOpenModal, userInputChangeHandler, userHandleImageChange, userSubmitForm,
         userList, userError, isLoadedUser, totalRowsUser, paginationComponentOptionsUser, userHandlePageChange
       }}>
       {children}
