@@ -83,7 +83,6 @@ const ContextDataApi = ({ children }) => {
     const { name, value } = e.target
     setUpdateTerritory({ ...updateTerritory, name: value });
   }
-  const a = null;
 
   const update_terrritori = async (id) => {
     const token = JSON.parse(localStorage.getItem('access_token'));

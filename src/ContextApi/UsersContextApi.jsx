@@ -60,8 +60,9 @@ const UsersContextApi = ({ children }) => {
             headers: { Authorization: `Bearer ${token.access}` }
           });
           Swal.fire('Deleted!', 'User will be deleted permanently!', 'success');
-          territoriFetch(1);
+          allUserFetch(1);
         } catch (error) {
+          console.log(error);
           Swal.fire('Error!', 'An error occurred while deleting.', 'error');
         }
 
