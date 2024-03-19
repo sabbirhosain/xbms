@@ -113,10 +113,12 @@ const AddUserModal = () => {
                       <select className="form-select" value={userType} onChange={(event) => setUserType(event.target.value)} aria-label="Default select example" required>
                         <option>Select User Type</option>
                         <option value="user">User</option>
+                        <option value="area_manager">Area Manager</option>
+                        <option value="mpo">MPO</option>
                         <option value="salesperson">Salesperson</option>
                         <option value="accountant">Accountant</option>
+                        <option value="factory">factory </option>
                       </select>
-                      <small className="text-danger">{error}</small>
                     </div>
 
                     <div className="mb-3">

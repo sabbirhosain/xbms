@@ -54,8 +54,11 @@ const UpdateUserModal = () => {
                       <select className="form-select" name='user_type' value={updateUser.user_type} onChange={userInputChangeHandler} aria-label="Default select example" required>
                         <option>Select User Type</option>
                         <option value="user">User</option>
+                        <option value="area_manager">Area Manager</option>
+                        <option value="mpo">MPO</option>
                         <option value="salesperson">Salesperson</option>
                         <option value="accountant">Accountant</option>
+                        <option value="factory">factory </option>
                       </select>
                     </div>
 
