@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react"
-import { user_delete, user_list, user_update } from "../ApiURL";
+import { selesPerson_list, user_delete, user_list, user_update } from "../ApiURL";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
@@ -144,6 +144,50 @@ const UsersContextApi = ({ children }) => {
 
 
 
+  // =======================================
+  //              Selse Person 
+  // =======================================
+
+  // All Selse Person List
+  const [selesPersonError, setSelesPersonError] = useState(null);
+  const [isLoadedSelesPerson, setIsLoadedSelesPerson] = useState(false);
+  const [selesPersonList, setSelesPersonList] = useState([]);
+  const [totalRowsSelesPerson, setTotalRowsSelesPerson] = useState(0);
+  const paginationComponentOptionsSelesPerson = { noRowsPerPage: true };
+  const [selectedSelesPersonType, setSelectedSelesPersonType] = useState("");
+  const [selesPersonSearchQuery, setSelesPersonSearchQuery] = useState("");
+
+  useEffect(() => {
+    selesPersonFetch(1);
+  }, [selectedSelesPersonType, selesPersonSearchQuery])
+
+  const selesPersonFetch = async (page) => {
+    try {
+      setIsLoadedSelesPerson(true);
+      const token = JSON.parse(localStorage.getItem('access_token'));
+      const response = await axios.get(`${selesPerson_list}?query=${selesPersonSearchQuery}&designation=${selectedSelesPersonType}&page=${page}`, { headers: { Authorization: `Bearer ${token.access}` } });
+      setSelesPersonList(response.data.results);
+      setTotalRowsSelesPerson(response.data.count);
+      setIsLoadedSelesPerson(false);
+    } catch (error) {
+      setIsLoadedSelesPerson(true);
+      setSelesPersonError(error);
+    }
+  }
+
+  const selesPersonHandlePageChange = page => {
+    selesPersonFetch(page);
+  };
+
+  const handleSelesPersonTypeChange = (e) => {
+    setSelectedSelesPersonType(e.target.value);
+    selesPersonFetch(1);
+  }
+
+  const handleSelesPersonSearchInputChange = (e) => {
+    setSelesPersonSearchQuery(e.target.value);
+  }
+
 
 
 
@@ -163,7 +207,10 @@ const UsersContextApi = ({ children }) => {
       {
         allUserFetch, delete_user, update_user, hideModal,
         showUserModal, handleUserCloseModal, updateUser, handleUserOpenModal, userInputChangeHandler, handleSearchInputChange, userHandleImageChange, userSubmitForm, userTypes, selectedUserType, handleUserTypeChange,
-        userList, userError, isLoadedUser, totalRowsUser, paginationComponentOptionsUser, userHandlePageChange
+        userList, userError, isLoadedUser, totalRowsUser, paginationComponentOptionsUser, userHandlePageChange,
+        // seles person
+        selesPersonList, selesPersonError, isLoadedSelesPerson, totalRowsSelesPerson, paginationComponentOptionsSelesPerson, selesPersonHandlePageChange, selectedSelesPersonType, handleSelesPersonSearchInputChange, handleSelesPersonTypeChange,
+
       }}>
       {children}
     </UserContextDataProvider.Provider>

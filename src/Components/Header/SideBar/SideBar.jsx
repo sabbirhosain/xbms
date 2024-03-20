@@ -54,7 +54,7 @@ const SideBar = () => {
 
                   <div id="flush-collapseuser" className={`accordion-collapse collapse`} aria-labelledby="flush-headinguser" data-bs-parent="#accordionFlushExample">
                     <NavLink to={"/all-user-list"} className="dropdown_link">All User</NavLink>
-                    <NavLink to={"/add-sales-person"} className="dropdown_link">Sales Person</NavLink>
+                    <NavLink to={"/sales-person"} className="dropdown_link">Sales Person List</NavLink>
                     <NavLink to={"/suppliers-list"} className="dropdown_link">Suppliers</NavLink>
                   </div>
                 </li>
