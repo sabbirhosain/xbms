@@ -18,16 +18,19 @@ const UsersContextApi = ({ children }) => {
   const [userList, setUserList] = useState([]);
   const [totalRowsUser, setTotalRowsUser] = useState(0);
   const paginationComponentOptionsUser = { noRowsPerPage: true };
+  const [selectedUserType, setSelectedUserType] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const userTypes = ['area_manager', 'mpo', 'user', 'superadmin', 'accountant', 'factory', 'salesperson'];
 
   useEffect(() => {
     allUserFetch(1);
-  }, [])
+  }, [selectedUserType, searchQuery])
 
   const allUserFetch = async (page) => {
     try {
       setIsLoadedUser(true);
       const token = JSON.parse(localStorage.getItem('access_token'));
-      const response = await axios.get(`${user_list}?page=${page}`, { headers: { Authorization: `Bearer ${token.access}` } });
+      const response = await axios.get(`${user_list}?user_type=${selectedUserType}&query=${searchQuery}&page=${page}`, { headers: { Authorization: `Bearer ${token.access}` } });
       setUserList(response.data.results);
       setTotalRowsUser(response.data.count);
       setIsLoadedUser(false);
@@ -41,12 +44,25 @@ const UsersContextApi = ({ children }) => {
     allUserFetch(page);
   };
 
+  const handleUserTypeChange = (e) => {
+    setSelectedUserType(e.target.value);
+    allUserFetch(1);
+  }
+
+  const handleSearchInputChange = (e) => {
+    setSearchQuery(e.target.value);
+  }
+
+
+
+
+
   // Update User
   const [updateUser, setUpdateUser] = useState({ username: "", first_name: "", last_name: "", email: "", phone: "", user_type: "", picture: null });
 
   const userInputChangeHandler = (e) => {
     const { name, value } = e.target;
-    setUpdateUser({ ...updateUser, [name]: value }); 
+    setUpdateUser({ ...updateUser, [name]: value });
   };
 
   const userHandleImageChange = (e) => {
@@ -146,7 +162,7 @@ const UsersContextApi = ({ children }) => {
     <UserContextDataProvider.Provider value={
       {
         allUserFetch, delete_user, update_user, hideModal,
-        showUserModal, handleUserCloseModal, updateUser, handleUserOpenModal, userInputChangeHandler, userHandleImageChange, userSubmitForm,
+        showUserModal, handleUserCloseModal, updateUser, handleUserOpenModal, userInputChangeHandler, handleSearchInputChange, userHandleImageChange, userSubmitForm, userTypes, selectedUserType, handleUserTypeChange,
         userList, userError, isLoadedUser, totalRowsUser, paginationComponentOptionsUser, userHandlePageChange
       }}>
       {children}
