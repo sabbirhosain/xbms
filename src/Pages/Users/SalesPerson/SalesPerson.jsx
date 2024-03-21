@@ -20,7 +20,7 @@ const SalesPerson = () => {
           </div>
         </div>
       </section>
-      <secton>
+      <section>
         <div className="container">
           <div className="row justify-content-end filter_row">
             <div className="col-md-6">
@@ -41,7 +41,7 @@ const SalesPerson = () => {
           </div>
           <SelesPersonTable />
         </div>
-      </secton>
+      </section>
     </Layout>
   )
 }

@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react"
-import { selesPerson_list, user_delete, user_list, user_update } from "../ApiURL";
+import { selesPerson_delete, selesPerson_list, user_delete, user_list, user_update } from "../ApiURL";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
@@ -148,7 +148,7 @@ const UsersContextApi = ({ children }) => {
   //              Selse Person 
   // =======================================
 
-  // All Selse Person List
+  // All Selse Person  List
   const [selesPersonError, setSelesPersonError] = useState(null);
   const [isLoadedSelesPerson, setIsLoadedSelesPerson] = useState(false);
   const [selesPersonList, setSelesPersonList] = useState([]);
@@ -188,7 +188,36 @@ const UsersContextApi = ({ children }) => {
     setSelesPersonSearchQuery(e.target.value);
   }
 
+  // Delete Selse Person
 
+  const deleteSelsePerson = (id) => {
+    const token = JSON.parse(localStorage.getItem('access_token'));
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'By Clicking Delete Selse Person Your Selse Person will be deleted permanently!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Delete Selse Person!',
+      cancelButtonText: 'Keep Selse Person!',
+      reverseButtons: true,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axios.delete(`${selesPerson_delete}${id}/`, {
+            headers: { Authorization: `Bearer ${token.access}` }
+          });
+          Swal.fire('Deleted!', 'Selse Person will be deleted permanently!', 'success');
+          selesPersonFetch(1);
+        } catch (error) {
+          console.log(error);
+          Swal.fire('Error!', 'An error occurred while deleting.', 'error');
+        }
+
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire('Cancelled', 'Your item is safe :)', 'info');
+      }
+    });
+  };
 
 
 
@@ -209,7 +238,7 @@ const UsersContextApi = ({ children }) => {
         showUserModal, handleUserCloseModal, updateUser, handleUserOpenModal, userInputChangeHandler, handleSearchInputChange, userHandleImageChange, userSubmitForm, userTypes, selectedUserType, handleUserTypeChange,
         userList, userError, isLoadedUser, totalRowsUser, paginationComponentOptionsUser, userHandlePageChange,
         // seles person
-        selesPersonList, selesPersonError, isLoadedSelesPerson, totalRowsSelesPerson, paginationComponentOptionsSelesPerson, selesPersonHandlePageChange, selectedSelesPersonType, handleSelesPersonSearchInputChange, handleSelesPersonTypeChange,
+        selesPersonFetch, selesPersonList, selesPersonError, isLoadedSelesPerson, totalRowsSelesPerson, paginationComponentOptionsSelesPerson, selesPersonHandlePageChange, selectedSelesPersonType, handleSelesPersonSearchInputChange, handleSelesPersonTypeChange, deleteSelsePerson,
 
       }}>
       {children}

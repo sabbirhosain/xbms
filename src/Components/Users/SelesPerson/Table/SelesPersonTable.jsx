@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { edit, trash } from '../../../../Data/Images';
 import { useUserDataProvider } from '../../../../ContextApi/UsersContextApi';
 const SelesPersonTable = () => {
-  const { selesPersonList, selesPersonError, isLoadedSelesPerson, totalRowsSelesPerson, paginationComponentOptionsSelesPerson, selesPersonHandlePageChange, } = useUserDataProvider();
+  const { selesPersonList, selesPersonError, isLoadedSelesPerson, totalRowsSelesPerson, paginationComponentOptionsSelesPerson, selesPersonHandlePageChange, deleteSelsePerson } = useUserDataProvider();
   const generateSerialNumber = (index) => index + 1;
   const columns = [
     {
@@ -37,7 +37,7 @@ const SelesPersonTable = () => {
     },
     {
       name: "Sample Eligibility",
-      selector: row => row.sample_eligibility === false ? <button style={{ backgroundColor: "red", padding: "5px 20px", color: "white", borderRadius: "5px" }}>No</button> : <button style={{ backgroundColor: "green", padding: "5px 20px", color: "white", borderRadius: "5px" }}>Yes</button>,
+      selector: row => row.sample_eligibility === false ? <button style={{ backgroundColor: "red", padding: "5px 20px", color: "white", borderRadius: "5px" }}>No</button> : <button style={{ backgroundColor: "green", padding: "5px 20px", color: "white", borderRadius: "5px" }}>Yes</button>
     },
     {
       name: "Carrying Rate",
@@ -75,7 +75,7 @@ const SelesPersonTable = () => {
       name: "Action",
       cell: row => <>
         <Link className="me-2" onClick={() => alert(row.id)}> <img src={edit} /></Link>
-        <Link onClick={() => alert(row.id)}><img src={trash} /></Link>
+        <Link onClick={() => deleteSelsePerson(row.id)}><img src={trash} /></Link>
       </>
 
     }
