@@ -164,8 +164,7 @@ const UsersContextApi = ({ children }) => {
   const selesPersonFetch = async (page) => {
     try {
       setIsLoadedSelesPerson(true);
-      const token = JSON.parse(localStorage.getItem('access_token'));
-      const response = await axios.get(`${selesPerson_list}?query=${selesPersonSearchQuery}&designation=${selectedSelesPersonType}&page=${page}`, { headers: { Authorization: `Bearer ${token.access}` } });
+      const response = await axios.get(`/api/auth/salespersons/?query=${selesPersonSearchQuery}&designation=${selectedSelesPersonType}&page=${page}`);
       setSelesPersonList(response.data.results);
       setTotalRowsSelesPerson(response.data.count);
       setIsLoadedSelesPerson(false);
@@ -220,9 +219,104 @@ const UsersContextApi = ({ children }) => {
   };
 
 
+  // ================================================
+  //                  Suppliers 
+  // ============================================
+  // All Selse Person  List
+  const [suppliersError, setSuppliersError] = useState(null);
+  const [isLoadedSuppliers, setIsLoadedSuppliers] = useState(false);
+  const [suppliersList, setSuppliersList] = useState([]);
+  const [totalRowsSuppliers, setTotalRowsSuppliers] = useState(0);
+  const paginationComponentOptionsSuppliers = { noRowsPerPage: true };
+  const [suppliersSearchQuery, setSuppliersSearchQuery] = useState("");
+
+  useEffect(() => {
+    suppliersFetch(1);
+  }, [suppliersSearchQuery])
+
+  const suppliersFetch = async (page) => {
+    try {
+      setIsLoadedSuppliers(true);
+      const response = await axios.get(`/api/auth/suppliers/?query=${suppliersSearchQuery}&page=${page}`);
+      setSuppliersList(response.data.results);
+      setTotalRowsSuppliers(response.data.count);
+      setIsLoadedSuppliers(false);
+    } catch (error) {
+      setIsLoadedSuppliers(true);
+      setSuppliersError(error);
+    }
+  }
+
+  const suppliersHandlePageChange = page => {
+    suppliersFetch(page);
+  };
 
 
+  const handleSuppliersSearchInputChange = (e) => {
+    setSuppliersSearchQuery(e.target.value);
+  }
 
+
+  // Update Suppliers
+  const [updateSuppliers, setUpdateSuppliers] = useState({ id: "", name: "", contact_no: "", address: "", opening_balance: "" });
+
+  const SuppliersInputChange = (e) => {
+    const { name, value } = e.target
+    setUpdateSuppliers({ ...updateSuppliers, [name]: value });
+  }
+
+  const getSuppliers = async (id) => {
+    try {
+      const response = await axios.get(`/api/auth/suppliers/${id}/`)
+      setUpdateSuppliers(response.data)
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const UpdateSuppliersFrom = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.put(`/api/auth/suppliers/${updateSuppliers.id}/`, updateSuppliers,);
+      if (response && response.data) {
+        toast.success("Suppliers Updated Successfully!")
+        setHideModal(!hideModal);
+        suppliersFetch(1)
+      }
+    } catch (error) {
+      console.error(error);
+    }
+
+  }
+
+
+  // Delete Suppliers
+
+  const deleteSuppliers = (id) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'By Clicking Delete Suppliers Your Suppliers will be deleted permanently!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Delete Suppliers!',
+      cancelButtonText: 'Keep Suppliers!',
+      reverseButtons: true,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axios.delete(`/api/auth/suppliers/${id}/`)
+          Swal.fire('Deleted!', 'Suppliers will be deleted permanently!', 'success');
+          suppliersFetch(1);
+        } catch (error) {
+          console.log(error);
+          Swal.fire('Error!', 'An error occurred while deleting.', 'error');
+        }
+
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire('Cancelled', 'Your item is safe :)', 'info');
+      }
+    });
+  };
 
 
 
@@ -239,6 +333,8 @@ const UsersContextApi = ({ children }) => {
         userList, userError, isLoadedUser, totalRowsUser, paginationComponentOptionsUser, userHandlePageChange,
         // seles person
         selesPersonFetch, selesPersonList, selesPersonError, isLoadedSelesPerson, totalRowsSelesPerson, paginationComponentOptionsSelesPerson, selesPersonHandlePageChange, selectedSelesPersonType, handleSelesPersonSearchInputChange, handleSelesPersonTypeChange, deleteSelsePerson,
+        // Suppliers
+        suppliersFetch, suppliersList, suppliersError, paginationComponentOptionsSuppliers, totalRowsSuppliers, isLoadedSuppliers, suppliersHandlePageChange, handleSuppliersSearchInputChange, deleteSuppliers, getSuppliers, updateSuppliers, SuppliersInputChange, UpdateSuppliersFrom
 
       }}>
       {children}

@@ -26,5 +26,5 @@ export const user_delete = import.meta.env.VITE_API_URL + "/api/auth/users/";
 
 export const selesPerson_list = import.meta.env.VITE_API_URL + "/api/auth/salespersons/"
 export const selesPerson_create = import.meta.env.VITE_API_URL + "/api/auth/salespersons/"
-export const selesPerson_update = import.meta.env.VITE_API_URL + "/api/auth/salespersons/4/"
+export const selesPerson_update = import.meta.env.VITE_API_URL + "/api/auth/salespersons/"
 export const selesPerson_delete = import.meta.env.VITE_API_URL + "/api/auth/salespersons/"

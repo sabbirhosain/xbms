@@ -29,8 +29,6 @@ const AddSalesPerson = () => {
 
   const bonusCheckboxChange = () => { setBonusEligibility(!bonusEligibility) };
   const sampleCheckboxChange = () => { setSampleEligibility(!sampleEligibility) };
-  console.log(bonusEligibility);
-  console.log(sampleEligibility);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -158,7 +156,7 @@ const AddSalesPerson = () => {
                         <input type="number" value={contactNo} onChange={(event) => setContactNo(event.target.value)} className="form-control" />
                       </div>
                       <div className="mb-3">
-                        <label className="form-label">Password</label>
+                        <label className="form-label">New Password</label>
                         <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} className="form-control" placeholder="******" />
                       </div>
                     </div>

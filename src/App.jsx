@@ -9,13 +9,17 @@ import { Login, Register, Dashboard, NotFound, ProductList, ProductSection, Prod
 
 import PrivateRoute from "./Routes/PrivateRoute.jsx";
 import "./App.css"
+import axios from "axios";
 
 const App = () => {
-
+  const token = JSON.parse(localStorage.getItem('access_token'));
+  axios.defaults.baseURL = import.meta.env.VITE_API_URL;
+  axios.defaults.headers.common['Authorization'] = `Bearer ${token.access}`;
+  axios.defaults.headers.post['Content-Type'] = 'application/json';
+  
   return (
     <>
       <ToastContainer position="top-right" autoClose={1000} />
-
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

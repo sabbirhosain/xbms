@@ -74,7 +74,7 @@ const SelesPersonTable = () => {
     {
       name: "Action",
       cell: row => <>
-        <Link className="me-2" onClick={() => alert(row.id)}> <img src={edit} /></Link>
+        <Link to={`/update-sales-person/${row.id}`} className="me-2"> <img src={edit} /></Link>
         <Link onClick={() => deleteSelsePerson(row.id)}><img src={trash} /></Link>
       </>
 
