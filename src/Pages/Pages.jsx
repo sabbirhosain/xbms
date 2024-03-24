@@ -27,8 +27,10 @@ import AddInventoryPackSize from "./Inventory/PackSize/AddInventoryPackSize";
 import UpdateInventoryPackSize from "./Inventory/PackSize/UpdateInventoryPackSize";
 import InventoryPackSize from "./Inventory/PackSize/InventoryPackSize";
 import InventoryRawItem from "./Inventory/RawItem/InventoryRawItem";
+import InventoryStockIn from "./Inventory/RawItem/InventoryStockIn";
+import InventoryStockOut from "./Inventory/RawItem/InventoryStockOut";
 import InventoryProduct from "./Inventory/Product/InventoryProduct";
 import ProductStockIn from "./Inventory/Product/ProductStockIn/ProductStockIn";
 import ProductStockOut from "./Inventory/Product/ProductStockout/ProductStockOut";
 
-export { Login, Register, Dashboard, Designation, ProductCategory, Territory, UnitType, NotFound, Accounts, ProductList, ProductSection, ProductType, ServiceList, AllUserList, SalesPerson, AddSalesPerson, UpdateSalesPerson, SuppliersList, InventoryRawItem, InventoryProduct, AddInventoryPackSize, UpdateInventoryPackSize, InventoryPackSize, ProductStockIn, ProductStockOut }
+export { Login, Register, Dashboard, Designation, ProductCategory, Territory, UnitType, NotFound, Accounts, ProductList, ProductSection, ProductType, ServiceList, AllUserList, SalesPerson, AddSalesPerson, UpdateSalesPerson, SuppliersList, InventoryRawItem, InventoryStockIn, InventoryStockOut, InventoryProduct, AddInventoryPackSize, UpdateInventoryPackSize, InventoryPackSize, ProductStockIn, ProductStockOut }

@@ -28,3 +28,26 @@ export const selesPerson_list = import.meta.env.VITE_API_URL + "/api/auth/salesp
 export const selesPerson_create = import.meta.env.VITE_API_URL + "/api/auth/salespersons/"
 export const selesPerson_update = import.meta.env.VITE_API_URL + "/api/auth/salespersons/"
 export const selesPerson_delete = import.meta.env.VITE_API_URL + "/api/auth/salespersons/"
+
+export const rawitems_list = "/api/inventory/rawitem/"
+export const rawitems_create = "/api/inventory/rawitem/"
+
+export const rawitem_stock_in_list = "/api/inventory/rawitemstockin/"
+export const rawitem_stock_in_create = "/api/inventory/rawitemstockin/"
+
+export const rawitem_stock_out_list = "/api/inventory/rawitemstockout/"
+export const rawitem_stock_out_create = "/api/inventory/rawitemstockout/"
+
+export const product_list = "/api/inventory/products/"
+export const product_create = "/api/inventory/Products/"
+export const product_update = "/api/inventory/Products/"
+export const product_delete = "/api/products/"
+
+export const product_stock_in_list = "/api/inventory/productstockin/"
+export const product_stock_in_create = "/api/inventory/productstockin/"
+
+export const product_stock_out_list = "/api/inventory/productstockout/"
+export const product_stock_out_create = "/api/inventory/productstockout/"
+
+export const packsize_list = "/api/inventory/packsizes/"
+export const packsize_create = "/api/inventory/packsizes/"

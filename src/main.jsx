@@ -5,12 +5,15 @@ import { BrowserRouter } from 'react-router-dom'
 import ContextApi from './ContextApi/ContextApi.jsx'
 import ContextDataApi from './ContextApi/ContextDataApi.jsx'
 import UsersContextApi from './ContextApi/UsersContextApi.jsx'
+import InventoryContextApi from './ContextApi/InventoryContextApi.jsx'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <ContextApi>
       <ContextDataApi>
         <UsersContextApi>
-          <App />
+          <InventoryContextApi>
+            <App />
+          </InventoryContextApi>
         </UsersContextApi>
       </ContextDataApi>
     </ContextApi>

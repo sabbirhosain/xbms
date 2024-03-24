@@ -3,8 +3,10 @@ import Layout from '../../../Layout/Layout'
 import { Link } from 'react-router-dom'
 import { balance7 } from '../../../Data/Images'
 import InventoryPackSizeTable from '../../../Components/Inventory/PackSize/InventoryPackSizeTable'
+import { useInventoryDataProvider } from '../../../ContextApi/InventoryContextApi'
 
 const InventoryPackSize = () => {
+  const { handlePacksizeSearchInputChange } = useInventoryDataProvider()
   return (
     <Layout title={"Inventory PackSize"}>
       <section>
@@ -18,6 +20,15 @@ const InventoryPackSize = () => {
       </section>
       <section>
         <div className="container">
+          <div className="row justify-content-end filter_row">
+            <div className="col-md-3">
+              <form className='d-flex align-items-center'>
+                <div className='w-100 ms-2'>
+                  <input className="form-control" type="search" onChange={handlePacksizeSearchInputChange} placeholder="Search by product, pack size, unit name, pack type" />
+                </div>
+              </form>
+            </div>
+          </div>
           <InventoryPackSizeTable />
         </div>
       </section>

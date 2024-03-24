@@ -5,10 +5,15 @@ import { dashIcon1, dashIcon10, dashIcon11, dashIcon12, dashIcon13, dashIcon14, 
 import { useState } from "react"
 
 const SideBar = () => {
+
   const [activeAccordion, setActiveAccordion] = useState(false);
-  const isAccordionActive = () => {
-    return setActiveAccordion(true)
-  };
+
+
+
+
+
+
+
   return (
     <>
       <div className="sidebar">
@@ -46,7 +51,7 @@ const SideBar = () => {
               <div className="accordion accordion-flush" id="accordionFlushExample">
 
                 <li className="dropdown_list">
-                  <button className="dropdown_btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseuser" aria-expanded="false" aria-controls="flush-collapseuser">
+                  <button className="dropdown_btn collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseuser" aria-expanded="false" aria-controls="flush-collapseuser" >
                     <span className="dropdown_list_name">
                       <img src={dashIcon15} className="dropdown_list_icon" alt="" /> Users</span>
                     <IoIosArrowDown className="dropdown_icon" />
@@ -67,9 +72,9 @@ const SideBar = () => {
                   </button>
 
                   <div id="flush-collapseInventory" className="accordion-collapse collapse" aria-labelledby="flush-headingInventory" data-bs-parent="#accordionFlushExample">
-                    <Link to={"/inventory-raw-item"} className="dropdown_link">Raw item</Link>
-                    <Link to={"/inventory-product"} className="dropdown_link">Product</Link>
-                    <Link to={"/inventory-pack-size"} className="dropdown_link">Pack size</Link>
+                    <NavLink to={"/inventory-raw-item"} className="dropdown_link">Raw item</NavLink>
+                    <NavLink to={"/inventory-product"} className="dropdown_link">Product</NavLink>
+                    <NavLink to={"/inventory-pack-size"} className="dropdown_link">Pack size</NavLink>
                   </div>
                 </li>
 
@@ -240,8 +245,8 @@ const SideBar = () => {
               </div>
             </ul>
           </div>
-        </div>
-      </div>
+        </div >
+      </div >
 
     </>
   )

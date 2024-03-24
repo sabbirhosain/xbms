@@ -1,8 +1,10 @@
 import React from 'react'
 import DataTable from 'react-data-table-component';
 import { edit, trash } from '../../../Data/Images';
+import { useInventoryDataProvider } from '../../../ContextApi/InventoryContextApi';
 
 const InventoryPackSizeTable = () => {
+  const { packsizeError, isLoadedPacksize, packsizeList, totalRowsPacksize, paginationComponentOptionsPacksize, packsizeHandlePageChange, } = useInventoryDataProvider()
   const columns = [
     {
       name: "ID",
@@ -14,39 +16,63 @@ const InventoryPackSizeTable = () => {
     },
     {
       name: "Pack Size",
-      selector: row => row.packSize,
+      selector: row => row.pack_size,
     },
     {
       name: "Unit Name",
-      selector: row => row.unitName,
+      selector: row => row.unit_name,
     },
     {
       name: "Pack Type",
-      selector: row => row.packType,
+      selector: row => row.pack_type,
     },
     {
       name: "Product Quantity Per Unit",
-      selector: row => row.productQuantityPerUnit,
+      selector: row => row.product_quantity_per_unit,
     },
     {
       name: "Opening Balance",
-      selector: row => row.openingBalance,
+      selector: row => row.opening_balance,
     },
     {
       name: "Current Balance",
-      selector: row => row.currentBalance,
+      selector: row => row.current_balance,
     },
     {
       name: "Recorder Level",
-      selector: row => row.recorderLevel,
-    },
-    {
-      name: "Recorder Level",
-      selector: row => row.recorderLevel,
+      selector: row => row.recorder_level,
     },
     {
       name: "Bonus Base Quantity",
-      selector: row => row.bonusBaseQuantity,
+      selector: row => row.bonus_base_quantity,
+    },
+    {
+      name: "Bonus Rate Per Base Quantity",
+      selector: row => row.bonus_rate_per_base_quantity,
+    },
+    {
+      name: "Sample Rate",
+      selector: row => row.sample_rate,
+    },
+    {
+      name: "Costing Price",
+      selector: row => row.costing_price,
+    },
+    {
+      name: "Company Price",
+      selector: row => row.company_price,
+    },
+    {
+      name: "Distributor Price",
+      selector: row => row.distributor_price,
+    },
+    {
+      name: "MRP",
+      selector: row => row.mrp,
+    },
+    {
+      name: "Physician Sample",
+      selector: row => row.is_physician_sample === false ? <button style={{ backgroundColor: "red", padding: "5px 20px", color: "white", borderRadius: "5px" }}>No</button> : <button style={{ backgroundColor: "green", padding: "5px 20px", color: "white", borderRadius: "5px" }}>Yes</button>
     },
     {
       name: "Action",
@@ -57,25 +83,24 @@ const InventoryPackSizeTable = () => {
 
     }
   ];
-
-  const data = [
-    {
-      id: 1,
-    },
-    {
-      id: 2,
-    },
-    {
-      id: 3,
-    },
-  ]
-
-
-  return (
-    <>
-      <DataTable columns={columns} data={data} pagination></DataTable>
-    </>
-  )
+  if (packsizeError) {
+    return <div>Error: {packsizeError.message}</div>;
+  } else {
+    return (
+      <>
+        <DataTable
+          columns={columns}
+          data={packsizeList}
+          pagination
+          paginationServer
+          paginationComponentOptions={paginationComponentOptionsPacksize}
+          progressPending={isLoadedPacksize}
+          paginationTotalRows={totalRowsPacksize}
+          onChangePage={packsizeHandlePageChange}
+        />
+      </>
+    )
+  }
 }
 
 export default InventoryPackSizeTable

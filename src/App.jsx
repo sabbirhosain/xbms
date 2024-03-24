@@ -5,13 +5,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { Route, Routes } from "react-router-dom"
 
-import { Login, Register, Dashboard, NotFound, ProductList, ProductSection, ProductType, ServiceList, Accounts, Designation, ProductCategory, Territory, UnitType, AllUserList, AddSalesPerson, UpdateSalesPerson, SuppliersList, InventoryPackSize, InventoryProduct, InventoryRawItem, AddInventoryPackSize, UpdateInventoryPackSize, ProductStockIn, ProductStockOut, SalesPerson } from "./Pages/Pages.jsx";
+import { Login, Register, Dashboard, NotFound, ProductList, ProductSection, ProductType, ServiceList, Accounts, Designation, ProductCategory, Territory, UnitType, AllUserList, AddSalesPerson, UpdateSalesPerson, SuppliersList, InventoryPackSize, InventoryProduct, InventoryRawItem, AddInventoryPackSize, UpdateInventoryPackSize, ProductStockIn, ProductStockOut, SalesPerson, InventoryStockIn, InventoryStockOut } from "./Pages/Pages.jsx";
 
 import PrivateRoute from "./Routes/PrivateRoute.jsx";
-import "./App.css"
 import axios from "axios";
+import "./App.css"
 
 const App = () => {
+  
   const token = JSON.parse(localStorage.getItem('access_token'));
   axios.defaults.baseURL = import.meta.env.VITE_API_URL;
   axios.defaults.headers.common['Authorization'] = `Bearer ${token.access}`;
@@ -56,6 +57,8 @@ const App = () => {
           <Route path="/product-stock-in" element={<ProductStockIn />} />
           <Route path="/product-stock-out" element={<ProductStockOut />} />
           <Route path="/inventory-raw-item" element={<InventoryRawItem />} />
+          <Route path="/inventory-stock-in" element={<InventoryStockIn />} />
+          <Route path="/inventory-stock-out" element={<InventoryStockOut />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />
