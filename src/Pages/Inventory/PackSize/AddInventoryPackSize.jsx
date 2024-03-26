@@ -1,8 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Layout from '../../../Layout/Layout'
 import { Link } from 'react-router-dom'
 
 const AddInventoryPackSize = () => {
+
+  const [product, setProduct] = useState("")
+  const [packsize, setPacksize] = useState("")
+  const [unitname, setUnitname] = useState("")
+  const [packtype, setPacktype] = useState("")
+  const [productQuantityPerUnit, setProductQuantityPerUnit] = useState("")
+  const [openingBalance, setOpeningBalance] = useState("")
+  const [currentBalance, setCurrentBalance] = useState("")
+  const [recorderLevel, setRecorderLevel] = useState("")
+  const [bonusBaseQuantity, setBonusBaseQuantity] = useState("")
+  const [bonusRatePerBaseQuantity, setBonusRatePerBaseQuantity] = useState("")
+  const [sampleRate, setSampleRate] = useState("")
+  const [costingPrice, setCostingPrice] = useState("")
+  const [companyPrice, setCompanyPrice] = useState("")
+  const [distributorPrice, setDistributorPrice] = useState("")
+  const [mrp, setMrp] = useState("")
+  const [isPhysicianSample, setIsPhysicianSample] = useState(false)
+
+
+
+  
   return (
     <Layout title={"Add Inventory PackSize"}>
       <section className='my-5'>
@@ -15,13 +36,8 @@ const AddInventoryPackSize = () => {
                   <div className="row">
                     <div className="col-md-6">
                       <div className="mb-3">
-                        <label className="form-label">Product</label>
-                        <select className="form-select" aria-label="Default select example">
-                          <option defaultValue={"user"}>Napa Extra</option>
-                          <option value={"1"}>Napa Extra</option>
-                          <option value={"2"}>Napa Extra</option>
-                          <option value={"3"}>Napa Extra</option>
-                        </select>
+                        <label className="form-label">Product Name</label>
+                        <input type="text" value={""} onChange={(e) => (e.target.value)} className="form-control" placeholder="Product Name" />
                       </div>
                       <div className="mb-3">
                         <label className="form-label">Unit Name</label>
