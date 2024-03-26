@@ -4,18 +4,20 @@ import { NavLink } from 'react-router-dom'
 import { balance7 } from '../../../Data/Images'
 import RawitemStockInTable from '../../../Components/Inventory/RawItem/Table/StockIn/RawitemStockInTable'
 import { useInventoryDataProvider } from '../../../ContextApi/InventoryContextApi'
+import RawitemStockinModal from '../../../Components/Inventory/RawItem/Modal/StockIn/RawitemStockinModal'
+import { useUserDataProvider } from '../../../ContextApi/UsersContextApi'
 
 const InventoryStockIn = () => {
   const { handleStockinFromDateChange, handleStockinToDateChange, handleRawitemStockinSearchInputChange } = useInventoryDataProvider()
+  const { handleUserOpenModal } = useUserDataProvider()
   return (
     <Layout title={"Inventory Stock In"}>
       <section>
         <div className="container">
           <div className="page_title">
             <h2 className="page_title_name">Stock in List</h2>
-            <button className="add_action_btn" > <img src={balance7} />Add New Stock in</button>
+            <button className="add_action_btn" onClick={handleUserOpenModal}> <img src={balance7} />Add New Stock in</button>
           </div>
-
           <nav className="setup_navbar">
             <div>
               <NavLink className="setup_page_link" to={"/inventory-raw-item"}>Raw Items</NavLink>
@@ -25,6 +27,7 @@ const InventoryStockIn = () => {
           </nav>
         </div>
       </section>
+      <RawitemStockinModal />
       <section className='mt-4'>
         <div className="container">
           <div className="row justify-content-end filter_row">

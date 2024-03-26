@@ -4,18 +4,22 @@ import { balance7 } from '../../../Data/Images'
 import { NavLink } from 'react-router-dom'
 import RawItemTable from '../../../Components/Inventory/RawItem/Table/RawItemTable'
 import { useInventoryDataProvider } from '../../../ContextApi/InventoryContextApi'
+import { useUserDataProvider } from '../../../ContextApi/UsersContextApi'
+import AddRawitemModal from '../../../Components/Inventory/RawItem/Modal/AddRawitemModal'
+import UpdateRawitemModal from '../../../Components/Inventory/RawItem/Modal/UpdateRawitemModal'
 
 const InventoryRawItem = () => {
   const { handleRawitemSearchInputChange } = useInventoryDataProvider()
+  const { handleUserOpenModal } = useUserDataProvider()
+
   return (
     <Layout title={"Inventory RawItem"}>
       <section>
         <div className="container">
           <div className="page_title">
             <h2 className="page_title_name">Raw Items List</h2>
-            <button className="add_action_btn" > <img src={balance7} />Add New Raw Items</button>
+            <button className="add_action_btn" onClick={handleUserOpenModal}> <img src={balance7} />Add New Raw Items</button>
           </div>
-
           <nav className="setup_navbar">
             <div>
               <NavLink className="setup_page_link" to={"/inventory-raw-item"}>Raw Items</NavLink>
@@ -25,6 +29,8 @@ const InventoryRawItem = () => {
           </nav>
         </div>
       </section>
+      <AddRawitemModal />
+      <UpdateRawitemModal />
       <section className='mt-4'>
         <div className="container">
           <div className="row justify-content-end filter_row">

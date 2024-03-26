@@ -1,9 +1,15 @@
 import { createContext, useContext, useEffect, useState } from "react"
-import { packsize_list, product_list, product_stock_in_list, product_stock_out_list, rawitem_stock_in_list, rawitem_stock_out_list, rawitems_list } from "../ApiURL";
+import { packsize_list, product_delete, product_list, product_stock_in_list, product_stock_out_list, rawitem_stock_in_list, rawitem_stock_out_list, rawitems_delete, rawitems_list, rawitems_update } from "../ApiURL";
 import axios from "axios";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 const InventoryContextDataProvider = createContext()
 const InventoryContextApi = ({ children }) => {
+  const [hideModal, setHideModal] = useState(false);
+  const [showUserModal, setShowUserModal] = useState(false);
+  const handleUserCloseModal = () => { setShowUserModal(false) };
+  const handleUserOpenModal = () => { setShowUserModal(true) };
 
   // All Raw items  List
   const [rawitemError, setRawitemError] = useState(null);
@@ -12,23 +18,20 @@ const InventoryContextApi = ({ children }) => {
   const [totalRowsSuppRawitem, setTotalRowsRawitem] = useState(0);
   const paginationComponentOptionsRawitem = { noRowsPerPage: true };
   const [rawitemSearchQuery, setRawitemSearchQuery] = useState("");
+  useEffect(() => { rawitemFetch(1); }, [rawitemSearchQuery])
 
-  useEffect(() => {
-    const rawitemFetch = async (page) => {
-      try {
-        setIsLoadedRawitem(true);
-        const response = await axios.get(`${rawitems_list}?search=${rawitemSearchQuery}&page=${page}`);
-        setRawitemList(response.data.results);
-        setTotalRowsRawitem(response.data.count);
-        setIsLoadedRawitem(false);
-      } catch (error) {
-        setIsLoadedRawitem(true);
-        setRawitemError(error);
-      }
+  const rawitemFetch = async (page) => {
+    try {
+      setIsLoadedRawitem(true);
+      const response = await axios.get(`${rawitems_list}?search=${rawitemSearchQuery}&page=${page}`);
+      setRawitemList(response.data.results);
+      setTotalRowsRawitem(response.data.count);
+      setIsLoadedRawitem(false);
+    } catch (error) {
+      setIsLoadedRawitem(true);
+      setRawitemError(error);
     }
-    rawitemFetch(1);
-  }, [rawitemSearchQuery])
-
+  }
   const rawitemHandlePageChange = page => {
     rawitemFetch(page);
   };
@@ -36,6 +39,68 @@ const InventoryContextApi = ({ children }) => {
   const handleRawitemSearchInputChange = (e) => {
     setRawitemSearchQuery(e.target.value);
   }
+
+  // Update Rawitem
+  const [updateRawitem, setUpdateRawitem] = useState({ id: "", name: "", unit_name: "", opening_balance: "", recorder_level: "" });
+
+  const rawitemInputChange = (e) => {
+    const { name, value } = e.target
+    setUpdateRawitem({ ...updateRawitem, [name]: value });
+  }
+
+  const getRawitem = async (id) => {
+    try {
+      const response = await axios.get(`${rawitems_list}${id}/`)
+      setUpdateRawitem(response.data)
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const UpdateRawitemFrom = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.put(`${rawitems_update}${updateRawitem.id}/`, updateRawitem,);
+      if (response && response.data) {
+        toast.success("Suppliers Updated Successfully!")
+        setHideModal(!hideModal);
+        rawitemFetch(1)
+      }
+    } catch (error) {
+      console.error(error);
+    }
+
+  }
+
+
+  // All Raw items Delete
+  const delete_rawitem = (id) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'By Clicking Delete Rawitem Your Rawitem will be deleted permanently!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Delete Rawitem!',
+      cancelButtonText: 'Keep Rawitem!',
+      reverseButtons: true,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axios.delete(`${rawitems_delete}${id}/`);
+          Swal.fire('Deleted!', 'Rawitem will be deleted permanently!', 'success');
+          rawitemFetch(1);
+        } catch (error) {
+          console.log(error);
+          Swal.fire('Error!', 'An error occurred while deleting.', 'error');
+        }
+
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire('Cancelled', 'Your item is safe :)', 'info');
+      }
+    });
+  };
+
+
 
   // All Raw items stock in List
   const [rawStockinError, setRawStockinError] = useState(null);
@@ -46,22 +111,20 @@ const InventoryContextApi = ({ children }) => {
   const [rawStockinSearchQuery, setRawStockinSearchQuery] = useState("");
   const [rawStockinFrom, setRawStockinFrom] = useState("");
   const [rawStockinTo, setRawStockinTo] = useState("");
+  useEffect(() => { rawitemStockinFetch(1) }, [rawStockinSearchQuery, rawStockinFrom, rawStockinTo])
 
-  useEffect(() => {
-    const rawitemStockinFetch = async (page) => {
-      try {
-        setIsLoadedRawStockin(true);
-        const response = await axios.get(`${rawitem_stock_in_list}?search=${rawStockinSearchQuery}&from_date=${rawStockinFrom}&to_date=${rawStockinTo}&page=${page}`);
-        setRawStockinList(response.data.results);
-        setTotalRowsRawStockin(response.data.count);
-        setIsLoadedRawStockin(false);
-      } catch (error) {
-        setIsLoadedRawStockin(true);
-        setRawStockinError(error);
-      }
+  const rawitemStockinFetch = async (page) => {
+    try {
+      setIsLoadedRawStockin(true);
+      const response = await axios.get(`${rawitem_stock_in_list}?search=${rawStockinSearchQuery}&from_date=${rawStockinFrom}&to_date=${rawStockinTo}&page=${page}`);
+      setRawStockinList(response.data.results);
+      setTotalRowsRawStockin(response.data.count);
+      setIsLoadedRawStockin(false);
+    } catch (error) {
+      setIsLoadedRawStockin(true);
+      setRawStockinError(error);
     }
-    rawitemStockinFetch(1);
-  }, [rawStockinSearchQuery, rawStockinFrom, rawStockinTo])
+  }
 
   const rawitemStockinHandlePageChange = page => {
     rawitemStockinFetch(page);
@@ -78,7 +141,7 @@ const InventoryContextApi = ({ children }) => {
     setRawStockinSearchQuery(e.target.value);
   }
 
-  // All Raw items stock in List
+  // All Raw items stock out List
   const [rawStockoutError, setRawStockoutError] = useState(null);
   const [isLoadedRawStockout, setIsLoadedRawStockout] = useState(false);
   const [rawStockoutList, setRawStockoutList] = useState([]);
@@ -87,23 +150,20 @@ const InventoryContextApi = ({ children }) => {
   const [rawStockoutSearchQuery, setRawStockoutSearchQuery] = useState("");
   const [rawStockoutFrom, setRawStockoutFrom] = useState("");
   const [rawStockoutTo, setRawStockoutTo] = useState("");
+  useEffect(() => { rawitemStockoutFetch(1); }, [rawStockoutSearchQuery, rawStockoutFrom, rawStockoutTo])
 
-  useEffect(() => {
-    const rawitemStockoutFetch = async (page) => {
-      try {
-        setIsLoadedRawStockout(true);
-        const response = await axios.get(`${rawitem_stock_out_list}?search=${rawStockoutSearchQuery}&from_date=${rawStockoutFrom}&to_date=${rawStockoutTo}&page=${page}`);
-        setRawStockoutList(response.data.results);
-        setTotalRowsRawStockout(response.data.count);
-        setIsLoadedRawStockout(false);
-      } catch (error) {
-        setIsLoadedRawStockout(true);
-        setRawStockoutError(error);
-      }
+  const rawitemStockoutFetch = async (page) => {
+    try {
+      setIsLoadedRawStockout(true);
+      const response = await axios.get(`${rawitem_stock_out_list}?search=${rawStockoutSearchQuery}&from_date=${rawStockoutFrom}&to_date=${rawStockoutTo}&page=${page}`);
+      setRawStockoutList(response.data.results);
+      setTotalRowsRawStockout(response.data.count);
+      setIsLoadedRawStockout(false);
+    } catch (error) {
+      setIsLoadedRawStockout(true);
+      setRawStockoutError(error);
     }
-    rawitemStockoutFetch(1);
-  }, [rawStockoutSearchQuery, rawStockoutFrom, rawStockoutTo])
-
+  }
   const rawitemStockoutHandlePageChange = page => {
     rawitemStockoutFetch(page);
   };
@@ -127,23 +187,20 @@ const InventoryContextApi = ({ children }) => {
   const [totalRowsProduct, setTotalRowsProduct] = useState(0);
   const paginationComponentOptionsProduct = { noRowsPerPage: true };
   const [productSearchQuery, setProductSearchQuery] = useState("");
+  useEffect(() => { productFetch(1); }, [productSearchQuery])
 
-  useEffect(() => {
-    const productFetch = async (page) => {
-      try {
-        setIsLoadedProduct(true);
-        const response = await axios.get(`${product_list}?search=${productSearchQuery}&page=${page}`);
-        setProductList(response.data.results);
-        setTotalRowsProduct(response.data.count);
-        setIsLoadedProduct(false);
-      } catch (error) {
-        setIsLoadedProduct(true);
-        setProductError(error);
-      }
+  const productFetch = async (page) => {
+    try {
+      setIsLoadedProduct(true);
+      const response = await axios.get(`${product_list}?search=${productSearchQuery}&page=${page}`);
+      setProductList(response.data.results);
+      setTotalRowsProduct(response.data.count);
+      setIsLoadedProduct(false);
+    } catch (error) {
+      setIsLoadedProduct(true);
+      setProductError(error);
     }
-    productFetch(1);
-  }, [productSearchQuery])
-
+  }
   const productHandlePageChange = page => {
     productFetch(page);
   };
@@ -151,6 +208,35 @@ const InventoryContextApi = ({ children }) => {
   const handleProductSearchInputChange = (e) => {
     setProductSearchQuery(e.target.value);
   }
+
+
+  // Product Delete
+  const delete_product = (id) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'By Clicking Delete Rawitem Your Rawitem will be deleted permanently!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Delete Rawitem!',
+      cancelButtonText: 'Keep Rawitem!',
+      reverseButtons: true,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axios.delete(`${product_delete}${id}/`);
+          Swal.fire('Deleted!', 'Rawitem will be deleted permanently!', 'success');
+          productFetch(1);
+        } catch (error) {
+          console.log(error);
+          Swal.fire('Error!', 'An error occurred while deleting.', 'error');
+        }
+
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire('Cancelled', 'Your item is safe :)', 'info');
+      }
+    });
+  };
+
 
   // All Product stock in List
   const [productStockinError, setProductStockinError] = useState(null);
@@ -202,23 +288,20 @@ const InventoryContextApi = ({ children }) => {
   const [productStockoutSearchQuery, setProductStockoutSearchQuery] = useState("");
   const [productStockoutFrom, setProductStockoutFrom] = useState("");
   const [productStockoutTo, setProductStockoutTo] = useState("");
+  useEffect(() => { productStockoutFetch(1); }, [productStockoutSearchQuery, productStockoutFrom, productStockoutTo])
 
-  useEffect(() => {
-    const productStockoutFetch = async (page) => {
-      try {
-        setIsLoadedProductStockout(true);
-        const response = await axios.get(`${product_stock_out_list}?search=${productStockoutSearchQuery}&from_date=${productStockoutFrom}&to_date=${productStockoutTo}&page=${page}`);
-        setProductStockoutList(response.data.results);
-        setTotalRowsProductStockout(response.data.count);
-        setIsLoadedProductStockout(false);
-      } catch (error) {
-        setIsLoadedProductStockout(true);
-        setProductStockoutError(error);
-      }
+  const productStockoutFetch = async (page) => {
+    try {
+      setIsLoadedProductStockout(true);
+      const response = await axios.get(`${product_stock_out_list}?search=${productStockoutSearchQuery}&from_date=${productStockoutFrom}&to_date=${productStockoutTo}&page=${page}`);
+      setProductStockoutList(response.data.results);
+      setTotalRowsProductStockout(response.data.count);
+      setIsLoadedProductStockout(false);
+    } catch (error) {
+      setIsLoadedProductStockout(true);
+      setProductStockoutError(error);
     }
-    productStockoutFetch(1);
-  }, [productStockoutSearchQuery, productStockoutFrom, productStockoutTo])
-
+  }
   const productStockoutHandlePageChange = page => {
     rawitemStockoutFetch(page);
   };
@@ -277,13 +360,13 @@ const InventoryContextApi = ({ children }) => {
     <InventoryContextDataProvider.Provider value={
       {
         // raw item
-        rawitemList, rawitemError, isLoadedRawitem, totalRowsSuppRawitem, paginationComponentOptionsRawitem, rawitemHandlePageChange, handleRawitemSearchInputChange,
+        rawitemFetch, rawitemList, rawitemError, isLoadedRawitem, totalRowsSuppRawitem, paginationComponentOptionsRawitem, rawitemHandlePageChange, handleRawitemSearchInputChange, hideModal, updateRawitem, rawitemInputChange, getRawitem, UpdateRawitemFrom, delete_rawitem,
         // raw item stock in
-        rawStockinError, isLoadedRawStockin, rawStockinList, totalRowsSuppRawStockin, paginationComponentOptionsRawStockin, rawitemStockinHandlePageChange, handleStockinFromDateChange, handleStockinToDateChange, handleRawitemStockinSearchInputChange,
+        rawitemStockinFetch, rawStockinError, isLoadedRawStockin, rawStockinList, totalRowsSuppRawStockin, paginationComponentOptionsRawStockin, rawitemStockinHandlePageChange, handleStockinFromDateChange, handleStockinToDateChange, handleRawitemStockinSearchInputChange,
         // raw item stock out
-        rawStockoutError, isLoadedRawStockout, rawStockoutList, totalRowsSuppRawStockout, paginationComponentOptionsRawStockout, rawitemStockoutHandlePageChange, handleStockoutFromDateChange, handleStockoutToDateChange, handleRawitemStockoutSearchInputChange,
+        rawitemStockoutFetch, rawStockoutError, isLoadedRawStockout, rawStockoutList, totalRowsSuppRawStockout, paginationComponentOptionsRawStockout, rawitemStockoutHandlePageChange, handleStockoutFromDateChange, handleStockoutToDateChange, handleRawitemStockoutSearchInputChange,
         // product
-        productError, isLoadedProduct, productList, totalRowsProduct, paginationComponentOptionsProduct, productHandlePageChange, handleProductSearchInputChange,
+        productFetch, productError, isLoadedProduct, productList, totalRowsProduct, paginationComponentOptionsProduct, productHandlePageChange, handleProductSearchInputChange, delete_product,
         // product stock in
         productStockinError, isLoadedProductStockin, productStockinList, totalRowsSuppProductStockin, paginationComponentOptionsProductStockin, productStockinHandlePageChange, handleProductStockinFromDateChange, handleProductStockinToDateChange, handleProductStockinSearchInputChange,
         // product stock out

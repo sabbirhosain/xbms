@@ -22,14 +22,14 @@ const RawitemStockInTable = () => {
       name: "Date Time",
       selector: row => row.date_time,
     },
-    {
-      name: "Action",
-      cell: row => <>
-        <button className="me-2" onClick={() => alert(row.id)}> <img src={edit} /></button>
-        <button onClick={() => alert(row.id)}><img src={trash} /></button>
-      </>
+    // {
+    //   name: "Action",
+    //   cell: row => <>
+    //     <button className="me-2" onClick={() => alert(row.id)}> <img src={edit} /></button>
+    //     <button onClick={() => alert(row.id)}><img src={trash} /></button>
+    //   </>
 
-    }
+    // }
   ];
 
 

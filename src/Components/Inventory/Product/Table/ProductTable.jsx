@@ -4,7 +4,7 @@ import { edit, trash } from '../../../../Data/Images';
 import { useInventoryDataProvider } from '../../../../ContextApi/InventoryContextApi';
 
 const ProductTable = () => {
-  const { productError, isLoadedProduct, productList, totalRowsProduct, paginationComponentOptionsProduct, productHandlePageChange } = useInventoryDataProvider()
+  const { productError, isLoadedProduct, productList, totalRowsProduct, paginationComponentOptionsProduct, productHandlePageChange, delete_product } = useInventoryDataProvider()
   const columns = [
     {
       name: "ID",
@@ -16,7 +16,7 @@ const ProductTable = () => {
     },
     {
       name: "Product image",
-      selector: row => <img src={row.image} width={"50px"} />
+      selector: row => <img src={row.image} width={"40px"} />
     },
     {
       name: "Formula No",
@@ -39,19 +39,31 @@ const ProductTable = () => {
       name: "Action",
       cell: row => <>
         <button className="me-2" onClick={() => alert(row.id)}> <img src={edit} /></button>
-        <button onClick={() => alert(row.id)}><img src={trash} /></button>
+        <button onClick={() => delete_product(row.id)}><img src={trash} /></button>
       </>
 
     }
   ];
 
 
-
-  return (
-    <>
-      <DataTable columns={columns} data={productList} pagination></DataTable>
-    </>
-  )
+  if (productError) {
+    return <div>Error: {productError.message}</div>;
+  } else {
+    return (
+      <>
+        <DataTable
+          columns={columns}
+          data={productList}
+          pagination
+          paginationServer
+          paginationComponentOptions={paginationComponentOptionsProduct}
+          progressPending={isLoadedProduct}
+          paginationTotalRows={totalRowsProduct}
+          onChangePage={productHandlePageChange}
+        />
+      </>
+    )
+  }
 }
 
 export default ProductTable

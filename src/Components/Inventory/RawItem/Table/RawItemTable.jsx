@@ -4,7 +4,7 @@ import { edit, trash } from '../../../../Data/Images';
 import { useInventoryDataProvider } from '../../../../ContextApi/InventoryContextApi';
 
 const RawItemTable = () => {
-  const { rawitemList, rawitemError, isLoadedRawitem, totalRowsSuppRawitem, paginationComponentOptionsRawitem, rawitemHandlePageChange, } = useInventoryDataProvider()
+  const { rawitemList, rawitemError, isLoadedRawitem, totalRowsSuppRawitem, paginationComponentOptionsRawitem, rawitemHandlePageChange, getRawitem, delete_rawitem } = useInventoryDataProvider()
   const columns = [
     {
       name: "ID",
@@ -33,8 +33,8 @@ const RawItemTable = () => {
     {
       name: "Action",
       cell: row => <>
-        <button className="me-2" onClick={() => alert(row.id)}> <img src={edit} /></button>
-        <button onClick={() => alert(row.id)}><img src={trash} /></button>
+        <button className="me-2" data-bs-toggle="modal" data-bs-target="#update_rawitem" onClick={() => getRawitem(row.id)}> <img src={edit} /></button>
+        <button onClick={() => delete_rawitem(row.id)}><img src={trash} /></button>
       </>
 
     }
