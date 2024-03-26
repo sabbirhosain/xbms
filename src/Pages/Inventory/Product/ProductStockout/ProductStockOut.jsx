@@ -19,7 +19,6 @@ const ProductStockOut = () => {
             <button className="add_action_btn" onClick={handleUserOpenModal}>
               <img src={balance7} alt="" />Add New Account</button>
           </div>
-          <ProductStockout />
           <nav className="setup_navbar">
             <div>
               <NavLink className="setup_page_link" to={"/inventory-product"}>Product</NavLink>
@@ -29,6 +28,7 @@ const ProductStockOut = () => {
           </nav>
         </div>
       </section>
+      <ProductStockout />
       <section className='mt-4'>
         <div className="container">
           <div className="row justify-content-end filter_row">

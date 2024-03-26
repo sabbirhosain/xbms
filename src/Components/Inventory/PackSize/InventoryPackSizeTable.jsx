@@ -4,7 +4,7 @@ import { edit, trash } from '../../../Data/Images';
 import { useInventoryDataProvider } from '../../../ContextApi/InventoryContextApi';
 
 const InventoryPackSizeTable = () => {
-  const { packsizeError, isLoadedPacksize, packsizeList, totalRowsPacksize, paginationComponentOptionsPacksize, packsizeHandlePageChange, } = useInventoryDataProvider()
+  const { packsizeError, isLoadedPacksize, packsizeList, totalRowsPacksize, paginationComponentOptionsPacksize, packsizeHandlePageChange,delete_packsize } = useInventoryDataProvider()
   const columns = [
     {
       name: "ID",
@@ -78,7 +78,7 @@ const InventoryPackSizeTable = () => {
       name: "Action",
       cell: row => <>
         <button className="me-2" onClick={() => alert(row.id)}> <img src={edit} /></button>
-        <button onClick={() => alert(row.id)}><img src={trash} /></button>
+        <button onClick={() => delete_packsize(row.id)}><img src={trash} /></button>
       </>
 
     }

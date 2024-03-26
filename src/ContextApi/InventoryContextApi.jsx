@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react"
-import { packsize_list, product_delete, product_list, product_stock_in_list, product_stock_out_list, product_update, rawitem_stock_in_list, rawitem_stock_out_list, rawitems_delete, rawitems_list, rawitems_update } from "../ApiURL";
+import { packsize_delete, packsize_list, packsize_update, product_delete, product_list, product_stock_in_list, product_stock_out_list, product_update, rawitem_stock_in_list, rawitem_stock_out_list, rawitems_delete, rawitems_list, rawitems_update } from "../ApiURL";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
@@ -293,24 +293,23 @@ const InventoryContextApi = ({ children }) => {
   const [productStockinFrom, setProductStockinFrom] = useState("");
   const [productStockinTo, setProductStockinTo] = useState("");
 
-  useEffect(() => {
-    const productStockinFetch = async (page) => {
-      try {
-        setIsLoadedProductStockin(true);
-        const response = await axios.get(`${product_stock_in_list}?search=${productStockinSearchQuery}&from_date=${productStockinFrom}&to_date=${productStockinTo}&page=${page}`);
-        setProductStockinList(response.data.results);
-        setTotalRowsProductStockin(response.data.count);
-        setIsLoadedProductStockin(false);
-      } catch (error) {
-        setIsLoadedProductStockin(true);
-        setProductStockinError(error);
-      }
+  useEffect(() => { productStockinFetch(1) }, [productStockinSearchQuery, productStockinFrom, productStockinTo])
+
+  const productStockinFetch = async (page) => {
+    try {
+      setIsLoadedProductStockin(true);
+      const response = await axios.get(`${product_stock_in_list}?search=${productStockinSearchQuery}&from_date=${productStockinFrom}&to_date=${productStockinTo}&page=${page}`);
+      setProductStockinList(response.data.results);
+      setTotalRowsProductStockin(response.data.count);
+      setIsLoadedProductStockin(false);
+    } catch (error) {
+      setIsLoadedProductStockin(true);
+      setProductStockinError(error);
     }
-    productStockinFetch(1);
-  }, [productStockinSearchQuery, productStockinFrom, productStockinTo])
+  }
 
   const productStockinHandlePageChange = page => {
-    rawitemStockinFetch(page);
+    productStockinFetch(page);
   };
 
   const handleProductStockinFromDateChange = (e) => {
@@ -348,7 +347,7 @@ const InventoryContextApi = ({ children }) => {
     }
   }
   const productStockoutHandlePageChange = page => {
-    rawitemStockoutFetch(page);
+    productStockoutFetch(page);
   };
 
   const handleProductStockoutFromDateChange = (e) => {
@@ -369,23 +368,20 @@ const InventoryContextApi = ({ children }) => {
   const [totalRowsPacksize, setTotalRowsPacksize] = useState(0);
   const paginationComponentOptionsPacksize = { noRowsPerPage: true };
   const [packsizeSearchQuery, setPacksizeSearchQuery] = useState("");
+  useEffect(() => { packsizeFetch(1) }, [packsizeSearchQuery])
 
-  useEffect(() => {
-    const packsizeFetch = async (page) => {
-      try {
-        setIsLoadedPacksize(true);
-        const response = await axios.get(`${packsize_list}?search=${packsizeSearchQuery}&page=${page}`);
-        setPacksizeList(response.data.results);
-        setTotalRowsPacksize(response.data.count);
-        setIsLoadedPacksize(false);
-      } catch (error) {
-        setIsLoadedPacksize(true);
-        setPacksizeError(error);
-      }
+  const packsizeFetch = async (page) => {
+    try {
+      setIsLoadedPacksize(true);
+      const response = await axios.get(`${packsize_list}?search=${packsizeSearchQuery}&page=${page}`);
+      setPacksizeList(response.data.results);
+      setTotalRowsPacksize(response.data.count);
+      setIsLoadedPacksize(false);
+    } catch (error) {
+      setIsLoadedPacksize(true);
+      setPacksizeError(error);
     }
-    packsizeFetch(1);
-  }, [packsizeSearchQuery])
-
+  }
   const packsizeHandlePageChange = page => {
     packsizeFetch(page);
   };
@@ -394,7 +390,32 @@ const InventoryContextApi = ({ children }) => {
     setPacksizeSearchQuery(e.target.value);
   }
 
+  // Packsize Delete
+  const delete_packsize = (id) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'By Clicking Delete Packsize Your Packsize will be deleted permanently!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Delete Packsize!',
+      cancelButtonText: 'Keep Packsize!',
+      reverseButtons: true,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axios.delete(`${packsize_delete}${id}/`);
+          Swal.fire('Deleted!', 'Packsize will be deleted permanently!', 'success');
+          packsizeFetch(1);
+        } catch (error) {
+          console.log(error);
+          Swal.fire('Error!', 'An error occurred while deleting.', 'error');
+        }
 
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire('Cancelled', 'Your item is safe :)', 'info');
+      }
+    });
+  };
 
 
 
@@ -413,11 +434,11 @@ const InventoryContextApi = ({ children }) => {
         // product
         productFetch, productError, isLoadedProduct, productList, totalRowsProduct, paginationComponentOptionsProduct, productHandlePageChange, handleProductSearchInputChange, delete_product, updateProduct, productInputChangeHandler, productHandleImageChange, update_product, productSubmitForm,
         // product stock in
-        productStockinError, isLoadedProductStockin, productStockinList, totalRowsSuppProductStockin, paginationComponentOptionsProductStockin, productStockinHandlePageChange, handleProductStockinFromDateChange, handleProductStockinToDateChange, handleProductStockinSearchInputChange,
+        productStockinError, isLoadedProductStockin, productStockinList, totalRowsSuppProductStockin, paginationComponentOptionsProductStockin, productStockinHandlePageChange, handleProductStockinFromDateChange, handleProductStockinToDateChange, handleProductStockinSearchInputChange, productStockinFetch,
         // product stock out
-        productStockoutError, isLoadedProductStockout, productStockoutList, totalRowsSuppProductStockout, paginationComponentOptionsProductStockout, productStockoutHandlePageChange, handleProductStockoutFromDateChange, handleProductStockoutToDateChange, handleProductStockoutSearchInputChange,
+        productStockoutError, isLoadedProductStockout, productStockoutList, totalRowsSuppProductStockout, paginationComponentOptionsProductStockout, productStockoutHandlePageChange, handleProductStockoutFromDateChange, handleProductStockoutToDateChange, handleProductStockoutSearchInputChange, productStockoutFetch,
         // packsize
-        packsizeError, isLoadedPacksize, packsizeList, totalRowsPacksize, paginationComponentOptionsPacksize, packsizeHandlePageChange, handlePacksizeSearchInputChange,
+        packsizeError, isLoadedPacksize, packsizeList, totalRowsPacksize, paginationComponentOptionsPacksize, packsizeHandlePageChange, handlePacksizeSearchInputChange, delete_packsize
       }
     }>
       {children}

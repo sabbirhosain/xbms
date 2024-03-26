@@ -53,5 +53,5 @@ export const product_stock_out_create = "/api/inventory/productstockout/"
 
 export const packsize_list = "/api/inventory/packsizes/"
 export const packsize_create = "/api/inventory/packsizes/"
-export const packsize_update = "/api/inventory/packsizes/2/"
-export const packsize_delete = "/api/inventory/packsizes/2/"
+export const packsize_update = "/api/inventory/packsizes/"
+export const packsize_delete = "/api/inventory/packsizes/"
