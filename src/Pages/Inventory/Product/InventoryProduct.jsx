@@ -5,6 +5,7 @@ import { balance7 } from '../../../Data/Images'
 import ProductTable from '../../../Components/Inventory/Product/Table/ProductTable'
 import AddProductModal from '../../../Components/Inventory/Product/Modal/AddProductModal'
 import { useUserDataProvider } from '../../../ContextApi/UsersContextApi'
+import UpdateProductModal from '../../../Components/Inventory/Product/Modal/UpdateProductModal'
 
 const InventoryProduct = () => {
   const { handleUserOpenModal } = useUserDataProvider()
@@ -28,6 +29,7 @@ const InventoryProduct = () => {
         </div>
       </section>
       <AddProductModal />
+      <UpdateProductModal/>
       <section className='mt-4'>
         <div className="container">
           <div className="row justify-content-end filter_row">

@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react"
-import { packsize_list, product_delete, product_list, product_stock_in_list, product_stock_out_list, rawitem_stock_in_list, rawitem_stock_out_list, rawitems_delete, rawitems_list, rawitems_update } from "../ApiURL";
+import { packsize_list, product_delete, product_list, product_stock_in_list, product_stock_out_list, product_update, rawitem_stock_in_list, rawitem_stock_out_list, rawitems_delete, rawitems_list, rawitems_update } from "../ApiURL";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
@@ -209,6 +209,51 @@ const InventoryContextApi = ({ children }) => {
     setProductSearchQuery(e.target.value);
   }
 
+  // Update Product
+  const [updateProduct, setUpdateProduct] = useState({ name: "", formula_no: "", production_unit_name: "", quantity_in_preparation_ratio: "", product_category: "", image: null });
+
+  const productInputChangeHandler = (e) => {
+    const { name, value } = e.target;
+    setUpdateProduct({ ...updateProduct, [name]: value });
+  };
+
+  const productHandleImageChange = (e) => {
+    setUpdateProduct({ ...updateProduct, image: e.target.files[0] });
+  };
+
+  const update_product = async (id) => {
+    try {
+      const response = await axios.get(`${product_list}${id}/`);
+      setUpdateProduct(response.data)
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const productSubmitForm = async (e) => {
+    e.preventDefault();
+    const { name, formula_no, production_unit_name, quantity_in_preparation_ratio, product_category, image } = updateProduct
+    try {
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('formula_no', formula_no);
+      formData.append('production_unit_name', production_unit_name);
+      formData.append('quantity_in_preparation_ratio', quantity_in_preparation_ratio);
+      formData.append('product_category', product_category);
+      if (image) {
+        formData.append('image', image);
+      }
+      const response = await axios.put(`${product_update}${updateProduct.id}/`, formData,);
+      if (response && response.data) {
+        toast.success("Product Updated Successfully!")
+        setHideModal(!hideModal);
+        productFetch(1);
+      }
+    } catch (error) {
+      console.error('Error adding post:', error);
+    }
+
+  }
 
   // Product Delete
   const delete_product = (id) => {
@@ -366,7 +411,7 @@ const InventoryContextApi = ({ children }) => {
         // raw item stock out
         rawitemStockoutFetch, rawStockoutError, isLoadedRawStockout, rawStockoutList, totalRowsSuppRawStockout, paginationComponentOptionsRawStockout, rawitemStockoutHandlePageChange, handleStockoutFromDateChange, handleStockoutToDateChange, handleRawitemStockoutSearchInputChange,
         // product
-        productFetch, productError, isLoadedProduct, productList, totalRowsProduct, paginationComponentOptionsProduct, productHandlePageChange, handleProductSearchInputChange, delete_product,
+        productFetch, productError, isLoadedProduct, productList, totalRowsProduct, paginationComponentOptionsProduct, productHandlePageChange, handleProductSearchInputChange, delete_product, updateProduct, productInputChangeHandler, productHandleImageChange, update_product, productSubmitForm,
         // product stock in
         productStockinError, isLoadedProductStockin, productStockinList, totalRowsSuppProductStockin, paginationComponentOptionsProductStockin, productStockinHandlePageChange, handleProductStockinFromDateChange, handleProductStockinToDateChange, handleProductStockinSearchInputChange,
         // product stock out

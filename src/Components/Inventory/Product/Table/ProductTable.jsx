@@ -4,7 +4,7 @@ import { edit, trash } from '../../../../Data/Images';
 import { useInventoryDataProvider } from '../../../../ContextApi/InventoryContextApi';
 
 const ProductTable = () => {
-  const { productError, isLoadedProduct, productList, totalRowsProduct, paginationComponentOptionsProduct, productHandlePageChange, delete_product } = useInventoryDataProvider()
+  const { productError, isLoadedProduct, productList, totalRowsProduct, paginationComponentOptionsProduct, productHandlePageChange, delete_product, update_product } = useInventoryDataProvider()
   const columns = [
     {
       name: "ID",
@@ -38,7 +38,7 @@ const ProductTable = () => {
     {
       name: "Action",
       cell: row => <>
-        <button className="me-2" onClick={() => alert(row.id)}> <img src={edit} /></button>
+        <button className="me-2" data-bs-toggle="modal" data-bs-target="#update_product" onClick={() => update_product(row.id)}> <img src={edit} /></button>
         <button onClick={() => delete_product(row.id)}><img src={trash} /></button>
       </>
 
