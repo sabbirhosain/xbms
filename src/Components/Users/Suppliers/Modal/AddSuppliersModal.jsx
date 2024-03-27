@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useUserDataProvider } from '../../../../ContextApi/UsersContextApi'
 import { toast } from 'react-toastify'
 import axios from 'axios'
+import { suppliers_create } from '../../../../ApiURL'
 
 const AddSuppliersModal = () => {
   const { suppliersFetch, showUserModal, handleUserCloseModal, } = useUserDataProvider()
@@ -14,7 +15,7 @@ const AddSuppliersModal = () => {
   const addSuppliersHandleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/auth/suppliers/", { name: name, contact_no: phone, address: address, opening_balance: openingBalance });
+      const response = await axios.post(suppliers_create, { name: name, contact_no: phone, address: address, opening_balance: openingBalance });
 
       if (response && response.data) {
         toast.success("Suppliers Added Successfully!")

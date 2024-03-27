@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react"
-import { packsize_delete, packsize_list, packsize_update, product_delete, product_list, product_stock_in_list, product_stock_out_list, product_update, rawitem_stock_in_list, rawitem_stock_out_list, rawitems_delete, rawitems_list, rawitems_update } from "../ApiURL";
+import { packsize_delete, packsize_list, product_delete, product_list, product_stock_in_list, product_stock_out_list, product_update, rawitem_stock_in_list, rawitem_stock_out_list, rawitems_delete, rawitems_list, rawitems_update } from "../ApiURL";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
@@ -10,6 +10,7 @@ const InventoryContextApi = ({ children }) => {
   const [showUserModal, setShowUserModal] = useState(false);
   const handleUserCloseModal = () => { setShowUserModal(false) };
   const handleUserOpenModal = () => { setShowUserModal(true) };
+  const token = JSON.parse(localStorage.getItem('access_token'));
 
   // All Raw items  List
   const [rawitemError, setRawitemError] = useState(null);
@@ -23,7 +24,7 @@ const InventoryContextApi = ({ children }) => {
   const rawitemFetch = async (page) => {
     try {
       setIsLoadedRawitem(true);
-      const response = await axios.get(`${rawitems_list}?search=${rawitemSearchQuery}&page=${page}`);
+      const response = await axios.get(`${rawitems_list}?search=${rawitemSearchQuery}&page=${page}`, { headers: { Authorization: `Bearer ${token.access}` } });
       setRawitemList(response.data.results);
       setTotalRowsRawitem(response.data.count);
       setIsLoadedRawitem(false);
@@ -116,7 +117,7 @@ const InventoryContextApi = ({ children }) => {
   const rawitemStockinFetch = async (page) => {
     try {
       setIsLoadedRawStockin(true);
-      const response = await axios.get(`${rawitem_stock_in_list}?search=${rawStockinSearchQuery}&from_date=${rawStockinFrom}&to_date=${rawStockinTo}&page=${page}`);
+      const response = await axios.get(`${rawitem_stock_in_list}?search=${rawStockinSearchQuery}&from_date=${rawStockinFrom}&to_date=${rawStockinTo}&page=${page}`, { headers: { Authorization: `Bearer ${token.access}` } });
       setRawStockinList(response.data.results);
       setTotalRowsRawStockin(response.data.count);
       setIsLoadedRawStockin(false);
@@ -155,7 +156,7 @@ const InventoryContextApi = ({ children }) => {
   const rawitemStockoutFetch = async (page) => {
     try {
       setIsLoadedRawStockout(true);
-      const response = await axios.get(`${rawitem_stock_out_list}?search=${rawStockoutSearchQuery}&from_date=${rawStockoutFrom}&to_date=${rawStockoutTo}&page=${page}`);
+      const response = await axios.get(`${rawitem_stock_out_list}?search=${rawStockoutSearchQuery}&from_date=${rawStockoutFrom}&to_date=${rawStockoutTo}&page=${page}`, { headers: { Authorization: `Bearer ${token.access}` } });
       setRawStockoutList(response.data.results);
       setTotalRowsRawStockout(response.data.count);
       setIsLoadedRawStockout(false);
@@ -192,7 +193,7 @@ const InventoryContextApi = ({ children }) => {
   const productFetch = async (page) => {
     try {
       setIsLoadedProduct(true);
-      const response = await axios.get(`${product_list}?search=${productSearchQuery}&page=${page}`);
+      const response = await axios.get(`${product_list}?search=${productSearchQuery}&page=${page}`, { headers: { Authorization: `Bearer ${token.access}` } });
       setProductList(response.data.results);
       setTotalRowsProduct(response.data.count);
       setIsLoadedProduct(false);
@@ -223,7 +224,7 @@ const InventoryContextApi = ({ children }) => {
 
   const update_product = async (id) => {
     try {
-      const response = await axios.get(`${product_list}${id}/`);
+      const response = await axios.get(`${product_list}${id}/`, { headers: { Authorization: `Bearer ${token.access}` } });
       setUpdateProduct(response.data)
     } catch (error) {
       console.error(error);
@@ -298,7 +299,7 @@ const InventoryContextApi = ({ children }) => {
   const productStockinFetch = async (page) => {
     try {
       setIsLoadedProductStockin(true);
-      const response = await axios.get(`${product_stock_in_list}?search=${productStockinSearchQuery}&from_date=${productStockinFrom}&to_date=${productStockinTo}&page=${page}`);
+      const response = await axios.get(`${product_stock_in_list}?search=${productStockinSearchQuery}&from_date=${productStockinFrom}&to_date=${productStockinTo}&page=${page}`, { headers: { Authorization: `Bearer ${token.access}` } });
       setProductStockinList(response.data.results);
       setTotalRowsProductStockin(response.data.count);
       setIsLoadedProductStockin(false);
@@ -337,7 +338,7 @@ const InventoryContextApi = ({ children }) => {
   const productStockoutFetch = async (page) => {
     try {
       setIsLoadedProductStockout(true);
-      const response = await axios.get(`${product_stock_out_list}?search=${productStockoutSearchQuery}&from_date=${productStockoutFrom}&to_date=${productStockoutTo}&page=${page}`);
+      const response = await axios.get(`${product_stock_out_list}?search=${productStockoutSearchQuery}&from_date=${productStockoutFrom}&to_date=${productStockoutTo}&page=${page}`, { headers: { Authorization: `Bearer ${token.access}` } });
       setProductStockoutList(response.data.results);
       setTotalRowsProductStockout(response.data.count);
       setIsLoadedProductStockout(false);
@@ -373,7 +374,8 @@ const InventoryContextApi = ({ children }) => {
   const packsizeFetch = async (page) => {
     try {
       setIsLoadedPacksize(true);
-      const response = await axios.get(`${packsize_list}?search=${packsizeSearchQuery}&page=${page}`);
+      const token = JSON.parse(localStorage.getItem('access_token'));
+      const response = await axios.get(`${packsize_list}?search=${packsizeSearchQuery}&page=${page}`, { headers: { Authorization: `Bearer ${token.access}` } });
       setPacksizeList(response.data.results);
       setTotalRowsPacksize(response.data.count);
       setIsLoadedPacksize(false);
@@ -403,7 +405,7 @@ const InventoryContextApi = ({ children }) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(`${packsize_delete}${id}/`);
+          await axios.delete(`${packsize_delete}${id}/`, { headers: { Authorization: `Bearer ${token.access}` } });
           Swal.fire('Deleted!', 'Packsize will be deleted permanently!', 'success');
           packsizeFetch(1);
         } catch (error) {

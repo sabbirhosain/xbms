@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react"
-import { selesPerson_delete, selesPerson_list, user_delete, user_list, user_update } from "../ApiURL";
+import { selesPerson_delete, selesPerson_list, suppliers_delete, suppliers_list, suppliers_update, user_delete, user_list, user_update } from "../ApiURL";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
@@ -11,6 +11,8 @@ const UsersContextApi = ({ children }) => {
   const [showUserModal, setShowUserModal] = useState(false);
   const handleUserCloseModal = () => { setShowUserModal(false) };
   const handleUserOpenModal = () => { setShowUserModal(true) };
+  const token = JSON.parse(localStorage.getItem('access_token'));
+
 
   // All User List
   const [userError, setUserError] = useState(null);
@@ -52,9 +54,6 @@ const UsersContextApi = ({ children }) => {
   const handleSearchInputChange = (e) => {
     setSearchQuery(e.target.value);
   }
-
-
-
 
 
   // Update User
@@ -163,8 +162,9 @@ const UsersContextApi = ({ children }) => {
 
   const selesPersonFetch = async (page) => {
     try {
+      const token = JSON.parse(localStorage.getItem('access_token'));
       setIsLoadedSelesPerson(true);
-      const response = await axios.get(`/api/auth/salespersons/?query=${selesPersonSearchQuery}&designation=${selectedSelesPersonType}&page=${page}`);
+      const response = await axios.get(`${selesPerson_list}?query=${selesPersonSearchQuery}&designation=${selectedSelesPersonType}&page=${page}`, { headers: { Authorization: `Bearer ${token.access}` } });
       setSelesPersonList(response.data.results);
       setTotalRowsSelesPerson(response.data.count);
       setIsLoadedSelesPerson(false);
@@ -236,8 +236,9 @@ const UsersContextApi = ({ children }) => {
 
   const suppliersFetch = async (page) => {
     try {
+      const token = JSON.parse(localStorage.getItem('access_token'));
       setIsLoadedSuppliers(true);
-      const response = await axios.get(`/api/auth/suppliers/?query=${suppliersSearchQuery}&page=${page}`);
+      const response = await axios.get(`${suppliers_list}?query=${suppliersSearchQuery}&page=${page}`, { headers: { Authorization: `Bearer ${token.access}` } });
       setSuppliersList(response.data.results);
       setTotalRowsSuppliers(response.data.count);
       setIsLoadedSuppliers(false);
@@ -267,7 +268,7 @@ const UsersContextApi = ({ children }) => {
 
   const getSuppliers = async (id) => {
     try {
-      const response = await axios.get(`/api/auth/suppliers/${id}/`)
+      const response = await axios.get(`${suppliers_list}${id}/`)
       setUpdateSuppliers(response.data)
     } catch (error) {
       console.error(error);
@@ -277,7 +278,7 @@ const UsersContextApi = ({ children }) => {
   const UpdateSuppliersFrom = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`/api/auth/suppliers/${updateSuppliers.id}/`, updateSuppliers,);
+      const response = await axios.put(`${suppliers_update}${updateSuppliers.id}/`, updateSuppliers, { headers: { Authorization: `Bearer ${token.access}` } });
       if (response && response.data) {
         toast.success("Suppliers Updated Successfully!")
         setHideModal(!hideModal);
@@ -304,7 +305,7 @@ const UsersContextApi = ({ children }) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(`/api/auth/suppliers/${id}/`)
+          await axios.delete(`${suppliers_delete}${id}/`, { headers: { Authorization: `Bearer ${token.access}` } })
           Swal.fire('Deleted!', 'Suppliers will be deleted permanently!', 'success');
           suppliersFetch(1);
         } catch (error) {

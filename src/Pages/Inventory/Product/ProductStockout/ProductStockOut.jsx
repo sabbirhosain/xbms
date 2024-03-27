@@ -17,7 +17,7 @@ const ProductStockOut = () => {
           <div className="page_title">
             <h2 className="page_title_name">Product Stock Out</h2>
             <button className="add_action_btn" onClick={handleUserOpenModal}>
-              <img src={balance7} alt="" />Add New Account</button>
+              <img src={balance7} alt="" />Add Product Stockout</button>
           </div>
           <nav className="setup_navbar">
             <div>

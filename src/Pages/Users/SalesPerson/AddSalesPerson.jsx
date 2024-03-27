@@ -52,7 +52,6 @@ const AddSalesPerson = () => {
         joining_date: joiningDate,
         password: password
       }, { headers: { Authorization: `Bearer ${token.access}` } });
-      console.log(response.data);
       if (response && response.data) {
         toast.success("User Added Successfully!")
         navigate("/sales-person")

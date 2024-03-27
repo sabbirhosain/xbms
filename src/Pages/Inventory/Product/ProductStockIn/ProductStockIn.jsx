@@ -16,7 +16,7 @@ const ProductStockIn = () => {
         <div className="container">
           <div className="page_title">
             <h2 className="page_title_name">Product Stock In</h2>
-            <button className="add_action_btn" onClick={handleUserOpenModal}><img src={balance7} alt="" />Add New Account</button>
+            <button className="add_action_btn" onClick={handleUserOpenModal}><img src={balance7} alt="" />Add Product Stockin</button>
           </div>
           <nav className="setup_navbar">
             <div>

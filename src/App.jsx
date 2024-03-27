@@ -12,12 +12,12 @@ import axios from "axios";
 import "./App.css"
 
 const App = () => {
-  
-  const token = JSON.parse(localStorage.getItem('access_token'));
-  axios.defaults.baseURL = import.meta.env.VITE_API_URL;
-  axios.defaults.headers.common['Authorization'] = `Bearer ${token.access}`;
-  axios.defaults.headers.post['Content-Type'] = 'application/json';
-  
+
+  // const token = JSON.parse(localStorage.getItem('access_token'));
+  // axios.defaults.baseURL = import.meta.env.VITE_API_URL;
+  // axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  // axios.defaults.headers.post['Content-Type'] = 'application/json';
+
   return (
     <>
       <ToastContainer position="top-right" autoClose={1000} />

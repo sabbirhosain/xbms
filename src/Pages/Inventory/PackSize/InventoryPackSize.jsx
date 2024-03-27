@@ -14,7 +14,7 @@ const InventoryPackSize = () => {
           <div className="page_title">
             <h2 className="page_title_name">Pack size List</h2>
             <Link to={"/add-inventory-pack-size"} className="add_action_btn">
-              <img src={balance7} alt="" />Add New Sales Person</Link>
+              <img src={balance7} alt="" />Add New Pack size</Link>
           </div>
         </div>
       </section>
