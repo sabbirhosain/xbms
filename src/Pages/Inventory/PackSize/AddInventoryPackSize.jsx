@@ -86,7 +86,7 @@ const AddInventoryPackSize = () => {
                       </div>
                       <div className="mb-3">
                         <label className="form-label">Pack Size</label>
-                        <input type="text" value={packsize} onChange={(e) => setPacksize(e.target.value)} className="form-control" required />
+                        <input type="text" value={packsize} onChange={(e) => setPacksize(e.target.value)} className="form-control" placeholder="pack name" required />
                       </div>
                       <div className="mb-3">
                         <label className="form-label">Product quantity per unit</label>
@@ -94,23 +94,23 @@ const AddInventoryPackSize = () => {
                       </div>
                       <div className="mb-3">
                         <label className="form-label">Current Balance</label>
-                        <input type="number" value={currentBalance} onChange={(e) => setCurrentBalance(e.target.value)} className="form-control" placeholder="Input Rate" />
+                        <input type="number" value={currentBalance} onChange={(e) => setCurrentBalance(e.target.value)} className="form-control" placeholder="00.00" />
                       </div>
                       <div className="mb-3">
                         <label className="form-label">Bonus Base Quantity</label>
-                        <input type="number" value={bonusBaseQuantity} onChange={(e) => setBonusBaseQuantity(e.target.value)} className="form-control" placeholder="Input Rate" />
+                        <input type="number" value={bonusBaseQuantity} onChange={(e) => setBonusBaseQuantity(e.target.value)} className="form-control" placeholder="00.00" />
                       </div>
                       <div className="mb-3">
                         <label className="form-label">Sample Rate</label>
-                        <input type="number" value={sampleRate} onChange={(e) => setSampleRate(e.target.value)} className="form-control" placeholder="Input Rate" />
+                        <input type="number" value={sampleRate} onChange={(e) => setSampleRate(e.target.value)} className="form-control" placeholder="00.00" />
                       </div>
                       <div className="mb-3">
                         <label className="form-label">Distributor Price</label>
-                        <input type="number" value={distributorPrice} onChange={(e) => setDistributorPrice(e.target.value)} className="form-control" placeholder="Input Rate" />
+                        <input type="number" value={distributorPrice} onChange={(e) => setDistributorPrice(e.target.value)} className="form-control" placeholder="00.00" />
                       </div>
                       <div className="mb-3">
                         <label className="form-label">MRP</label>
-                        <input type="number" value={mrp} onChange={(e) => setMrp(e.target.value)} className="form-control" placeholder="Input Rate" />
+                        <input type="number" value={mrp} onChange={(e) => setMrp(e.target.value)} className="form-control" placeholder="00.00" />
                       </div>
                     </div>
                     <div className="col-md-6">
@@ -128,30 +128,30 @@ const AddInventoryPackSize = () => {
                         <select className="form-select" value={packtype} onChange={(e) => setPacktype(e.target.value)}>
                           <option value={""}>Select Type</option>
                           <option value={"loquid"}>Loquid</option>
-                          <option value={"alt"}>Malt</option>
+                          <option value={"malt"}>Malt</option>
                           <option value={"ointment"}>Ointment</option>
                           <option value={"tab/cap"}>Tab/Cap</option>
                         </select>
                       </div>
                       <div className="mb-3">
                         <label className="form-label">Opening Balance</label>
-                        <input type="number" value={openingBalance} onChange={(e) => setOpeningBalance(e.target.value)} className="form-control" placeholder="Input Rate" />
+                        <input type="number" value={openingBalance} onChange={(e) => setOpeningBalance(e.target.value)} className="form-control" placeholder="00.00" />
                       </div>
                       <div className="mb-3">
                         <label className="form-label">Recorder level</label>
-                        <input type="number" value={recorderLevel} onChange={(e) => setRecorderLevel(e.target.value)} className="form-control" placeholder="Input Rate" />
+                        <input type="number" value={recorderLevel} onChange={(e) => setRecorderLevel(e.target.value)} className="form-control" placeholder="00.00" />
                       </div>
                       <div className="mb-3">
-                        <label className="form-label">bonus_rate_per_base_quantity</label>
-                        <input type="number" value={bonusRatePerBaseQuantity} onChange={(e) => setBonusRatePerBaseQuantity(e.target.value)} className="form-control" placeholder="Input Rate" />
+                        <label className="form-label">Bonus rate per base quantity</label>
+                        <input type="number" value={bonusRatePerBaseQuantity} onChange={(e) => setBonusRatePerBaseQuantity(e.target.value)} className="form-control" placeholder="00.00" />
                       </div>
                       <div className="mb-3">
-                        <label className="form-label">company_price</label>
-                        <input type="number" value={companyPrice} onChange={(e) => setCompanyPrice(e.target.value)} className="form-control" placeholder="Input Rate" />
+                        <label className="form-label">Company price</label>
+                        <input type="number" value={companyPrice} onChange={(e) => setCompanyPrice(e.target.value)} className="form-control" placeholder="00.00" />
                       </div>
                       <div className="mb-3">
-                        <label className="form-label">costing_price</label>
-                        <input type="number" value={costingPrice} onChange={(e) => setCostingPrice(e.target.value)} className="form-control" placeholder="Input Rate" />
+                        <label className="form-label">Costing price</label>
+                        <input type="number" value={costingPrice} onChange={(e) => setCostingPrice(e.target.value)} className="form-control" placeholder="00.00" />
                       </div>
                     </div>
                   </div>

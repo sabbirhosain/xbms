@@ -51,7 +51,7 @@ const App = () => {
 
           {/* Inventorys */}
           <Route path="/add-inventory-pack-size" element={<AddInventoryPackSize />} />
-          <Route path="/update-inventory-pack-size" element={<UpdateInventoryPackSize />} />
+          <Route path="/update-inventory-pack-size/:id" element={<UpdateInventoryPackSize />} />
           <Route path="/inventory-pack-size" element={<InventoryPackSize />} />
           <Route path="/inventory-product" element={<InventoryProduct />} />
           <Route path="/product-stock-in" element={<ProductStockIn />} />

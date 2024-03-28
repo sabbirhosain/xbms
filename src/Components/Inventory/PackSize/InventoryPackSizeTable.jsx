@@ -2,6 +2,7 @@ import React from 'react'
 import DataTable from 'react-data-table-component';
 import { edit, trash } from '../../../Data/Images';
 import { useInventoryDataProvider } from '../../../ContextApi/InventoryContextApi';
+import { Link } from 'react-router-dom';
 
 const InventoryPackSizeTable = () => {
   const { packsizeError, isLoadedPacksize, packsizeList, totalRowsPacksize, paginationComponentOptionsPacksize, packsizeHandlePageChange,delete_packsize } = useInventoryDataProvider()
@@ -77,7 +78,7 @@ const InventoryPackSizeTable = () => {
     {
       name: "Action",
       cell: row => <>
-        <button className="me-2" onClick={() => alert(row.id)}> <img src={edit} /></button>
+        <Link to={`/update-inventory-pack-size/${row.id}`} className="me-2"> <img src={edit} /></Link>
         <button onClick={() => delete_packsize(row.id)}><img src={trash} /></button>
       </>
 
