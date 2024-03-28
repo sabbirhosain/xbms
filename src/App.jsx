@@ -5,11 +5,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { Route, Routes } from "react-router-dom"
 
-import { Login, Register, Dashboard, NotFound, ProductList, ProductSection, ProductType, ServiceList, Accounts, Designation, ProductCategory, Territory, UnitType, AllUserList, AddSalesPerson, UpdateSalesPerson, SuppliersList, InventoryPackSize, InventoryProduct, InventoryRawItem, AddInventoryPackSize, UpdateInventoryPackSize, ProductStockIn, ProductStockOut, SalesPerson, InventoryStockIn, InventoryStockOut } from "./Pages/Pages.jsx";
+import { Login, Register, Dashboard, NotFound, ProductList, ProductSection, ProductType, ServiceList, Accounts, Designation, ProductCategory, Territory, UnitType, AllUserList, AddSalesPerson, UpdateSalesPerson, SuppliersList, InventoryPackSize, InventoryProduct, InventoryRawItem, AddInventoryPackSize, UpdateInventoryPackSize, ProductStockIn, ProductStockOut, SalesPerson, InventoryStockIn, InventoryStockOut, CreateInvoice } from "./Pages/Pages.jsx";
 
 import PrivateRoute from "./Routes/PrivateRoute.jsx";
 import axios from "axios";
 import "./App.css"
+import CreateSampleInvoice from "./Pages/Invoice/CreateSampleInvoice.jsx";
 
 const App = () => {
 
@@ -29,6 +30,9 @@ const App = () => {
           <Route path="/" element={<Dashboard />} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="/accounts" element={<Accounts />} />
+          {/* invoice */}
+          <Route path="/create-new-invoice" element={<CreateInvoice />} />
+          <Route path="/create-sample-invoice" element={<CreateSampleInvoice />} />
 
           {/* setup */}
           <Route path="/designation" element={<Designation />} />

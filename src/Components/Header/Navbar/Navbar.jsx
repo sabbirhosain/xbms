@@ -20,7 +20,7 @@ const Navbar = () => {
                 <BsPlusSquare className="company_btn_icon" />
               </Link>
 
-              <button className="create_invoice_btn d-none d-md-block">Create Invoice</button>
+              <Link to={"/create-new-invoice"} className="create_invoice_btn d-none d-md-block">Create Invoice</Link>
 
               <div className="btn-group">
                 <button type="button" className="user_dropdown dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">

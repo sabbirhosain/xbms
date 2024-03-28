@@ -4,6 +4,9 @@ import Register from "./Authentication/Register/Register"
 import Dashboard from "./Dashboard/Dashboard";
 import NotFound from "./NotFound/NotFound";
 import Accounts from "./Accounts/Accounts";
+// invoice
+import CreateInvoice from "./Invoice/CreateInvoice";
+import CreateSampleInvoice from "./Invoice/CreateSampleInvoice";
 // setup
 import Designation from "./Setup/Designation/Designation";
 import ProductCategory from "./Setup/ProductCategory/ProductCategory";
@@ -33,4 +36,4 @@ import InventoryProduct from "./Inventory/Product/InventoryProduct";
 import ProductStockIn from "./Inventory/Product/ProductStockIn/ProductStockIn";
 import ProductStockOut from "./Inventory/Product/ProductStockout/ProductStockOut";
 
-export { Login, Register, Dashboard, Designation, ProductCategory, Territory, UnitType, NotFound, Accounts, ProductList, ProductSection, ProductType, ServiceList, AllUserList, SalesPerson, AddSalesPerson, UpdateSalesPerson, SuppliersList, InventoryRawItem, InventoryStockIn, InventoryStockOut, InventoryProduct, AddInventoryPackSize, UpdateInventoryPackSize, InventoryPackSize, ProductStockIn, ProductStockOut }
+export { Login, Register, Dashboard, CreateInvoice, Designation, ProductCategory, Territory, UnitType, NotFound, Accounts, ProductList, ProductSection, ProductType, ServiceList, AllUserList, SalesPerson, AddSalesPerson, UpdateSalesPerson, SuppliersList, InventoryRawItem, InventoryStockIn, InventoryStockOut, InventoryProduct, AddInventoryPackSize, UpdateInventoryPackSize, InventoryPackSize, ProductStockIn, ProductStockOut }
